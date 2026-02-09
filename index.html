@@ -142,16 +142,17 @@
 
     <script>
         let cart = [];
-        const products = [
-            { id: 1, name: "4 In 1 Emergency Light", price: 200, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
-            { id: 2, name: "NIGHT LAMP", price: 250, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
-            { id: 3, name: "BUDDHA TRIMMER", price: 250, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
-            { id: 4, name: "4 IN 1 FACIAL KIT", price: 250, img: "https://m.media-amazon.com/images/I/71xiDo3LSbL._SX679_.jpg" },
-            { id: 5, name: "VACCUM SEALER", price: 250, img: "https://m.media-amazon.com/images/I/71fD76VAK-L._SX569_.jpg" },
-            { id: 6, name: "RECHARGEABLE LIGHTER", price: 250, img: "https://m.media-amazon.com/images/I/612+zfJYAPL._SX569_.jpg" },
-            { id: 7, name: "ELECTRONIC JUICER", price: 250, img: "https://m.media-amazon.com/images/I/715bLTUaxAL._AC_UY218_.jpg" },
-            { id: 8, name: "HUMIDIFIRE", price: 500, img: "https://m.media-amazon.com/images/I/41iE9oX5aOL._SY300_SX300_QL70_FMwebp_.jpg" }
-        ];
+       const products = [
+    { id: 1, name: "4 In 1 Emergency Light", price: 320, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
+    { id: 2, name: "NIGHT LAMP", price: 340, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
+    { id: 3, name: "BUDDHA TRIMMER", price: 350, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
+    { id: 4, name: "4 IN 1 FACIAL KIT", price: 300, img: "https://m.media-amazon.com/images/I/71xiDo3LSbL._SX679_.jpg" },
+    { id: 5, name: "VACCUM SEALER", price: 399, img: "https://m.media-amazon.com/images/I/71fD76VAK-L._SX569_.jpg" },
+    { id: 6, name: "RECHARGEABLE LIGHTER", price: 250, img: "https://m.media-amazon.com/images/I/612+zfJYAPL._SX569_.jpg" },
+    { id: 7, name: "ELECTRONIC JUICER", price: 350, img: "https://m.media-amazon.com/images/I/715bLTUaxAL._AC_UY218_.jpg" },
+    { id: 8, name: "HUMIDIFIRE", price: 300, img: "https://m.media-amazon.com/images/I/41iE9oX5aOL._SY300_SX300_QL70_FMwebp_.jpg" },
+ { id: 9, name: "NOSE TRIMMER", price: 320, img: " https://m.media-amazon.com/images/I/515nwSzjGoL.jpg" }
+];
 
         function renderProducts() {
             document.getElementById('productGrid').innerHTML = products.map(p => `
@@ -295,4 +296,5 @@
     </script>
 </body>
 </html>
+
 
