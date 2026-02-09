@@ -1,2 +1,2 @@
 # 14-STARS-TRADERS.IN
-HELLO, EVERYONE IN THIS WEBSITE YOU CAN BUY SOME COSMETIC GOODS,TOYS ETC.
+Discover premium quality home decor, electronic night lamps, and essential kitchen tools at 14 STARS TRADERS. Quality products at wholesale prices.
