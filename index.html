@@ -82,19 +82,23 @@
 </head>
 <body>
 
-    <header>
+    <header style="background-color: #131921; padding: 15px 0; border-bottom: 3px solid #febd69; position: sticky; top: 0; z-index: 1000;">
         <div class="container">
-            <div class="header-top">
-                <div class="logo" onclick="goToHome()">
-    <img src="https://lh3.googleusercontent.com/gg-dl/AOI_d_8g5GAc5yPtU1xqLYdsSNJiJ0GbVqkAiQ0VHIn6U7Uci9NhKNGfkK6fM3UwoZII0OU_D69SZriLR1Q_aZp4kvEhPKEypRnqDv2_6Dqgz5lY8Rq9snE2sqGX3CVtc9lvwrPlE2QFgqcIG8slfXGfWLcMl8WWpo697EV3IIY2_ODx26Pz=s1024-rj" alt="14 STARS TRADERS" style="height: 50px; vertical-align: middle;">
-</div>
-                <div class="search-bar"><input type="text" placeholder="Search gadgets..."></div>
-                <div class="cart-icon" onclick="openCart()">🛒<span class="cart-count" id="cart-count">0</span></div>
+            <div class="header-top" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="logo" onclick="goToHome()" style="cursor: pointer;">
+                    <img src="https://i.ibb.co/XrnS7vVp/14-STARS-TRADERS-2.png" alt="14 STARS TRADERS" style="height: 60px;">
+                </div>
+                <div class="search-bar" style="flex: 1; max-width: 500px; margin: 0 30px;">
+                    <input type="text" placeholder="Search gadgets..." style="width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none;">
+                </div>
+                <div class="cart-icon" onclick="openCart()" style="color: white; font-size: 24px; position: relative; cursor: pointer;">
+                    🛒<span class="cart-count" id="cart-count" style="position: absolute; top: -8px; right: -10px; background: #febd69; color: black; font-size: 12px; padding: 2px 7px; border-radius: 50%; font-weight: bold;">0</span>
+                </div>
             </div>
-            <nav>
-                <a onclick="goToHome()">Home</a>
-                <a onclick="goToHome()">Catalog</a>
-                <a onclick="showContact()">Contact</a>
+            <nav style="display: flex; justify-content: center; gap: 30px; margin-top: 15px;">
+                <a onclick="goToHome()" style="color: white; text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: uppercase;">Home</a>
+                <a onclick="goToHome()" style="color: white; text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: uppercase;">Catalog</a>
+                <a onclick="showContact()" style="color: white; text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: uppercase;">Contact</a>
             </nav>
         </div>
     </header>
@@ -297,6 +301,7 @@
     </script>
 </body>
 </html>
+
 
 
 
