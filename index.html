@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>14 STARS TRADERS | Best Night Lamps & Kitchen Gadgets</title>
     <style>
+        /* CSS RESET & GENERAL */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: sans-serif; background-color: #fff; color: #333; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -12,9 +13,9 @@
         /* FIXED HEADER */
         header { background-color: #131921; padding: 15px 0; border-bottom: 3px solid #febd69; position: sticky; top: 0; z-index: 1000; }
         .header-top { display: flex; justify-content: space-between; align-items: center; }
-        .logo img { height: 50px; cursor: pointer; display: block; }
+        .logo img { height: 60px; cursor: pointer; display: block; }
         .search-bar { flex: 1; max-width: 500px; margin: 0 30px; }
-        .search-bar input { width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none; }
+        .search-bar input { width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none; background: white; color: #333; }
         .cart-icon { cursor: pointer; font-size: 24px; color: white; position: relative; }
         .cart-count { position: absolute; top: -8px; right: -10px; background: #febd69; color: black; font-size: 12px; padding: 2px 7px; border-radius: 50%; font-weight: bold; }
         
@@ -22,22 +23,30 @@
         nav a { text-decoration: none; color: white; font-size: 14px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         nav a:hover { color: #febd69; }
 
-        /* BLUR & SEARCH UI */
-        #main-content { transition: filter 0.3s ease; }
-        .blur-active { filter: blur(10px); opacity: 0.3; pointer-events: none; }
+        /* BLUR EFFECT */
+        #product-container.blur-active { filter: blur(8px); pointer-events: none; }
+
+        /* SEARCH INFO */
         #search-info { display: none; text-align: center; padding: 60px 20px; }
         .no-results { color: #555; font-size: 18px; margin-bottom: 20px; }
         .back-btn { display: inline-block; padding: 12px 25px; background: #131921; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; font-weight: bold; border: none; }
 
         /* PRODUCT GRID */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; }
-        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; border: 1px solid #f0f0f0; }
-        .card img { max-width: 100%; height: 180px; object-fit: contain; margin-bottom: 15px; }
-        .p-name { font-weight: bold; margin-bottom: 10px; height: 40px; overflow: hidden; font-size: 16px; }
-        .p-price { color: #00008b; font-weight: bold; font-size: 20px; margin-bottom: 15px; }
-        .btn-buy { width: 100%; padding: 12px; background: #00008b; color: #fff; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; font-size: 14px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; transition: filter 0.3s; }
+        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center; border: 1px solid #eee; }
+        .card img { max-width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
+        .p-name { font-weight: bold; margin-bottom: 8px; height: 36px; overflow: hidden; }
+        .p-price { font-weight: 700; color: #00008b; margin-bottom: 15px; font-size: 18px; }
         
-        footer { text-align: center; padding: 30px; border-top: 1px solid #eee; margin-top: 50px; color: #888; }
+        /* QTY SELECTOR (Original Style) */
+        .qty-box { display: flex; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; width: 100%; height: 35px; }
+        .qty-box button { width: 30%; background: none; border: none; cursor: pointer; font-size: 18px; color: #666; }
+        .qty-box input { width: 40%; border: none; border-left: 1px solid #ddd; border-right: 1px solid #ddd; text-align: center; font-weight: bold; }
+        
+        .btn-add { width: 100%; padding: 10px; background: #fff; border: 1px solid #00008b; color: #00008b; font-weight: 600; cursor: pointer; border-radius: 4px; margin-bottom: 8px; }
+        .btn-buy { width: 100%; padding: 12px; background: #00008b; border: none; color: #fff; font-weight: 600; cursor: pointer; border-radius: 4px; }
+
+        footer { text-align: center; padding: 40px; color: #888; border-top: 1px solid #eee; margin-top: 50px; }
     </style>
 </head>
 <body>
@@ -63,7 +72,7 @@
         </div>
     </header>
 
-    <div class="container" id="main-content">
+    <div class="container" id="product-container">
         <div id="search-info">
             <div id="search-msg" class="no-results"></div>
             <button class="back-btn" onclick="goHome()">Back to Home</button>
@@ -71,39 +80,51 @@
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <footer id="footer">© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
+    <footer>© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
 
     <script>
         const products = [
-            { name: "4 In 1 Emergency Light", price: 320, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
-            { name: "NIGHT LAMP", price: 340, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
-            { name: "BUDDHA TRIMMER", price: 350, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
-            { name: "NOSE TRIMMER", price: 320, img: "https://m.media-amazon.com/images/I/515nwSzjGoL.jpg" }
+            { id: 1, name: "4 In 1 Emergency Light", price: 320, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
+            { id: 2, name: "NIGHT LAMP", price: 340, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
+            { id: 3, name: "BUDDHA TRIMMER", price: 350, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
+            { id: 4, name: "NOSE TRIMMER", price: 320, img: "https://m.media-amazon.com/images/I/515nwSzjGoL.jpg" }
         ];
 
-        const grid = document.getElementById('productGrid');
-        const searchInfo = document.getElementById('search-info');
-        const content = document.getElementById('main-content');
-        const footer = document.getElementById('footer');
-
         function renderProducts(data) {
+            const grid = document.getElementById('productGrid');
+            const info = document.getElementById('search-info');
+            
             if (data.length === 0) {
                 grid.style.display = 'none';
-                searchInfo.style.display = 'block';
+                info.style.display = 'block';
                 let term = document.getElementById('searchInput').value;
                 document.getElementById('search-msg').innerHTML = `No results found for “${term}”.<br><small>Check the spelling or use a different word or phrase.</small>`;
             } else {
                 grid.style.display = 'grid';
-                searchInfo.style.display = 'none';
+                info.style.display = 'none';
                 grid.innerHTML = data.map(p => `
                     <div class="card">
                         <img src="${p.img}">
                         <div class="p-name">${p.name}</div>
                         <div class="p-price">Rs. ${p.price}</div>
-                        <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy ${p.name}')">Buy on WhatsApp</button>
+                        <div style="color: #ffa41c; font-size: 13px; margin-bottom: 10px;">⭐⭐⭐⭐⭐</div>
+                        <div class="qty-box">
+                            <button onclick="changeQty(this, -1)">-</button>
+                            <input type="text" value="0" readonly>
+                            <button onclick="changeQty(this, 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="alert('Added to cart')">Add to cart</button>
+                        <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy ${p.name}')">Buy it now</button>
                     </div>
                 `).join('');
             }
+        }
+
+        function changeQty(btn, delta) {
+            let input = btn.parentElement.querySelector('input');
+            let val = parseInt(input.value) + delta;
+            if (val < 0) val = 0;
+            input.value = val;
         }
 
         function handleSearch() {
@@ -119,25 +140,24 @@
 
         function applyBlur() {
             if(document.getElementById('searchInput').value === "") {
-                content.classList.add('blur-active');
-                footer.classList.add('blur-active');
+                document.getElementById('product-container').classList.add('blur-active');
             }
         }
 
         function removeBlur() {
-            content.classList.remove('blur-active');
-            footer.classList.remove('blur-active');
+            document.getElementById('product-container').classList.remove('blur-active');
+        }
+
+        function showCatalog() {
+            document.getElementById('searchInput').value = '';
+            renderProducts(products);
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function goHome() {
             document.getElementById('searchInput').value = '';
             removeBlur();
             renderProducts(products);
-        }
-
-        function showCatalog() {
-            goHome();
-            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         renderProducts(products);
