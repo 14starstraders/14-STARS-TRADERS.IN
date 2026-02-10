@@ -89,7 +89,7 @@
                     <img src="https://i.ibb.co/XrnS7vVp/14-STARS-TRADERS-2.png" alt="14 STARS TRADERS" style="height: 60px;">
                 </div>
                 <div class="search-bar" style="flex: 1; max-width: 500px; margin: 0 30px;">
-                    <input type="text" placeholder="Search gadgets..." style="width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none;">
+                   <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search gadgets..." style="width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none; background: white; color: #333;"> style="width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none; background: white; color: #333;"> style="width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none;">
                 </div>
                 <div class="cart-icon" onclick="openCart()" style="color: white; font-size: 24px; position: relative; cursor: pointer;">
                     🛒<span class="cart-count" id="cart-count" style="position: absolute; top: -8px; right: -10px; background: #febd69; color: black; font-size: 12px; padding: 2px 7px; border-radius: 50%; font-weight: bold;">0</span>
@@ -304,6 +304,7 @@
     </script>
 </body>
 </html>
+
 
 
 
