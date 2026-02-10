@@ -148,7 +148,9 @@
     <footer id="foot">© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
 
     <script>
-        let cart = [];
+        // Check if data exists in localStorage
+        let cart = JSON.parse(localStorage.getItem('stars_cart')) || [];
+
         const products = [
             { id: 1, name: "4 In 1 Emergency Light", price: 200, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
             { id: 2, name: "NIGHT LAMP", price: 250, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
@@ -159,6 +161,12 @@
             { id: 7, name: "ELECTRONIC JUICER", price: 250, img: "https://m.media-amazon.com/images/I/715bLTUaxAL._AC_UY218_.jpg" },
             { id: 8, name: "HUMIDIFIRE", price: 500, img: "https://m.media-amazon.com/images/I/41iE9oX5aOL._SY300_SX300_QL70_FMwebp_.jpg" }
         ];
+
+        // Save cart to localStorage
+        function saveToStorage() {
+            localStorage.setItem('stars_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
 
         function renderProducts(data = products) {
             const grid = document.getElementById('productGrid');
@@ -187,7 +195,6 @@
             }
         }
 
-        /* NEW SEARCH & BLUR LOGIC */
         function runSearch() {
             let t = document.getElementById('srchInp').value.toLowerCase();
             renderProducts(products.filter(x => x.name.toLowerCase().includes(t)));
@@ -196,7 +203,6 @@
         function startBlur() { if(!document.getElementById('srchInp').value) { document.getElementById('productGrid').classList.add('blur-active'); document.getElementById('foot').classList.add('blur-active'); } }
         function stopBlur() { setTimeout(() => { document.getElementById('productGrid').classList.remove('blur-active'); document.getElementById('foot').classList.remove('blur-active'); }, 200); }
 
-        /* ORIGINAL APP FUNCTIONS */
         function changeInpQty(pid, btn, delta) {
             let inp = btn.parentElement.querySelector('input');
             let val = parseInt(inp.value) + delta;
@@ -213,7 +219,7 @@
             let existing = cart.find(item => item.id === pid);
             if(existing) existing.qty += qty;
             else cart.push({...product, qty: qty});
-            updateCartCount();
+            saveToStorage();
             openCart(product.name);
         }
         function updateCartCount() { document.getElementById('cart-count').innerText = cart.length; }
@@ -253,8 +259,17 @@
             }).join('');
             document.getElementById('grand-total').innerText = total + ".00";
         }
-        function updateCartQty(idx, delta) { cart[idx].qty += delta; if(cart[idx].qty < 1) cart[idx].qty = 1; renderCart(); }
-        function removeItem(idx) { cart.splice(idx, 1); updateCartCount(); renderCart(); }
+        function updateCartQty(idx, delta) { 
+            cart[idx].qty += delta; 
+            if(cart[idx].qty < 1) cart[idx].qty = 1; 
+            saveToStorage();
+            renderCart(); 
+        }
+        function removeItem(idx) { 
+            cart.splice(idx, 1); 
+            saveToStorage();
+            renderCart(); 
+        }
         function hideAll() {
             document.getElementById('main-site').style.display = 'none';
             document.getElementById('cart-page').style.display = 'none';
@@ -280,7 +295,9 @@
         }
         function buyNow(name) { window.open(`https://wa.me/919837904369?text=I want to buy: ${name}`); }
 
+        // Initial Calls
         renderProducts();
+        updateCartCount();
     </script>
 </body>
 </html>
