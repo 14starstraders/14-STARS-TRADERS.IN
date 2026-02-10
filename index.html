@@ -100,24 +100,33 @@
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <div class="header-top">
-                <div class="logo" onclick="app.nav('home')">
-                    <img src="https://i.postimg.cc/856m9p8z/14-STARS-TRADERS-LOGO.png" alt="14 STARS TRADERS">
-                </div>
-                <div class="search-bar">
-                    <input type="text" id="srchInp" oninput="app.search()" placeholder="Search gadgets...">
-                </div>
-                <div class="cart-icon" onclick="app.nav('cart')">🛒<span class="cart-count" id="cart-count">0</span></div>
+  
+     <header>
+    <div class="container">
+        <div class="header-top">
+            <div class="logo" onclick="app.nav('home')">
+                <img src="https://i.postimg.cc/856m9p8z/14-STARS-TRADERS-LOGO.png" 
+                     alt="14 STARS TRADERS" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                <span style="display:none; font-size:24px; font-weight:800; color:var(--dark-blue); letter-spacing:-1px;">
+                    14 STARS<span style="color:var(--accent-color)">TRADERS</span>
+                </span>
             </div>
-            <nav>
-                <a onclick="app.nav('home')">Home</a>
-                <a onclick="app.nav('home')">Shop</a>
-                <a onclick="app.nav('contact')">Contact</a>
-            </nav>
+            <div class="search-bar">
+                <input type="text" id="srchInp" oninput="app.search()" placeholder="Search gadgets...">
+            </div>
+            <div class="cart-icon" onclick="app.nav('cart')">🛒<span class="cart-count" id="cart-count">0</span></div>
         </div>
-    </header>
+        <nav>
+            <a onclick="app.nav('home')">Home</a>
+            <a onclick="app.nav('home')">Shop</a>
+            <a onclick="app.nav('contact')">Contact</a>
+        </nav>
+    </div>
+</header>
+
+
+    
 
     <main class="container">
         <section id="home-section">
@@ -307,3 +316,4 @@
     </script>
 </body>
 </html>
+
