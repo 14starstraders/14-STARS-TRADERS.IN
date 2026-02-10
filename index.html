@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>14 STARS TRADERS</title>
     <style>
-        /* AAPKA ORIGINAL DESIGN */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: sans-serif; background-color: #fff; color: #333; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -13,29 +12,28 @@
         header { padding: 20px 0; border-bottom: 1px solid #f0f0f0; background: #fff; position: sticky; top: 0; z-index: 1000; }
         .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         
-        /* CODE 1: LOGO IMAGE CSS */
+        /* LOGO IMAGE */
         .logo img { height: 50px; cursor: pointer; display: block; }
 
-        /* SEARCH BAR WITH NEW FEATURES */
         .search-bar { flex: 1; max-width: 500px; margin: 0 30px; }
         .search-bar input { width: 100%; padding: 10px 20px; border-radius: 25px; border: 1px solid #ddd; outline: none; background: #f9f9f9; }
         
-        /* NEW FEATURE: BLUR CLASS */
         .blur-active { filter: blur(8px); pointer-events: none; transition: 0.3s; }
         
+        /* CART ICON STYLE */
+        .cart-btn { font-size: 24px; cursor: pointer; background: none; border: none; position: relative; }
+
         #search-info { display: none; text-align: center; padding: 50px 20px; }
         .no-results { font-size: 18px; color: #666; margin-bottom: 15px; }
-        .btn-home { padding: 10px 25px; background: #00008b; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
 
-        /* PRODUCT GRID & BUTTONS (+ 0 -) */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: left; }
+        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .img-container { height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
         .img-container img { max-height: 100%; max-width: 100%; object-fit: contain; }
         .p-price { font-weight: 700; color: #00008b; margin-bottom: 15px; font-size: 18px; }
         
-        .qty-box { display: flex; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; width: 100%; height: 35px; }
-        .qty-box button { width: 30%; background: none; border: none; cursor: pointer; font-size: 18px; }
+        .qty-box { display: flex; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; height: 35px; }
+        .qty-box button { width: 30%; background: none; border: none; cursor: pointer; }
         .qty-box input { width: 40%; border: none; border-left: 1px solid #ddd; border-right: 1px solid #ddd; text-align: center; font-weight: bold; }
         
         .btn-add { width: 100%; padding: 10px; background: #fff; border: 1px solid #00008b; color: #00008b; font-weight: 600; cursor: pointer; border-radius: 4px; margin-bottom: 8px; }
@@ -54,11 +52,10 @@
                 <div class="logo" onclick="location.reload()">
                     <img src="https://i.postimg.cc/856m9p8z/14-STARS-TRADERS-LOGO.png" alt="14 STARS TRADERS">
                 </div>
-                
                 <div class="search-bar">
                     <input type="text" id="srch" oninput="runSearch()" onfocus="startBlur()" onblur="stopBlur()" placeholder="Search gadgets...">
                 </div>
-                <div style="font-size: 20px;">🛒</div>
+                <button class="cart-btn" onclick="alert('Cart is coming soon!')">🛒</button>
             </div>
             <nav>
                 <a onclick="location.reload()">Home</a>
@@ -71,7 +68,7 @@
     <div class="container" id="content">
         <div id="search-info">
             <p id="msg" class="no-results"></p>
-            <button class="btn-home" onclick="location.reload()">Back to Home</button>
+            <button onclick="location.reload()">Back to Home</button>
         </div>
         <div class="product-grid" id="grid"></div>
     </div>
@@ -90,12 +87,10 @@
             const g = document.getElementById('grid');
             const info = document.getElementById('search-info');
             if(data.length === 0) {
-                g.style.display = 'none';
-                info.style.display = 'block';
+                g.style.display = 'none'; info.style.display = 'block';
                 document.getElementById('msg').innerText = `No results found for "${document.getElementById('srch').value}".`;
             } else {
-                g.style.display = 'grid';
-                info.style.display = 'none';
+                g.style.display = 'grid'; info.style.display = 'none';
                 g.innerHTML = data.map(p => `
                     <div class="card">
                         <div class="img-container"><img src="${p.img}"></div>
@@ -106,7 +101,7 @@
                             <input type="text" value="0" readonly>
                             <button onclick="this.previousElementSibling.value = parseInt(this.previousElementSibling.value)+1">+</button>
                         </div>
-                        <button class="btn-add">Add to cart</button>
+                        <button class="btn-add" onclick="alert('Added to cart')">Add to cart</button>
                         <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want ${p.name}')">Buy Now</button>
                     </div>
                 `).join('');
@@ -118,21 +113,8 @@
             draw(items.filter(x => x.name.toLowerCase().includes(t)));
             document.getElementById('grid').classList.remove('blur-active');
         }
-
-        function startBlur() {
-            if(document.getElementById('srch').value === "") {
-                document.getElementById('grid').classList.add('blur-active');
-                document.getElementById('foot').classList.add('blur-active');
-            }
-        }
-
-        function stopBlur() {
-            setTimeout(() => {
-                document.getElementById('grid').classList.remove('blur-active');
-                document.getElementById('foot').classList.remove('blur-active');
-            }, 200);
-        }
-
+        function startBlur() { if(!document.getElementById('srch').value) document.getElementById('grid').classList.add('blur-active'); }
+        function stopBlur() { setTimeout(() => document.getElementById('grid').classList.remove('blur-active'), 200); }
         draw(items);
     </script>
 </body>
