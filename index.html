@@ -301,9 +301,26 @@
         }
 
         renderProducts();
+
+
+
+        function searchProducts() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let cards = document.getElementsByClassName('card');
+
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].querySelector('.p-name').innerText.toLowerCase();
+        if (name.includes(input)) {
+            cards[i].style.display = "block";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
     </script>
 </body>
 </html>
+
 
 
 
