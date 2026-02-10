@@ -22,22 +22,20 @@
         nav a { text-decoration: none; color: white; font-size: 14px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         nav a:hover { color: #febd69; }
 
-        /* BLUR EFFECT */
-        .blur-bg { filter: blur(10px); opacity: 0.3; }
-
-        /* SEARCH RESULT INFO */
+        /* BLUR & SEARCH UI */
+        #main-content { transition: filter 0.3s ease; }
+        .blur-active { filter: blur(10px); opacity: 0.3; pointer-events: none; }
         #search-info { display: none; text-align: center; padding: 60px 20px; }
-        .no-results { color: #555; font-size: 20px; margin-bottom: 20px; line-height: 1.6; }
-        .back-btn { display: inline-block; padding: 12px 30px; background: #00008b; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; font-weight: bold; border: none; }
+        .no-results { color: #555; font-size: 18px; margin-bottom: 20px; }
+        .back-btn { display: inline-block; padding: 12px 25px; background: #131921; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; font-weight: bold; border: none; }
 
         /* PRODUCT GRID */
-        #product-container { transition: filter 0.3s ease; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
-        .card img { max-width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
-        .p-name { font-weight: bold; margin-bottom: 5px; height: 40px; overflow: hidden; }
-        .p-price { color: #00008b; font-weight: bold; font-size: 18px; margin-bottom: 10px; }
-        .btn-buy { width: 100%; padding: 10px; background: #00008b; color: #fff; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; border: 1px solid #f0f0f0; }
+        .card img { max-width: 100%; height: 180px; object-fit: contain; margin-bottom: 15px; }
+        .p-name { font-weight: bold; margin-bottom: 10px; height: 40px; overflow: hidden; font-size: 16px; }
+        .p-price { color: #00008b; font-weight: bold; font-size: 20px; margin-bottom: 15px; }
+        .btn-buy { width: 100%; padding: 12px; background: #00008b; color: #fff; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; font-size: 14px; }
         
         footer { text-align: center; padding: 30px; border-top: 1px solid #eee; margin-top: 50px; color: #888; }
     </style>
@@ -51,7 +49,7 @@
                     <img src="https://i.postimg.cc/856m9p8z/14-STARS-TRADERS-LOGO.png" alt="14 STARS TRADERS">
                 </div>
                 <div class="search-bar">
-                   <input type="text" id="searchInput" oninput="searchProducts()" onfocus="applyBlur()" onblur="setTimeout(removeBlur, 200)" placeholder="Search gadgets...">
+                   <input type="text" id="searchInput" oninput="handleSearch()" onfocus="applyBlur()" onblur="setTimeout(removeBlur, 200)" placeholder="Search gadgets...">
                 </div>
                 <div class="cart-icon">
                     🛒<span class="cart-count">0</span>
@@ -60,48 +58,40 @@
             <nav>
                 <a onclick="goHome()">Home</a>
                 <a onclick="showCatalog()">Catalog</a>
-                <a href="#" onclick="alert('Contact us at: 9837904369')">Contact</a>
+                <a href="#">Contact</a>
             </nav>
         </div>
     </header>
 
-    <div class="container" id="product-container">
+    <div class="container" id="main-content">
         <div id="search-info">
             <div id="search-msg" class="no-results"></div>
             <button class="back-btn" onclick="goHome()">Back to Home</button>
         </div>
-
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <footer id="main-footer">© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
+    <footer id="footer">© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
 
     <script>
-        // Aapke saare 9 items wapas add kar diye hain
         const products = [
-            { id: 1, name: "4 In 1 Emergency Light", price: 320, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
-            { id: 2, name: "NIGHT LAMP", price: 340, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
-            { id: 3, name: "BUDDHA TRIMMER", price: 350, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
-            { id: 4, name: "4 IN 1 FACIAL KIT", price: 300, img: "https://m.media-amazon.com/images/I/71xiDo3LSbL._SX679_.jpg" },
-            { id: 5, name: "VACCUM SEALER", price: 399, img: "https://m.media-amazon.com/images/I/71fD76VAK-L._SX569_.jpg" },
-            { id: 6, name: "RECHARGEABLE LIGHTER", price: 250, img: "https://m.media-amazon.com/images/I/612+zfJYAPL._SX569_.jpg" },
-            { id: 7, name: "ELECTRONIC JUICER", price: 350, img: "https://m.media-amazon.com/images/I/715bLTUaxAL._AC_UY218_.jpg" },
-            { id: 8, name: "HUMIDIFIRE", price: 300, img: "https://m.media-amazon.com/images/I/41iE9oX5aOL._SY300_SX300_QL70_FMwebp_.jpg" },
-            { id: 9, name: "NOSE TRIMMER", price: 320, img: "https://m.media-amazon.com/images/I/515nwSzjGoL.jpg" }
+            { name: "4 In 1 Emergency Light", price: 320, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
+            { name: "NIGHT LAMP", price: 340, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
+            { name: "BUDDHA TRIMMER", price: 350, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
+            { name: "NOSE TRIMMER", price: 320, img: "https://m.media-amazon.com/images/I/515nwSzjGoL.jpg" }
         ];
 
         const grid = document.getElementById('productGrid');
         const searchInfo = document.getElementById('search-info');
-        const searchMsg = document.getElementById('search-msg');
-        const productContainer = document.getElementById('product-container');
-        const footer = document.getElementById('main-footer');
+        const content = document.getElementById('main-content');
+        const footer = document.getElementById('footer');
 
         function renderProducts(data) {
             if (data.length === 0) {
                 grid.style.display = 'none';
                 searchInfo.style.display = 'block';
                 let term = document.getElementById('searchInput').value;
-                searchMsg.innerHTML = `No results found for “<strong>${term}</strong>”.<br><small style="color:#888;">Check the spelling or use a different word or phrase.</small>`;
+                document.getElementById('search-msg').innerHTML = `No results found for “${term}”.<br><small>Check the spelling or use a different word or phrase.</small>`;
             } else {
                 grid.style.display = 'grid';
                 searchInfo.style.display = 'none';
@@ -110,14 +100,13 @@
                         <img src="${p.img}">
                         <div class="p-name">${p.name}</div>
                         <div class="p-price">Rs. ${p.price}</div>
-                        <div style="color: #ffa41c; font-size: 13px; margin-bottom: 10px;">⭐⭐⭐⭐⭐</div>
                         <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy ${p.name}')">Buy on WhatsApp</button>
                     </div>
                 `).join('');
             }
         }
 
-        function searchProducts() {
+        function handleSearch() {
             let term = document.getElementById('searchInput').value.toLowerCase();
             if (term.trim() === "") {
                 goHome();
@@ -125,37 +114,32 @@
             }
             let filtered = products.filter(p => p.name.toLowerCase().includes(term));
             renderProducts(filtered);
-            removeBlur(); // Search result dikhane ke liye blur hatana zaruri hai
+            removeBlur();
         }
 
         function applyBlur() {
-            // Sirf tab blur hoga jab search box empty ho aur click kiya jaye
             if(document.getElementById('searchInput').value === "") {
-                grid.classList.add('blur-bg');
-                footer.classList.add('blur-bg');
+                content.classList.add('blur-active');
+                footer.classList.add('blur-active');
             }
         }
 
         function removeBlur() {
-            grid.classList.remove('blur-bg');
-            footer.classList.remove('blur-bg');
-        }
-
-        function showCatalog() {
-            document.getElementById('searchInput').value = '';
-            goHome();
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            content.classList.remove('blur-active');
+            footer.classList.remove('blur-active');
         }
 
         function goHome() {
             document.getElementById('searchInput').value = '';
-            searchInfo.style.display = 'none';
-            grid.style.display = 'grid';
             removeBlur();
             renderProducts(products);
         }
 
-        // Initial Load
+        function showCatalog() {
+            goHome();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
         renderProducts(products);
     </script>
 </body>
