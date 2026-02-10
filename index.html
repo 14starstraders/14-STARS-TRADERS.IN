@@ -4,58 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>14 STARS TRADERS | Best Night Lamps & Kitchen Gadgets</title>
-    <meta name="description" content="14 Stars Traders - Your premium destination for affordable and high-quality gadgets and toys.">
     <style>
-        /* CSS RESET & GENERAL */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #fff; color: #333; }
+        body { font-family: sans-serif; background-color: #fff; color: #333; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HEADER */
+        /* FIXED HEADER */
         header { background-color: #131921; padding: 15px 0; border-bottom: 3px solid #febd69; position: sticky; top: 0; z-index: 1000; }
-        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .logo img { height: 60px; cursor: pointer; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 50px; cursor: pointer; display: block; }
         .search-bar { flex: 1; max-width: 500px; margin: 0 30px; }
-        .search-bar input { width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none; background: white; color: #333; }
-        .cart-icon { cursor: pointer; font-size: 24px; position: relative; color: white; }
+        .search-bar input { width: 100%; padding: 10px 20px; border-radius: 25px; border: none; outline: none; }
+        .cart-icon { cursor: pointer; font-size: 24px; color: white; position: relative; }
         .cart-count { position: absolute; top: -8px; right: -10px; background: #febd69; color: black; font-size: 12px; padding: 2px 7px; border-radius: 50%; font-weight: bold; }
         
-        nav { display: flex; justify-content: center; gap: 30px; }
+        nav { display: flex; justify-content: center; gap: 30px; margin-top: 15px; }
         nav a { text-decoration: none; color: white; font-size: 14px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         nav a:hover { color: #febd69; }
 
-        /* NOTIFICATION MESSAGE */
-        .cart-notif { display: none; text-align: center; color: #00008b; font-size: 24px; font-weight: bold; margin: 20px 0; }
-
         /* PRODUCT GRID */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: left; transition: 0.3s; }
-        .img-container { height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
-        .img-container img { max-height: 100%; max-width: 100%; object-fit: contain; }
-        .p-name { font-size: 15px; margin-bottom: 8px; color: #444; height: 36px; overflow: hidden; font-weight: 600; }
-        .p-price { font-weight: 700; color: #00008b; margin-bottom: 5px; font-size: 18px; }
+        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
+        .card img { max-width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
+        .p-name { font-weight: bold; margin-bottom: 5px; height: 40px; overflow: hidden; }
+        .p-price { color: #00008b; font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+        .btn-buy { width: 100%; padding: 10px; background: #00008b; color: #fff; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; }
         
-        /* QTY SELECTOR */
-        .qty-box { display: flex; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; width: 100%; height: 35px; }
-        .qty-box button { width: 30%; background: none; border: none; cursor: pointer; font-size: 18px; color: #666; }
-        .qty-box input { width: 40%; border: none; border-left: 1px solid #ddd; border-right: 1px solid #ddd; text-align: center; font-weight: bold; }
-        
-        .btn-add { width: 100%; padding: 10px; background: #fff; border: 1px solid #00008b; color: #00008b; font-weight: 600; cursor: pointer; border-radius: 4px; margin-bottom: 8px; }
-        .btn-buy { width: 100%; padding: 12px; background: #00008b; border: none; color: #fff; font-weight: 600; cursor: pointer; border-radius: 4px; }
-
-        /* CONTACT SECTION */
-        #contact-page { display: none; padding: 60px 0; max-width: 800px; margin: 0 auto; }
-        .contact-title { font-size: 24px; margin-bottom: 30px; text-align: center; }
-        .form-group { margin-bottom: 20px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px; }
-        .btn-contact-send { background-color: #c4b5a8; color: white; padding: 15px 50px; border: none; cursor: pointer; border-radius: 4px; width: 100%; }
-
-        /* CART PAGE */
-        #cart-page { display: none; padding-top: 50px; }
-        .cart-item { display: grid; grid-template-columns: 3fr 1fr 1fr; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee; }
-        .cart-prod-info { display: flex; align-items: center; gap: 15px; }
-        .cart-prod-img-box { width: 80px; height: 80px; border: 1px solid #f0f0f0; padding: 5px; }
-        footer { text-align: center; padding: 40px; color: #888; border-top: 1px solid #eee; margin-top: 50px; }
+        footer { text-align: center; padding: 30px; border-top: 1px solid #eee; margin-top: 50px; color: #888; }
     </style>
 </head>
 <body>
@@ -63,194 +38,58 @@
     <header>
         <div class="container">
             <div class="header-top">
-                <div class="logo" onclick="goToHome()">
-                    <img src="https://i.ibb.co/XrnS7vVp/14-STARS-TRADERS-2.png" alt="14 STARS TRADERS">
+                <div class="logo" onclick="location.reload()">
+                    <img src="https://i.postimg.cc/856m9p8z/14-STARS-TRADERS-LOGO.png" alt="14 STARS TRADERS">
                 </div>
                 <div class="search-bar">
                    <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search gadgets...">
                 </div>
-                <div class="cart-icon" onclick="openCart()">
-                    🛒<span class="cart-count" id="cart-count">0</span>
+                <div class="cart-icon">
+                    🛒<span class="cart-count">0</span>
                 </div>
             </div>
             <nav>
-                <a onclick="goToHome()">Home</a>
-                <a onclick="goToHome()">Catalog</a>
-                <a onclick="showContact()">Contact</a>
+                <a onclick="location.reload()">Home</a>
+                <a href="#">Catalog</a>
+                <a href="#">Contact</a>
             </nav>
         </div>
     </header>
 
-    <div id="main-site" class="container">
-        <div class="product-grid" id="productGrid"></div>
-    </div>
-
-    <div id="contact-page" class="container">
-        <h2 class="contact-title">Questions or comments? Get in touch!</h2>
-        <div class="form-group"><input type="text" id="contact-name" placeholder="Name"></div>
-        <div class="form-group"><input type="email" id="contact-email" placeholder="Email *"></div>
-        <div class="form-group"><input type="text" id="contact-phone" placeholder="Phone number"></div>
-        <div class="form-group"><textarea id="contact-comment" placeholder="Comment"></textarea></div>
-        <button class="btn-contact-send" onclick="sendContactWhatsApp()">Send Message</button>
-    </div>
-
-    <div id="cart-page" class="container">
-        <div id="notif-msg" class="cart-notif"></div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-            <h1>Your Cart</h1>
-            <span style="text-decoration: underline; cursor: pointer;" onclick="goToHome()">Continue shopping</span>
-        </div>
-        <div id="cart-items-container"></div>
-        <div style="text-align: right; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px;">
-            <h3>Total: Rs. <span id="grand-total">0</span></h3>
-            <button class="btn-buy" style="max-width: 300px; margin-top: 20px;" onclick="checkoutWhatsApp()">Checkout via WhatsApp</button>
-        </div>
+    <div class="container">
+        <div class="product-grid" id="productGrid">
+            </div>
     </div>
 
     <footer>© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
 
     <script>
-        let cart = [];
         const products = [
-            { id: 1, name: "4 In 1 Emergency Light", price: 320, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
-            { id: 2, name: "NIGHT LAMP", price: 340, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
-            { id: 3, name: "BUDDHA TRIMMER", price: 350, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
-            { id: 4, name: "4 IN 1 FACIAL KIT", price: 300, img: "https://m.media-amazon.com/images/I/71xiDo3LSbL._SX679_.jpg" },
-            { id: 5, name: "VACCUM SEALER", price: 399, img: "https://m.media-amazon.com/images/I/71fD76VAK-L._SX569_.jpg" },
-            { id: 6, name: "RECHARGEABLE LIGHTER", price: 250, img: "https://m.media-amazon.com/images/I/612+zfJYAPL._SX569_.jpg" },
-            { id: 7, name: "ELECTRONIC JUICER", price: 350, img: "https://m.media-amazon.com/images/I/715bLTUaxAL._AC_UY218_.jpg" },
-            { id: 8, name: "HUMIDIFIRE", price: 300, img: "https://m.media-amazon.com/images/I/41iE9oX5aOL._SY300_SX300_QL70_FMwebp_.jpg" },
-            { id: 9, name: "NOSE TRIMMER", price: 320, img: "https://m.media-amazon.com/images/I/515nwSzjGoL.jpg" }
+            { name: "4 In 1 Emergency Light", price: 320, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
+            { name: "NIGHT LAMP", price: 340, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
+            { name: "BUDDHA TRIMMER", price: 350, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
+            { name: "NOSE TRIMMER", price: 320, img: "https://m.media-amazon.com/images/I/515nwSzjGoL.jpg" }
         ];
 
-        function renderProducts() {
-            document.getElementById('productGrid').innerHTML = products.map(p => `
+        function renderProducts(data) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = data.map(p => `
                 <div class="card">
-                    <div class="img-container"><img src="${p.img}"></div>
+                    <img src="${p.img}">
                     <div class="p-name">${p.name}</div>
                     <div class="p-price">Rs. ${p.price}</div>
-                    <div style="color: #ffa41c; font-size: 13px; margin-bottom: 10px;">
-                        ⭐⭐⭐⭐⭐ <span style="color: #565959; font-weight: normal;">(4.8/5)</span>
-                    </div>
-                    <div class="qty-box">
-                        <button onclick="changeInpQty(${p.id}, this, -1)">-</button>
-                        <input type="text" value="0" readonly>
-                        <button onclick="changeInpQty(${p.id}, this, 1)">+</button>
-                    </div>
-                    <button class="btn-add" onclick="manualAdd(${p.id}, this)">Add to cart</button>
-                    <button class="btn-buy" onclick="buyNow('${p.name}')">Buy it now</button>
+                    <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy ${p.name}')">Buy on WhatsApp</button>
                 </div>
             `).join('');
         }
 
         function searchProducts() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
-            for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].querySelector('.p-name').innerText.toLowerCase();
-                cards[i].style.display = name.includes(input) ? "block" : "none";
-            }
+            let term = document.getElementById('searchInput').value.toLowerCase();
+            let filtered = products.filter(p => p.name.toLowerCase().includes(term));
+            renderProducts(filtered);
         }
 
-        function changeInpQty(pid, btn, delta) {
-            let inp = btn.parentElement.querySelector('input');
-            let val = parseInt(inp.value) + delta;
-            if(val < 0) val = 0;
-            inp.value = val;
-        }
-
-        function manualAdd(pid, btn) {
-            let qty = parseInt(btn.parentElement.querySelector('input').value);
-            if(qty > 0) addToCart(pid, qty);
-            else alert("Please select quantity first!");
-        }
-
-        function addToCart(pid, qty) {
-            let product = products.find(p => p.id === pid);
-            let existing = cart.find(item => item.id === pid);
-            if(existing) existing.qty += qty;
-            else cart.push({...product, qty: qty});
-            updateCartCount();
-            openCart(product.name);
-        }
-
-        function updateCartCount() {
-            document.getElementById('cart-count').innerText = cart.length;
-        }
-
-        function openCart(newProductName = "") {
-            hideAll();
-            document.getElementById('cart-page').style.display = 'block';
-            let notif = document.getElementById('notif-msg');
-            if(newProductName) {
-                notif.innerText = `"${newProductName}" Added to cart!`;
-                notif.style.display = 'block';
-            } else {
-                notif.style.display = 'none';
-            }
-            renderCart();
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cart-items-container');
-            if(cart.length === 0) {
-                container.innerHTML = "<p style='padding:50px; text-align:center;'>Your cart is empty.</p>";
-                document.getElementById('grand-total').innerText = "0";
-                return;
-            }
-            let total = 0;
-            container.innerHTML = cart.map((item, index) => {
-                total += item.price * item.qty;
-                return `
-                <div class="cart-item">
-                    <div class="cart-prod-info">
-                        <div class="cart-prod-img-box"><img src="${item.img}" style="width:100%"></div>
-                        <div><h3>${item.name}</h3><p>Rs. ${item.price}</p></div>
-                    </div>
-                    <div class="cart-qty-box">
-                        <button onclick="updateCartQty(${index}, -1)">-</button>
-                        <input type="text" value="${item.qty}" readonly style="width:30px; text-align:center; border:none;">
-                        <button onclick="updateCartQty(${index}, 1)">+</button>
-                    </div>
-                    <div style="text-align:right">Rs. ${item.price * item.qty}</div>
-                </div>`;
-            }).join('');
-            document.getElementById('grand-total').innerText = total;
-        }
-
-        function updateCartQty(idx, delta) {
-            cart[idx].qty += delta;
-            if(cart[idx].qty < 1) cart.splice(idx, 1);
-            updateCartCount();
-            renderCart();
-        }
-
-        function hideAll() {
-            document.getElementById('main-site').style.display = 'none';
-            document.getElementById('cart-page').style.display = 'none';
-            document.getElementById('contact-page').style.display = 'none';
-        }
-
-        function goToHome() { hideAll(); document.getElementById('main-site').style.display = 'block'; }
-        function showContact() { hideAll(); document.getElementById('contact-page').style.display = 'block'; }
-
-        function sendContactWhatsApp() {
-            const name = document.getElementById('contact-name').value;
-            const msg = `Contact Inquiry:\nName: ${name}\nComment: ${document.getElementById('contact-comment').value}`;
-            window.open(`https://wa.me/919837904369?text=${encodeURIComponent(msg)}`);
-        }
-
-        function checkoutWhatsApp() {
-            let msg = "Order Details:\n";
-            cart.forEach(i => msg += `${i.name} x ${i.qty} = Rs.${i.price * i.qty}\n`);
-            window.open(`https://wa.me/919837904369?text=${encodeURIComponent(msg)}`);
-        }
-
-        function buyNow(name) {
-            window.open(`https://wa.me/919837904369?text=I want to buy: ${name}`);
-        }
-
-        renderProducts();
+        renderProducts(products);
     </script>
 </body>
 </html>
