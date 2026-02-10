@@ -4,57 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>14 STARS TRADERS</title>
-
     <style>
-        /* CSS RESET & GENERAL */
+        /* AAPKA ORIGINAL DESIGN */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #fff; color: #333; }
+        body { font-family: sans-serif; background-color: #fff; color: #333; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HEADER */
         header { padding: 20px 0; border-bottom: 1px solid #f0f0f0; background: #fff; position: sticky; top: 0; z-index: 1000; }
         .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         
-        /* LOGO IMAGE STYLE */
+        /* CODE 1: LOGO IMAGE CSS */
         .logo img { height: 50px; cursor: pointer; display: block; }
-        
+
+        /* SEARCH BAR WITH NEW FEATURES */
         .search-bar { flex: 1; max-width: 500px; margin: 0 30px; }
         .search-bar input { width: 100%; padding: 10px 20px; border-radius: 25px; border: 1px solid #ddd; outline: none; background: #f9f9f9; }
-        .cart-icon { cursor: pointer; font-size: 20px; position: relative; }
-        .cart-count { position: absolute; top: -8px; right: -10px; background: red; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; }
         
-        nav { display: flex; justify-content: center; gap: 25px; }
-        nav a { text-decoration: none; color: #555; font-size: 13px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
-        nav a:hover { color: #000; }
-
-        /* SEARCH & BLUR STYLES */
-        .blur-body { filter: blur(8px); pointer-events: none; transition: 0.3s; }
+        /* NEW FEATURE: BLUR CLASS */
+        .blur-active { filter: blur(8px); pointer-events: none; transition: 0.3s; }
+        
         #search-info { display: none; text-align: center; padding: 50px 20px; }
-        .no-results-msg { font-size: 18px; color: #666; margin-bottom: 20px; }
-        .btn-home { padding: 10px 25px; background: #00008b; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .no-results { font-size: 18px; color: #666; margin-bottom: 15px; }
+        .btn-home { padding: 10px 25px; background: #00008b; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
 
-        /* PRODUCT GRID */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; transition: 0.3s; }
+        /* PRODUCT GRID & BUTTONS (+ 0 -) */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; }
         .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: left; }
         .img-container { height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
         .img-container img { max-height: 100%; max-width: 100%; object-fit: contain; }
-        .p-name { font-size: 15px; margin-bottom: 8px; color: #444; height: 36px; overflow: hidden; }
         .p-price { font-weight: 700; color: #00008b; margin-bottom: 15px; font-size: 18px; }
         
-        /* QTY SELECTOR */
         .qty-box { display: flex; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; width: 100%; height: 35px; }
-        .qty-box button { width: 30%; background: none; border: none; cursor: pointer; font-size: 18px; color: #666; }
+        .qty-box button { width: 30%; background: none; border: none; cursor: pointer; font-size: 18px; }
         .qty-box input { width: 40%; border: none; border-left: 1px solid #ddd; border-right: 1px solid #ddd; text-align: center; font-weight: bold; }
         
         .btn-add { width: 100%; padding: 10px; background: #fff; border: 1px solid #00008b; color: #00008b; font-weight: 600; cursor: pointer; border-radius: 4px; margin-bottom: 8px; }
         .btn-buy { width: 100%; padding: 12px; background: #00008b; border: none; color: #fff; font-weight: 600; cursor: pointer; border-radius: 4px; }
-
-        /* CONTACT & CART PAGES */
-        #contact-page, #cart-page { display: none; padding-top: 50px; }
-        .cart-header-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 40px; }
-        .cart-header-row h1 { font-size: 42px; font-weight: 400; color: #1a1a1a; }
-        .cart-item { display: grid; grid-template-columns: 3fr 1fr 1fr; align-items: center; padding: 25px 0; border-bottom: 1px solid #f9f9f9; }
         
+        nav { display: flex; justify-content: center; gap: 25px; }
+        nav a { text-decoration: none; color: #555; font-size: 13px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         footer { text-align: center; padding: 40px; color: #888; border-top: 1px solid #eee; margin-top: 50px; }
     </style>
 </head>
@@ -63,102 +51,89 @@
     <header>
         <div class="container">
             <div class="header-top">
-                <div class="logo" onclick="goToHome()">
+                <div class="logo" onclick="location.reload()">
                     <img src="https://i.postimg.cc/856m9p8z/14-STARS-TRADERS-LOGO.png" alt="14 STARS TRADERS">
                 </div>
+                
                 <div class="search-bar">
-                    <input type="text" id="searchInput" oninput="runSearch()" onfocus="applyBlur()" onblur="setTimeout(removeBlur, 200)" placeholder="Search gadgets...">
+                    <input type="text" id="srch" oninput="runSearch()" onfocus="startBlur()" onblur="stopBlur()" placeholder="Search gadgets...">
                 </div>
-                <div class="cart-icon" onclick="openCart()">🛒<span class="cart-count" id="cart-count">0</span></div>
+                <div style="font-size: 20px;">🛒</div>
             </div>
             <nav>
-                <a onclick="goToHome()">Home</a>
-                <a onclick="goToHome()">Catalog</a>
-                <a onclick="showContact()">Contact</a>
+                <a onclick="location.reload()">Home</a>
+                <a onclick="location.reload()">Catalog</a>
+                <a href="#">Contact</a>
             </nav>
         </div>
     </header>
 
-    <div id="main-site" class="container">
+    <div class="container" id="content">
         <div id="search-info">
-            <p id="search-msg" class="no-results-msg"></p>
-            <button class="btn-home" onclick="goToHome()">Back to Home</button>
+            <p id="msg" class="no-results"></p>
+            <button class="btn-home" onclick="location.reload()">Back to Home</button>
         </div>
-        <div class="product-grid" id="productGrid"></div>
+        <div class="product-grid" id="grid"></div>
     </div>
 
-    <div id="contact-page" class="container">... (Contact form logic here) ...</div>
-    <div id="cart-page" class="container">... (Cart logic here) ...</div>
-
-    <footer id="footer">© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
+    <footer id="foot">© 2026 14 STARS TRADERS</footer>
 
     <script>
-        let cart = [];
-        const products = [
+        const items = [
             { id: 1, name: "4 In 1 Emergency Light", price: 200, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
             { id: 2, name: "NIGHT LAMP", price: 250, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
             { id: 3, name: "BUDDHA TRIMMER", price: 250, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
-            { id: 4, name: "4 IN 1 FACIAL KIT", price: 250, img: "https://m.media-amazon.com/images/I/71xiDo3LSbL._SX679_.jpg" },
-            { id: 5, name: "VACCUM SEALER", price: 250, img: "https://m.media-amazon.com/images/I/71fD76VAK-L._SX569_.jpg" },
-            { id: 6, name: "RECHARGEABLE LIGHTER", price: 250, img: "https://m.media-amazon.com/images/I/612+zfJYAPL._SX569_.jpg" },
-            { id: 7, name: "ELECTRONIC JUICER", price: 250, img: "https://m.media-amazon.com/images/I/715bLTUaxAL._AC_UY218_.jpg" },
-            { id: 8, name: "HUMIDIFIRE", price: 500, img: "https://m.media-amazon.com/images/I/41iE9oX5aOL._SY300_SX300_QL70_FMwebp_.jpg" }
+            { id: 4, name: "4 IN 1 FACIAL KIT", price: 250, img: "https://m.media-amazon.com/images/I/71xiDo3LSbL._SX679_.jpg" }
         ];
 
-        function renderProducts(data = products) {
-            const grid = document.getElementById('productGrid');
+        function draw(data) {
+            const g = document.getElementById('grid');
             const info = document.getElementById('search-info');
             if(data.length === 0) {
-                grid.style.display = 'none';
+                g.style.display = 'none';
                 info.style.display = 'block';
-                document.getElementById('search-msg').innerText = `No results found for "${document.getElementById('searchInput').value}".`;
+                document.getElementById('msg').innerText = `No results found for "${document.getElementById('srch').value}".`;
             } else {
-                grid.style.display = 'grid';
+                g.style.display = 'grid';
                 info.style.display = 'none';
-                grid.innerHTML = data.map(p => `
+                g.innerHTML = data.map(p => `
                     <div class="card">
                         <div class="img-container"><img src="${p.img}"></div>
-                        <div class="p-name">${p.name}</div>
+                        <div style="font-size:15px; margin-bottom:8px;">${p.name}</div>
                         <div class="p-price">Rs. ${p.price}</div>
                         <div class="qty-box">
-                            <button onclick="changeInpQty(${p.id}, this, -1)">-</button>
+                            <button onclick="this.nextElementSibling.value = Math.max(0, parseInt(this.nextElementSibling.value)-1)">-</button>
                             <input type="text" value="0" readonly>
-                            <button onclick="changeInpQty(${p.id}, this, 1)">+</button>
+                            <button onclick="this.previousElementSibling.value = parseInt(this.previousElementSibling.value)+1">+</button>
                         </div>
-                        <button class="btn-add" onclick="manualAdd(${p.id}, this)">Add to cart</button>
-                        <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy ${p.name}')">Buy it now</button>
+                        <button class="btn-add">Add to cart</button>
+                        <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want ${p.name}')">Buy Now</button>
                     </div>
                 `).join('');
             }
         }
 
-        // Search & Blur Functions
         function runSearch() {
-            let term = document.getElementById('searchInput').value.toLowerCase();
-            renderProducts(products.filter(p => p.name.toLowerCase().includes(term)));
-            removeBlur();
-        }
-        function applyBlur() { if(!document.getElementById('searchInput').value) { document.getElementById('productGrid').classList.add('blur-body'); } }
-        function removeBlur() { document.getElementById('productGrid').classList.remove('blur-body'); }
-
-        // Core App Functions
-        function changeInpQty(pid, btn, delta) {
-            let inp = btn.parentElement.querySelector('input');
-            let val = parseInt(inp.value) + delta;
-            if(val < 0) val = 0;
-            inp.value = val;
-        }
-        function manualAdd(pid, btn) {
-            let qty = parseInt(btn.parentElement.querySelector('input').value);
-            if(qty > 0) alert("Added to cart!"); else alert("Select quantity!");
-        }
-        function goToHome() { 
-            document.getElementById('searchInput').value = '';
-            document.getElementById('main-site').style.display = 'block';
-            renderProducts(products); 
+            let t = document.getElementById('srch').value.toLowerCase();
+            draw(items.filter(x => x.name.toLowerCase().includes(t)));
+            document.getElementById('grid').classList.remove('blur-active');
         }
 
-        renderProducts();
+        function startBlur() {
+            if(document.getElementById('srch').value === "") {
+                document.getElementById('grid').classList.add('blur-active');
+                document.getElementById('foot').classList.add('blur-active');
+            }
+        }
+
+        function stopBlur() {
+            setTimeout(() => {
+                document.getElementById('grid').classList.remove('blur-active');
+                document.getElementById('foot').classList.remove('blur-active');
+            }, 200);
+        }
+
+        draw(items);
     </script>
 </body>
 </html>
