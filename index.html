@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>14 STARS TRADERS | Best Night Lamps & Kitchen Gadgets</title>
     <style>
-        /* --- AAPKA ORIGINAL DESIGN (NO CHANGES) --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: sans-serif; background-color: #fff; color: #333; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -22,26 +21,18 @@
         nav a { text-decoration: none; color: white; font-size: 14px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         nav a:hover { color: #febd69; }
 
-        /* BLUR & SEARCH UI */
-        .blur-active { filter: blur(10px); pointer-events: none; }
-        #search-info { display: none; text-align: center; padding: 60px 20px; }
-        .no-results { color: #555; font-size: 18px; margin-bottom: 20px; }
-        .back-btn { padding: 10px 20px; background: #131921; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-
-        /* PRODUCT GRID (PURANA LAYOUT) */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; transition: 0.3s; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee; }
-        .card img { max-width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
-        .p-name { font-weight: bold; margin-bottom: 5px; height: 40px; overflow: hidden; }
-        .p-price { color: #00008b; font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee; }
+        .card img { max-width: 100%; height: 180px; object-fit: contain; margin-bottom: 15px; }
+        .p-name { font-weight: bold; margin-bottom: 10px; height: 40px; overflow: hidden; font-size: 16px; }
+        .p-price { color: #00008b; font-weight: bold; font-size: 20px; margin-bottom: 15px; }
         
-        /* RESTORING YOUR - 0 + BUTTONS */
         .qty-box { display: flex; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; width: 100%; height: 35px; overflow: hidden; }
         .qty-box button { width: 30%; background: #f8f8f8; border: none; cursor: pointer; font-size: 18px; }
         .qty-box input { width: 40%; border: none; border-left: 1px solid #ddd; border-right: 1px solid #ddd; text-align: center; font-weight: bold; }
         
-        .btn-add { width: 100%; padding: 10px; background: #fff; border: 1px solid #00008b; color: #00008b; cursor: pointer; border-radius: 4px; font-weight: bold; margin-bottom: 5px; }
-        .btn-buy { width: 100%; padding: 10px; background: #00008b; color: #fff; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; }
+        .btn-add { width: 100%; padding: 10px; background: #fff; border: 1px solid #00008b; color: #00008b; font-weight: bold; cursor: pointer; border-radius: 4px; margin-bottom: 8px; }
+        .btn-buy { width: 100%; padding: 12px; background: #00008b; color: #fff; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; }
         
         footer { text-align: center; padding: 30px; border-top: 1px solid #eee; margin-top: 50px; color: #888; }
     </style>
@@ -51,98 +42,79 @@
     <header>
         <div class="container">
             <div class="header-top">
-                <div class="logo" onclick="location.reload()">
+                <div class="logo">
                     <img src="https://i.postimg.cc/856m9p8z/14-STARS-TRADERS-LOGO.png" alt="14 STARS TRADERS">
                 </div>
                 <div class="search-bar">
-                   <input type="text" id="searchInput" oninput="doSearch()" onfocus="applyBlur()" onblur="setTimeout(removeBlur, 200)" placeholder="Search gadgets...">
+                   <input type="text" id="searchInput" placeholder="Search gadgets...">
                 </div>
-                <div class="cart-icon">
-                    🛒<span class="cart-count">0</span>
-                </div>
+                <div class="cart-icon">🛒<span class="cart-count">0</span></div>
             </div>
             <nav>
-                <a onclick="location.reload()">Home</a>
-                <a onclick="showAll()">Catalog</a>
+                <a href="#">Home</a>
+                <a href="#">Catalog</a>
                 <a href="#">Contact</a>
             </nav>
         </div>
     </header>
 
-    <div class="container" id="main-content">
-        <div id="search-info">
-            <div id="search-msg" class="no-results"></div>
-            <button class="back-btn" onclick="location.reload()">Back to Home</button>
+    <div class="container">
+        <div class="product-grid" id="productGrid">
+            <div class="card">
+                <img src="https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg">
+                <div class="p-name">4 In 1 Emergency Light</div>
+                <div class="p-price">Rs. 320</div>
+                <div class="qty-box">
+                    <button onclick="this.nextElementSibling.value = Math.max(0, parseInt(this.nextElementSibling.value) - 1)">-</button>
+                    <input type="text" value="0" readonly>
+                    <button onclick="this.previousElementSibling.value = parseInt(this.previousElementSibling.value) + 1">+</button>
+                </div>
+                <button class="btn-add">Add to cart</button>
+                <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy 4 In 1 Emergency Light')">Buy on WhatsApp</button>
+            </div>
+
+            <div class="card">
+                <img src="https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg">
+                <div class="p-name">NIGHT LAMP</div>
+                <div class="p-price">Rs. 340</div>
+                <div class="qty-box">
+                    <button onclick="this.nextElementSibling.value = Math.max(0, parseInt(this.nextElementSibling.value) - 1)">-</button>
+                    <input type="text" value="0" readonly>
+                    <button onclick="this.previousElementSibling.value = parseInt(this.previousElementSibling.value) + 1">+</button>
+                </div>
+                <button class="btn-add">Add to cart</button>
+                <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy NIGHT LAMP')">Buy on WhatsApp</button>
+            </div>
+
+            <div class="card">
+                <img src="https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg">
+                <div class="p-name">BUDDHA TRIMMER</div>
+                <div class="p-price">Rs. 350</div>
+                <div class="qty-box">
+                    <button onclick="this.nextElementSibling.value = Math.max(0, parseInt(this.nextElementSibling.value) - 1)">-</button>
+                    <input type="text" value="0" readonly>
+                    <button onclick="this.previousElementSibling.value = parseInt(this.previousElementSibling.value) + 1">+</button>
+                </div>
+                <button class="btn-add">Add to cart</button>
+                <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy BUDDHA TRIMMER')">Buy on WhatsApp</button>
+            </div>
+
+            <div class="card">
+                <img src="https://m.media-amazon.com/images/I/515nwSzjGoL.jpg">
+                <div class="p-name">NOSE TRIMMER</div>
+                <div class="p-price">Rs. 320</div>
+                <div class="qty-box">
+                    <button onclick="this.nextElementSibling.value = Math.max(0, parseInt(this.nextElementSibling.value) - 1)">-</button>
+                    <input type="text" value="0" readonly>
+                    <button onclick="this.previousElementSibling.value = parseInt(this.previousElementSibling.value) + 1">+</button>
+                </div>
+                <button class="btn-add">Add to cart</button>
+                <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy NOSE TRIMMER')">Buy on WhatsApp</button>
+            </div>
         </div>
-        <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <footer id="main-footer">© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
+    <footer>© 2026 14 STARS TRADERS • High Quality Gadgets</footer>
 
-    <script>
-        // AAPKE SAARE PRODUCTS WAPAS ADD KAR DIYE
-        const items = [
-            { n: "4 In 1 Emergency Light", p: 320, i: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
-            { n: "NIGHT LAMP", p: 340, i: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
-            { n: "BUDDHA TRIMMER", p: 350, i: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
-            { n: "NOSE TRIMMER", p: 320, i: "https://m.media-amazon.com/images/I/515nwSzjGoL.jpg" }
-        ];
-
-        function render(data) {
-            const g = document.getElementById('productGrid');
-            const info = document.getElementById('search-info');
-            
-            if (data.length === 0) {
-                g.style.display = 'none';
-                info.style.display = 'block';
-                let t = document.getElementById('searchInput').value;
-                document.getElementById('search-msg').innerHTML = `No results found for “${t}”. Check the spelling or try another word.`;
-            } else {
-                g.style.display = 'grid';
-                info.style.display = 'none';
-                g.innerHTML = data.map(item => `
-                    <div class="card">
-                        <img src="${item.i}">
-                        <div class="p-name">${item.n}</div>
-                        <div class="p-price">Rs. ${item.p}</div>
-                        <div class="qty-box">
-                            <button onclick="this.nextElementSibling.value = Math.max(0, parseInt(this.nextElementSibling.value)-1)">-</button>
-                            <input type="text" value="0" readonly>
-                            <button onclick="this.previousElementSibling.value = parseInt(this.previousElementSibling.value)+1">+</button>
-                        </div>
-                        <button class="btn-add" onclick="alert('Added!')">Add to cart</button>
-                        <button class="btn-buy" onclick="window.open('https://wa.me/919837904369?text=I want to buy ${item.n}')">Buy on WhatsApp</button>
-                    </div>
-                `).join('');
-            }
-        }
-
-        function doSearch() {
-            let t = document.getElementById('searchInput').value.toLowerCase();
-            if(t.trim()==="") { render(items); return; }
-            render(items.filter(x => x.n.toLowerCase().includes(t)));
-            removeBlur();
-        }
-
-        function applyBlur() {
-            if(document.getElementById('searchInput').value === "") {
-                document.getElementById('productGrid').classList.add('blur-active');
-                document.getElementById('main-footer').classList.add('blur-active');
-            }
-        }
-
-        function removeBlur() {
-            document.getElementById('productGrid').classList.remove('blur-active');
-            document.getElementById('main-footer').classList.remove('blur-active');
-        }
-
-        function showAll() {
-            document.getElementById('searchInput').value = '';
-            render(items);
-            window.scrollTo(0,0);
-        }
-
-        render(items);
-    </script>
 </body>
 </html>
