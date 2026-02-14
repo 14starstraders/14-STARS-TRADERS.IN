@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>14 STARS TRADERS | Official Store</title>
-    
-    <meta name="description" content="Welcome to 14 STARS TRADERS. Shop premium gadgets, beauty kits, and home essentials at the best prices.">
-</head>
+    <meta name="description" content="Welcome to 14 STARS TRADERS. Shop premium gadgets, beauty kits, and home essentials at the best prices with fast WhatsApp ordering.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +15,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
         body { background-color: #ffffff; color: #333; line-height: 1.5; }
 
-        /* HEADER - Accessibility Fix */
+        /* HEADER */
         header { background: #1a1a1a; color: #fff; padding: 18px 0; position: sticky; top: 0; z-index: 2000; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .nav-flex { display: flex; justify-content: space-between; align-items: center; }
@@ -30,7 +28,7 @@
         .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 20px; }
         .badge { position: absolute; top: -10px; right: -10px; background: #d4af37; color: #fff; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
 
-        /* HERO BANNER - Optimized for BANNERA.png */
+        /* HERO BANNER */
         .hero-banner {
             width: 100%; height: 500px;
             background: url('https://copilot.microsoft.com/th/id/BCO.c36814e0-4b79-4fd5-9e55-1000825f2caa.png') no-repeat center center; 
@@ -45,21 +43,72 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* PRODUCT GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; padding: 40px 0; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
+            padding: 40px 0; 
+        }
         .product-card { background: transparent; text-align: left; }
         .img-container { 
-            background: #f7f7f7; height: 320px; border-radius: 12px; 
-            display: flex; align-items: center; justify-content: center; 
-            overflow: hidden; border: 1px solid #eee; margin-bottom: 15px; 
+            background: #f7f7f7; 
+            height: 220px; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; 
+            border: 1px solid #eee; 
+            margin-bottom: 15px; 
         }
-        .img-container img { max-width: 85%; transition: 0.4s; height: auto; }
-        .p-name { font-size: 15px; color: #555; margin-bottom: 5px; font-weight: 500; }
-        .p-price { font-size: 17px; font-weight: 700; color: #000; margin-bottom: 15px; }
+        .img-container img { max-width: 80%; transition: 0.4s; height: auto; }
+        .p-name { font-size: 14px; color: #555; margin-bottom: 5px; font-weight: 500; height: 40px; overflow: hidden; }
+        .p-price { font-size: 16px; font-weight: 700; color: #000; margin-bottom: 15px; }
 
-        /* QTY BOX */
-        .qty-box { display: flex; align-items: center; border: 1px solid #d1d1d1; border-radius: 4px; padding: 5px; background: #fff; width: fit-content; }
-        .qty-box button { background: none; border: none; font-size: 18px; color: #333; cursor: pointer; width: 30px; height: 30px; }
-        .qty-box input { border: none; text-align: center; width: 40px; font-size: 14px; font-weight: 600; outline: none; }
+        /* RESPONSIVE GRID FOR MOBILE */
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .img-container { height: 160px; }
+            .hero-banner { height: 300px; }
+        }
+
+        /* --- UPDATED FULL WIDTH QTY BOX --- */
+        .qty-box { 
+            display: flex; 
+            align-items: center; 
+            border: 1px solid #d1d1d1; 
+            border-radius: 4px; 
+            padding: 2px; 
+            background: #fff; 
+            width: 100%; /* Isse width product ke barabar ho jayegi */
+            justify-content: space-between;
+        }
+        .qty-box button { 
+            background: #f9f9f9; 
+            border: none; 
+            font-size: 18px; 
+            color: #333; 
+            cursor: pointer; 
+            width: 35px; 
+            height: 35px; 
+            flex-shrink: 0;
+        }
+        .qty-box button:hover { background: #eee; }
+        .qty-box input { 
+            border: none; 
+            text-align: center; 
+            width: 100%; /* Input center me fail jayega */
+            font-size: 14px; 
+            font-weight: 600; 
+            outline: none; 
+            background: transparent;
+        }
+        /* Chrome, Safari, Edge, Opera se arrows hatane ke liye */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
         /* CART STYLES */
         .cart-container { max-width: 1000px; margin: 50px auto; padding: 20px; }
@@ -69,7 +118,7 @@
         .cart-item-row { border-bottom: 1px solid #f9f9f9; }
         .cart-item-row td { padding: 20px 0; vertical-align: middle; }
         .product-info { display: flex; align-items: center; gap: 20px; }
-        .cart-img { width: 100px; height: 100px; object-fit: contain; background: #f9f9f9; border-radius: 8px; }
+        .cart-img { width: 80px; height: 80px; object-fit: contain; background: #f9f9f9; border-radius: 8px; }
         .cart-item-title { font-weight: 600; font-size: 16px; margin-bottom: 5px; }
         .delete-btn { background: none; border: none; cursor: pointer; font-size: 18px; color: #999; margin-left: 15px; }
         .wa-btn { background: #25d366; color: white; padding: 15px 40px; border: none; border-radius: 4px; font-weight: 700; font-size: 14px; cursor: pointer; text-transform: uppercase; width: 100%; max-width: 400px; }
@@ -105,8 +154,7 @@
 
     <main>
         <section id="page-home" class="page-view active">
-            <div class="hero-banner" role="img" aria-label="14 Stars Traders Main Banner">
-                </div>
+            <div class="hero-banner" role="img" aria-label="14 Stars Traders Main Banner"></div>
             <div class="container">
                 <h2 style="text-align: center; margin: 40px 0;">OUR PRODUCTS</h2>
                 <div class="grid" id="homeProductGrid"></div>
@@ -255,7 +303,7 @@
                             </td>
                             <td style="text-align: center;">
                                 <div style="display: flex; align-items: center; justify-content: center;">
-                                    <div class="qty-box">
+                                    <div class="qty-box" style="width:120px;">
                                         <button onclick="app.updateCartQty(${item.id}, -1)">−</button>
                                         <input type="text" value="${item.q}" readonly>
                                         <button onclick="app.updateCartQty(${item.id}, 1)">+</button>
@@ -309,19 +357,10 @@
                 const email = document.getElementById('contact_email').value;
                 if(!email) { alert("Please enter your email"); return; }
                 alert("Thank you! Opening WhatsApp to send your message.");
-                this.checkout(); // Reusing WA logic for demo
+                this.checkout(); 
             }
         };
         app.init();
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
