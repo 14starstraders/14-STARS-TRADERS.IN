@@ -3,323 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>14 STARS TRADERS | Premium Shop</title>
+    <title>14 STARS TRADERS | Official Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: linear-gradient(135deg, #000046 0%, #1cb5e0 100%);
-            --dark-blue: #00008b;
-            --soft-bg: #f8f9fa;
-            --text-main: #2d3436;
-            --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 30px rgba(0,0,0,0.1);
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+        body { background-color: #ffffff; color: #333; }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', -apple-system, sans-serif; background-color: var(--soft-bg); color: var(--text-main); }
+        /* HEADER */
+        header { background: #1a1a1a; color: #fff; padding: 18px 0; position: sticky; top: 0; z-index: 2000; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* HEADER & NAVIGATION */
-        header { 
-            background: #fff; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
-            position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm);
-        }
-        .header-top { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #fff; cursor: pointer; text-decoration: none; }
         
-        /* LOGO CROP & FIT */
-        .logo { display: flex; align-items: center; cursor: pointer; }
-        .logo img { 
-            height: 50px; /* Chota aur clean look */
-            width: auto; 
-            object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+
+        .header-icons { display: flex; gap: 20px; align-items: center; font-size: 18px; }
+        .cart-btn { position: relative; cursor: pointer; }
+        .badge { position: absolute; top: -10px; right: -10px; background: #d4af37; color: #fff; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* HERO BANNER */
+        .hero-banner {
+            width: 100%; height: 450px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=1501&auto=format&fit=crop'); 
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #fff; text-align: center; margin-bottom: 20px;
         }
-        
-        .search-bar { flex: 1; max-width: 500px; position: relative; }
-        .search-bar input { 
-            width: 100%; padding: 10px 20px; border-radius: 50px; border: 1.5px solid #eee;
-            background: #f1f3f5; outline: none; transition: var(--transition);
+        .hero-banner h1 { font-size: 42px; font-weight: 700; letter-spacing: 3px; margin-bottom: 10px; }
+
+        /* PAGE VIEWS */
+        .page-view { display: none; min-height: 85vh; }
+        .active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* PRODUCT GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; padding: 40px 0; }
+        .product-card { background: transparent; text-align: left; }
+        .img-container { 
+            background: #f7f7f7; height: 320px; border-radius: 12px; 
+            display: flex; align-items: center; justify-content: center; 
+            overflow: hidden; border: 1px solid #eee; margin-bottom: 15px; 
         }
-        .search-bar input:focus { background: #fff; border-color: var(--dark-blue); box-shadow: 0 0 0 4px rgba(28, 181, 224, 0.1); }
+        .img-container img { max-width: 85%; transition: 0.4s; }
+        .p-name { font-size: 15px; color: #555; margin-bottom: 5px; font-weight: 500; }
+        .p-price { font-size: 17px; font-weight: 700; color: #000; margin-bottom: 15px; }
 
-        .cart-icon { cursor: pointer; font-size: 24px; position: relative; transition: transform 0.2s; }
-        .cart-icon:hover { transform: scale(1.1); }
-        .cart-count { 
-            position: absolute; top: -5px; right: -8px; background: #ff4757; color: #fff;
-            font-size: 10px; height: 18px; width: 18px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-weight: bold;
+        /* QTY BOX */
+        .qty-box { display: flex; align-items: center; border: 1px solid #d1d1d1; border-radius: 4px; padding: 5px; background: #fff; width: fit-content; }
+        .qty-box button { background: none; border: none; font-size: 18px; color: #333; cursor: pointer; width: 30px; height: 30px; }
+        .qty-box input { border: none; text-align: center; width: 40px; font-size: 14px; font-weight: 600; outline: none; }
+
+        /* CART PAGE STYLES */
+        .cart-container { max-width: 1000px; margin: 50px auto; padding: 20px; }
+        .cart-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }
+        .cart-table { width: 100%; border-collapse: collapse; }
+        .cart-table th { text-align: left; font-size: 12px; text-transform: uppercase; color: #888; letter-spacing: 1px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .cart-item-row { border-bottom: 1px solid #f9f9f9; }
+        .cart-item-row td { padding: 20px 0; vertical-align: middle; }
+        .product-info { display: flex; align-items: center; gap: 20px; }
+        .cart-img { width: 100px; height: 100px; object-fit: contain; background: #f9f9f9; border-radius: 8px; }
+        .cart-item-title { font-weight: 600; font-size: 16px; margin-bottom: 5px; }
+        .cart-item-price { color: #666; font-size: 14px; }
+        .delete-btn { background: none; border: none; cursor: pointer; font-size: 18px; color: #999; margin-left: 15px; }
+        .cart-summary { margin-top: 40px; text-align: right; border-top: 1px solid #eee; padding-top: 30px; }
+        .subtotal-text { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+        .wa-btn { background: #25d366; color: white; padding: 15px 40px; border: none; border-radius: 4px; font-weight: 700; font-size: 14px; cursor: pointer; text-transform: uppercase; width: 100%; max-width: 400px; }
+
+        /* CONTACT PAGE STYLES */
+        .contact-wrapper { max-width: 700px; margin: 60px auto; padding: 0 20px; }
+        .contact-title { font-size: 36px; margin-bottom: 30px; font-weight: 500; text-align: left; }
+        .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .contact-form input, .contact-form textarea { 
+            width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px; 
+            font-size: 15px; outline: none; background: #fff;
         }
-
-        nav { display: flex; justify-content: center; gap: 30px; margin-top: 10px; }
-        nav a { 
-            text-decoration: none; color: #636e72; font-size: 13px; font-weight: 700; 
-            letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.3s;
-        }
-        nav a:hover { color: var(--dark-blue); }
-
-        /* PRODUCT CARDS */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; padding: 40px 0; }
-        .card { 
-            background: #fff; padding: 20px; border-radius: 15px; border: 1px solid rgba(0,0,0,0.03);
-            transition: var(--transition); display: flex; flex-direction: column; position: relative;
-        }
-        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
-        
-        .img-container { height: 180px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: #fff; }
-        .img-container img { max-height: 100%; max-width: 100%; object-fit: contain; transition: 0.5s; }
-        .card:hover img { transform: scale(1.08); }
-
-        .p-name { font-weight: 600; font-size: 16px; margin-bottom: 8px; color: #2d3436; height: 44px; overflow: hidden; }
-        .p-price { font-size: 20px; font-weight: 800; color: var(--dark-blue); margin-bottom: 15px; }
-
-        .qty-box { display: flex; background: #f1f3f5; border-radius: 8px; margin-bottom: 12px; height: 38px; overflow: hidden; }
-        .qty-box button { width: 35%; border: none; background: transparent; cursor: pointer; font-size: 18px; font-weight: bold; }
-        .qty-box button:hover { background: #e9ecef; }
-        .qty-box input { width: 30%; border: none; text-align: center; font-weight: bold; background: transparent; pointer-events: none; }
-
-        .btn-add, .btn-buy { 
-            width: 100%; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; 
-            transition: 0.3s; border: none; font-size: 13px; letter-spacing: 0.5px;
-        }
-        .btn-add { background: #fff; border: 2px solid var(--dark-blue); color: var(--dark-blue); margin-bottom: 8px; }
-        .btn-add:hover { background: var(--dark-blue); color: #fff; }
-        .btn-buy { background: var(--primary); color: #fff; }
-
-        /* CART PAGE */
-        #cart-page { display: none; padding: 50px 0; animation: fadeIn 0.5s; }
-        .cart-item { 
-            display: grid; grid-template-columns: 4fr 1fr 1fr; align-items: center; 
-            background: #fff; padding: 15px; margin-bottom: 15px; border-radius: 12px; box-shadow: var(--shadow-sm);
-        }
-        .cart-prod-info { display: flex; align-items: center; gap: 15px; }
-        .cart-prod-img-box { width: 70px; height: 70px; background: #f8f9fa; border-radius: 8px; padding: 5px; }
-        .cart-prod-img-box img { width: 100%; height: 100%; object-fit: contain; }
-        .del-btn { color: #ff4757; font-size: 20px; cursor: pointer; margin-left: 10px; }
-
-        /* FOOTER */
-        footer { 
-            background: var(--primary); color: #fff; text-align: center; 
-            padding: 50px 20px; margin-top: 60px; font-size: 14px; letter-spacing: 1px;
+        .contact-form textarea { grid-column: span 2; height: 150px; resize: none; }
+        .phone-input { grid-column: span 2; }
+        .contact-send-btn { 
+            background: #b5a496; color: white; border: none; padding: 16px 45px; 
+            border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 500; 
+            margin-top: 10px; width: fit-content;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .hidden { display: none !important; }
+        footer { text-align: center; padding: 40px; color: #999; font-size: 11px; border-top: 1px solid #eee; margin-top: 50px; }
     </style>
 </head>
 <body>
 
     <header>
-    <div class="container">
-        <div class="header-top">
-            
-            <div class="LOGOF.png" onclick="app.nav('home')" style="font-size: 22px; font-weight: 800; color: #00008b; cursor: pointer; font-family: sans-serif; white-space: nowrap;">
-                14 <span style="color: #1cb5e0;">STARS</span> TRADERS
+        <div class="container nav-flex">
+            <a class="logo" onclick="app.nav('home')">14 STARS</a>
+            <nav class="nav-links">
+                <a onclick="app.nav('home')">Home</a>
+                <a onclick="app.nav('catalog')">Catalog</a>
+                <a onclick="app.nav('contact')">Contact</a>
+            </nav>
+            <div class="header-icons">
+                <div class="cart-btn" onclick="app.nav('cart')">
+                    👜 <span class="badge" id="badge">0</span>
+                </div>
             </div>
-
-            <div class="search-bar">
-                <input type="text" id="srchInp" oninput="app.search()" placeholder="Search gadgets...">
-            </div>
-            <div class="cart-icon" onclick="app.nav('cart')">🛒<span class="cart-count" id="cart-count">0</span></div>
         </div>
-        <nav>
-            <a onclick="app.nav('home')">Home</a>
-            <a onclick="app.nav('home')">Shop</a>
-            <a onclick="app.nav('contact')">Contact</a>
-        </nav>
-    </div>
-</header>
+    </header>
 
-    <main class="container">
-        <section id="home-section">
-            <div id="search-info" class="hidden">
-                <center style="padding: 100px;">
-                    <p id="search-msg" style="font-size: 18px; color: #666;"></p>
-                    <button class="btn-buy" style="width: 200px; margin-top: 20px;" onclick="app.nav('home')">Go Back</button>
-                </center>
+    <main>
+        <section id="page-home" class="page-view active">
+            <div class="hero-banner">
+                <h1>14 STARS TRADERS</h1>
+                <p>Premium Gadgets & Modern Lifestyle Essentials</p>
             </div>
-            <div class="product-grid" id="productGrid"></div>
-        </section>
-
-        <section id="cart-page">
-            <h1 style="font-size: 32px; margin-bottom: 30px;">Your Bag</h1>
-            <div id="cart-items-container"></div>
-            <div id="checkout-box" style="margin-top: 40px; text-align: right; background: #fff; padding: 30px; border-radius: 15px;">
-                <h2 style="margin-bottom: 20px;">Subtotal: Rs. <span id="grand-total">0</span></h2>
-                <button class="btn-buy" style="max-width: 350px; padding: 18px; font-size: 16px;" onclick="app.checkout()">Confirm Order via WhatsApp</button>
+            <div class="container">
+                <h2 style="text-align: center; margin: 40px 0;">OUR PRODUCTS</h2>
+                <div class="grid" id="homeProductGrid"></div>
             </div>
         </section>
 
-        <section id="contact-page" class="hidden" style="padding: 60px 0; max-width: 600px; margin: 0 auto;">
-            <h2 style="font-size: 28px; margin-bottom: 20px;">Contact Us</h2>
-            <input type="text" id="c-name" placeholder="Name" style="width:100%; padding:15px; margin-bottom:15px; border-radius:8px; border:1px solid #ddd;">
-            <textarea id="c-msg" placeholder="Message" rows="5" style="width:100%; padding:15px; margin-bottom:15px; border-radius:8px; border:1px solid #ddd;"></textarea>
-            <button class="btn-buy" onclick="app.sendContact()">Send to WhatsApp</button>
+        <section id="page-catalog" class="page-view">
+            <div class="container">
+                <h2 style="text-align: center; margin: 40px 0;">OUR CATALOG</h2>
+                <div class="grid" id="catalogGrid"></div>
+            </div>
+        </section>
+
+        <section id="page-cart" class="page-view">
+            <div class="cart-container">
+                <div class="cart-header">
+                    <h1 style="font-size: 32px;">Your cart</h1>
+                    <a onclick="app.nav('catalog')" style="text-decoration: underline; cursor: pointer; color: #666;">Continue shopping</a>
+                </div>
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th style="text-align: center;">Quantity</th>
+                            <th style="text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartItemsList"></tbody>
+                </table>
+                <div id="cartSummary" class="cart-summary">
+                    <div class="subtotal-text">Subtotal: Rs. <span id="totalPrice">0</span>.00</div>
+                    <p style="color: #888; font-size: 12px; margin-bottom: 20px;">Taxes and shipping calculated at checkout</p>
+                    <button class="wa-btn" onclick="app.checkout()">ORDER ON WHATSAPP</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-contact" class="page-view">
+            <div class="contact-wrapper">
+                <h1 class="contact-title">Contact</h1>
+                <div class="contact-form">
+                    <input type="text" id="contact_name" placeholder="Name">
+                    <input type="email" id="contact_email" placeholder="Email *">
+                    <input type="text" id="contact_phone" class="phone-input" placeholder="Phone number">
+                    <textarea id="contact_message" placeholder="Comment"></textarea>
+                </div>
+                <button class="contact-send-btn" onclick="app.sendContact()">Send</button>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <h3 style="margin-bottom: 10px;">14 STARS TRADERS</h3>
-        <p>© 2026 High Quality Gadgets Store</p>
-    </footer>
+    <footer>© 2026 14 STARS TRADERS</footer>
 
     <script>
         const app = {
             products: [
                 { id: 1, name: "4 In 1 Emergency Light", price: 200, img: "https://m.media-amazon.com/images/I/511FKiYjv3L._SX342_SY445_QL70_FMwebp_.jpg" },
-                { id: 2, name: "NIGHT LAMP", price: 250, img: "https://m.media-amazon.com/images/I/61GfiZngyIL._SX466_.jpg" },
-                { id: 3, name: "BUDDHA TRIMMER", price: 250, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
-                { id: 4, name: "4 IN 1 FACIAL KIT", price: 250, img: "https://m.media-amazon.com/images/I/71xiDo3LSbL._SX679_.jpg" },
-                { id: 5, name: "VACCUM SEALER", price: 250, img: "https://m.media-amazon.com/images/I/71fD76VAK-L._SX569_.jpg" },
-                { id: 6, name: "RECHARGEABLE LIGHTER", price: 250, img: "https://m.media-amazon.com/images/I/612+zfJYAPL._SX569_.jpg" },
-                { id: 7, name: "ELECTRONIC JUICER", price: 250, img: "https://m.media-amazon.com/images/I/715bLTUaxAL._AC_UY218_.jpg" },
-                { id: 8, name: "HUMIDIFIRE", price: 500, img: "https://m.media-amazon.com/images/I/41iE9oX5aOL._SY300_SX300_QL70_FMwebp_.jpg" }
+               
+                { id: 3, name: "Buddha Design Trimmer", price: 250, img: "https://m.media-amazon.com/images/I/51aY9Kw1Y6L._SY300_SX300_QL70_FMwebp_.jpg" },
+                { id: 4, name: "4 In 1 Facial Kit", price: 250, img: "https://m.media-amazon.com/images/I/71xiDo3LSbL._SX679_.jpg" },
+                { id: 5, name: "Portable Vacuum Sealer", price: 250, img: "https://m.media-amazon.com/images/I/71fD76VAK-L._SX569_.jpg" },
+                { id: 6, name: "Electric Plasma Lighter", price: 250, img: "https://m.media-amazon.com/images/I/612+zfJYAPL._SX569_.jpg" },
+                { id: 7, name: "Portable Electronic Juicer", price: 250, img: "https://m.media-amazon.com/images/I/715bLTUaxAL._AC_UY218_.jpg" }
+                
             ],
-            cart: JSON.parse(localStorage.getItem('stars_cart')) || [],
+            cart: [],
 
             init() {
-                this.renderProducts(this.products);
-                this.updateUI();
+                const saved = localStorage.getItem('14stars_data');
+                if (saved) { this.cart = JSON.parse(saved); this.updateBadge(); }
+                this.renderProducts('homeProductGrid');
+                this.renderProducts('catalogGrid');
             },
 
-            renderProducts(list) {
-                const grid = document.getElementById('productGrid');
-                const info = document.getElementById('search-info');
-                if (list.length === 0) {
-                    grid.classList.add('hidden');
-                    info.classList.remove('hidden');
-                    document.getElementById('search-msg').innerText = "We couldn't find what you're looking for.";
-                    return;
-                }
-                grid.classList.remove('hidden');
-                info.classList.add('hidden');
-                grid.innerHTML = list.map(p => `
-                    <div class="card">
-                        <div class="img-container"><img src="${p.img}"></div>
-                        <div class="p-name">${p.name}</div>
-                        <div class="p-price">Rs. ${p.price}</div>
-                        <div class="qty-box">
-                            <button onclick="app.adjustInp(${p.id}, -1)">-</button>
-                            <input type="number" value="1" id="qty-${p.id}">
-                            <button onclick="app.adjustInp(${p.id}, 1)">+</button>
-                        </div>
-                        <button class="btn-add" onclick="app.addToCart(${p.id})">ADD TO BAG</button>
-                        <button class="btn-buy" onclick="app.quickBuy('${p.name}')">BUY NOW</button>
-                    </div>
-                `).join('');
-            },
-
-            adjustInp(id, delta) {
-                const inp = document.getElementById(`qty-${id}`);
-                let val = parseInt(inp.value) + delta;
-                if (val < 1) val = 1;
-                inp.value = val;
-            },
-
-            addToCart(id) {
-                const product = this.products.find(p => p.id === id);
-                const qty = parseInt(document.getElementById(`qty-${id}`).value);
-                const existing = this.cart.find(item => item.id === id);
-                if (existing) existing.qty += qty;
-                else this.cart.push({ ...product, qty });
-                this.save();
-                alert(`${product.name} added!`);
-            },
-
-            save() {
-                localStorage.setItem('stars_cart', JSON.stringify(this.cart));
-                this.updateUI();
-            },
-
-            updateUI() {
-                document.getElementById('cart-count').innerText = this.cart.length;
-                if (document.getElementById('cart-page').style.display === 'block') this.renderCart();
-            },
-
-            renderCart() {
-                const container = document.getElementById('cart-items-container');
-                const checkout = document.getElementById('checkout-box');
-                if (this.cart.length === 0) {
-                    container.innerHTML = "<center style='padding:80px;'>Your bag is empty.</center>";
-                    checkout.classList.add('hidden');
-                    return;
-                }
-                checkout.classList.remove('hidden');
-                let total = 0;
-                container.innerHTML = this.cart.map((item, index) => {
-                    total += item.price * item.qty;
-                    return `
-                        <div class="cart-item">
-                            <div class="cart-prod-info">
-                                <div class="cart-prod-img-box"><img src="${item.img}"></div>
-                                <div><h4 style="font-size:14px;">${item.name}</h4><p style="color:#666;">Rs. ${item.price}</p></div>
-                            </div>
-                            <div class="qty-box" style="margin-bottom:0; width:100px;">
-                                <button onclick="app.updateCartQty(${index}, -1)">-</button>
-                                <input type="text" value="${item.qty}">
-                                <button onclick="app.updateCartQty(${index}, 1)">+</button>
-                            </div>
-                            <div style="text-align:right;"><strong>Rs. ${item.price * item.qty}</strong> <span class="del-btn" onclick="app.removeItem(${index})">🗑</span></div>
-                        </div>
-                    `;
-                }).join('');
-                document.getElementById('grand-total').innerText = total;
-            },
-
-            updateCartQty(idx, delta) {
-                this.cart[idx].qty += delta;
-                if (this.cart[idx].qty < 1) this.cart[idx].qty = 1;
-                this.save();
-            },
-
-            removeItem(idx) {
-                this.cart.splice(idx, 1);
-                this.save();
-            },
-
-            nav(page) {
-                const sections = ['home-section', 'cart-page', 'contact-page'];
-                sections.forEach(s => document.getElementById(s).style.display = 'none');
-                
-                if (page === 'home') {
-                    document.getElementById('home-section').style.display = 'block';
-                    this.renderProducts(this.products);
-                } else {
-                    document.getElementById(page + (page === 'contact' ? '-page' : '')).style.display = 'block';
-                    if (page === 'cart') this.renderCart();
-                }
+            nav(id) {
+                document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+                document.getElementById('page-' + id).classList.add('active');
+                if(id === 'cart') this.renderCart();
                 window.scrollTo(0,0);
             },
 
-            search() {
-                const term = document.getElementById('srchInp').value.toLowerCase();
-                this.renderProducts(this.products.filter(p => p.name.toLowerCase().includes(term)));
+            renderProducts(elementId) {
+                const grid = document.getElementById(elementId);
+                grid.innerHTML = this.products.map(p => {
+                    const cartItem = this.cart.find(item => item.id === p.id);
+                    const currentQty = cartItem ? cartItem.q : 0;
+                    return `
+                        <div class="product-card">
+                            <div class="img-container"><img src="${p.img}"></div>
+                            <div class="p-name">${p.name}</div>
+                            <div class="p-price">Rs. ${p.price}.00</div>
+                            <div class="qty-box">
+                                <button onclick="app.uiQty('${elementId}', ${p.id}, -1)">−</button>
+                                <input type="number" value="${currentQty}" id="qty-${elementId}-${p.id}" readonly>
+                                <button onclick="app.uiQty('${elementId}', ${p.id}, 1)">+</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            },
+
+            uiQty(prefix, id, delta) {
+                const input = document.getElementById(`qty-${prefix}-${id}`);
+                let val = parseInt(input.value) + delta;
+                if(val < 0) val = 0;
+                input.value = val;
+                
+                // Automatically update cart when + or - is clicked
+                this.updateCartDirectly(id, val);
+            },
+
+            updateCartDirectly(id, quantity) {
+                const p = this.products.find(x => x.id === id);
+                const index = this.cart.findIndex(item => item.id === id);
+                
+                if (quantity > 0) {
+                    if (index !== -1) {
+                        this.cart[index].q = quantity;
+                    } else {
+                        this.cart.push({ ...p, q: quantity });
+                    }
+                } else {
+                    if (index !== -1) {
+                        this.cart.splice(index, 1);
+                    }
+                }
+                this.sync();
+                // Update all quantity inputs on the page to stay in sync
+                document.querySelectorAll(`[id$="-${id}"]`).forEach(el => el.value = quantity);
+            },
+
+            renderCart() {
+                const list = document.getElementById('cartItemsList');
+                const summary = document.getElementById('cartSummary');
+                let total = 0;
+                if(this.cart.length === 0) {
+                    list.innerHTML = "<tr><td colspan='3' style='text-align:center; padding:50px;'>Your cart is currently empty.</td></tr>";
+                    summary.style.display = 'none';
+                    return;
+                }
+                summary.style.display = 'block';
+                list.innerHTML = this.cart.map(item => {
+                    const itemTotal = item.price * item.q;
+                    total += itemTotal;
+                    return `<tr class="cart-item-row"><td><div class="product-info"><img src="${item.img}" class="cart-img"><div><div class="cart-item-title">${item.name}</div><div class="cart-item-price">Rs. ${item.price}.00</div></div></div></td><td style="text-align: center;"><div style="display: flex; align-items: center; justify-content: center;"><div class="qty-box"><button onclick="app.updateCartQty(${item.id}, -1)">−</button><input type="text" value="${item.q}" readonly><button onclick="app.updateCartQty(${item.id}, 1)">+</button></div><button class="delete-btn" onclick="app.removeItem(${item.id})">🗑</button></div></td><td style="text-align: right; font-weight: 600;">Rs. ${itemTotal}.00</td></tr>`;
+                }).join('');
+                document.getElementById('totalPrice').innerText = total;
+            },
+
+            updateCartQty(id, delta) {
+                const item = this.cart.find(x => x.id === id);
+                if(item) { 
+                    item.q += delta; 
+                    if(item.q < 1) {
+                        this.removeItem(id);
+                    } else {
+                        this.sync(); 
+                        this.renderCart(); 
+                        // Update main product grid inputs
+                        document.querySelectorAll(`[id$="-${id}"]`).forEach(el => el.value = item.q);
+                    }
+                }
+            },
+
+            removeItem(id) {
+                this.cart = this.cart.filter(x => x.id !== id);
+                this.sync(); 
+                this.renderCart();
+                // Reset main product grid inputs to 0
+                document.querySelectorAll(`[id$="-${id}"]`).forEach(el => el.value = 0);
+            },
+
+            sync() {
+                localStorage.setItem('14stars_data', JSON.stringify(this.cart));
+                this.updateBadge();
+            },
+
+            updateBadge() {
+                document.getElementById('badge').innerText = this.cart.reduce((s, i) => s + i.q, 0);
             },
 
             checkout() {
-                let msg = "*ORDER CONFIRMATION - 14 STARS TRADERS*\n\n";
-                this.cart.forEach(i => msg += `📦 *${i.name}*\nQty: ${i.qty} | Rs. ${i.price * i.qty}\n\n`);
-                msg += `*Total Amount: Rs. ${document.getElementById('grand-total').innerText}*`;
-                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(msg)}`);
-            },
-
-            quickBuy(name) {
-                window.open(`https://wa.me/919837904369?text=I want to buy *${name}* immediately.`);
+                let m = "*ORDER FROM 14 STARS*\n\n";
+                this.cart.forEach(i => m += `• ${i.name} (x${i.q}) = Rs. ${i.price * i.q}\n`);
+                m += `\n*TOTAL: Rs. ${document.getElementById('totalPrice').innerText}*`;
+                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(m)}`);
             },
 
             sendContact() {
-                const n = document.getElementById('c-name').value;
-                const m = document.getElementById('c-msg').value;
-                window.open(`https://wa.me/919837904369?text=Inquiry from ${n}: ${m}`);
+                const name = document.getElementById('contact_name').value;
+                const email = document.getElementById('contact_email').value;
+                const phone = document.getElementById('contact_phone').value;
+                const msg = document.getElementById('contact_message').value;
+
+                if(!email) { alert("Please enter your email"); return; }
+
+                let waMsg = `*NEW CONTACT INQUIRY*\n\n`;
+                waMsg += `*Name:* ${name || 'Not provided'}\n`;
+                waMsg += `*Email:* ${email}\n`;
+                waMsg += `*Phone:* ${phone || 'Not provided'}\n`;
+                waMsg += `*Message:* ${msg || 'No message'}`;
+
+                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(waMsg)}`);
             }
         };
-
         app.init();
     </script>
 </body>
 </html>
-
-
-
-
-
-
