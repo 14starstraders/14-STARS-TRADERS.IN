@@ -54,9 +54,10 @@
         .p-name { font-size: 14px; font-weight: 600; margin: 10px 0; height: 40px; }
         .p-price { font-size: 16px; font-weight: 700; color: #000; margin-bottom: 10px; }
         
-        .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: fit-content; }
-        .qty-box button { width: 35px; height: 35px; border: none; background: #fff; cursor: pointer; font-size: 18px; }
-        .qty-box input { width: 40px; text-align: center; border: none; outline: none; font-weight: bold; -moz-appearance: textfield; }
+        /* UPDATED: FULL WIDTH QTY BOX */
+        .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 100%; }
+        .qty-box button { flex: 1; height: 35px; border: none; background: #fff; cursor: pointer; font-size: 18px; }
+        .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: bold; -moz-appearance: textfield; }
         .qty-box input::-webkit-outer-spin-button, .qty-box input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
         .product-detail-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px 0; align-items: start; }
@@ -77,7 +78,10 @@
         .cart-item-info span { color: #666; font-size: 14px; }
         .delete-btn { background: none; border: none; cursor: pointer; margin-left: 15px; color: #333; font-size: 18px; }
         .total-cell { text-align: right; font-weight: 600; font-size: 16px; }
+        
+        /* Specific Fix for Cart Qty to not be too huge */
         .quantity-cell { display: flex; align-items: center; }
+        .quantity-cell .qty-box { width: 120px; }
 
         .page-view { display: none; }
         .active { display: block; }
@@ -263,7 +267,7 @@
             renderGrid(items, targetId) {
                 const target = document.getElementById(targetId);
                 if (items.length === 0) {
-                    target.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding:40px;'>No products found.</p>";
+                    target.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding:40px;'>No results found </p>";
                     return;
                 }
                 target.innerHTML = items.map(p => {
