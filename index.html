@@ -38,7 +38,7 @@
 
         #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; }
 
-        /* MODAL STYLING MATCHING THE IMAGE */
+        /* MODAL STYLING */
         #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); overflow-y: auto; }
         .contact-container { max-width: 800px; margin: 100px auto; padding: 20px; }
         .contact-container h2 { font-size: 26px; font-weight: 500; margin-bottom: 40px; color: #333; }
@@ -52,7 +52,7 @@
         .contact-send-btn:hover { background: #b0a196; }
         .close-contact { position: fixed; top: 30px; right: 40px; font-size: 30px; cursor: pointer; color: #333; }
 
-        /* SEARCH RESULTS STYLING */
+        /* SEARCH RESULTS */
         .search-results-container { padding: 60px 20px; text-align: center; max-width: 800px; margin: 0 auto; }
         .search-results-container h1 { font-size: 28px; font-weight: 500; margin-bottom: 30px; color: #333; }
         .search-bar-styled { position: relative; max-width: 600px; margin: 0 auto 40px; }
@@ -76,7 +76,6 @@
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
         .img-container { background: var(--light-bg); height: 220px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; margin-bottom: 12px; }
         .img-container img { max-width: 85%; max-height: 85%; object-fit: contain; transition: 0.4s; }
-        .product-card:hover .img-container img { transform: scale(1.05); }
         
         .p-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
         .p-price { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 15px; }
@@ -86,7 +85,6 @@
         .qty-box button:hover { background: #eee; }
         .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: 700; background: #fff; }
 
-        /* CART PAGE */
         .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
         .cart-header h1 { font-size: 32px; font-weight: 500; }
         .cont-shop { color: #666; text-decoration: underline; font-size: 14px; cursor: pointer; }
@@ -136,10 +134,10 @@
         <div class="contact-container">
             <h2>Questions or comments? Get in touch and we'll be happy to help.</h2>
             <div class="contact-form-grid">
-                <input type="text" id="cName" class="contact-input input-half" placeholder="Name">
-                <input type="email" id="cEmail" class="contact-input input-half" placeholder="Email *">
-                <input type="text" id="cPhone" class="contact-input input-full" placeholder="Phone number">
-                <textarea id="cMsg" class="contact-input input-full contact-textarea" placeholder="Comment"></textarea>
+                <input type="text" id="cName" class="contact-input input-half" placeholder="Name" aria-label="Name">
+                <input type="email" id="cEmail" class="contact-input input-half" placeholder="Email *" aria-label="Email">
+                <input type="text" id="cPhone" class="contact-input input-full" placeholder="Phone number" aria-label="Phone">
+                <textarea id="cMsg" class="contact-input input-full contact-textarea" placeholder="Comment" aria-label="Comment"></textarea>
                 <button class="contact-send-btn" onclick="app.sendContact()">Send</button>
             </div>
         </div>
@@ -186,9 +184,9 @@
                 <h1>Search results</h1>
                 <div class="search-bar-styled">
                     <span style="position: absolute; left: 25px; top: 10px; font-size: 10px; color: #999;">Search</span>
-                    <input type="text" id="resultsSearchInput" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)">
-                    <button class="clear-x" onclick="document.getElementById('resultsSearchInput').value='';">✕</button>
-                    <button class="search-btn-inside" onclick="app.performSearch(document.getElementById('resultsSearchInput').value)">🔍</button>
+                    <input type="text" id="resultsSearchInput" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)" aria-label="Search Results">
+                    <button class="clear-x" onclick="document.getElementById('resultsSearchInput').value='';" aria-label="Clear Search">✕</button>
+                    <button class="search-btn-inside" onclick="app.performSearch(document.getElementById('resultsSearchInput').value)" aria-label="Search Button">🔍</button>
                 </div>
                 <div id="searchGrid" class="grid"></div>
                 <div id="noResultsUI" style="display:none;">
@@ -290,7 +288,6 @@
                     grid.style.display = 'none';
                     noResults.style.display = 'block';
                 }
-                
                 this.nav('search');
             },
 
@@ -306,10 +303,10 @@
                 document.getElementById('productDetailContent').innerHTML = `
                     <div style="display:flex; flex-wrap:wrap; gap:40px; padding:40px 0;">
                         <div style="flex:1; min-width:300px; background:#f9f9f9; padding:20px; border-radius:15px; text-align:center;">
-                            <img src="${p.img}" alt="${p.name}" style="max-width:100%; height:auto; border-radius:10px;">
+                            <img src="${p.img}" alt="${p.name}" style="max-width:100%; height:auto; border-radius:10px;" width="400" height="400">
                         </div>
                         <div style="flex:1; min-width:300px;">
-                            <button onclick="app.nav('home')" style="margin-bottom:20px; border:none; background:none; cursor:pointer; color:#888;">← Back to Home</button>
+                            <button onclick="app.nav('home')" style="margin-bottom:20px; border:none; background:none; cursor:pointer; color:#888;" aria-label="Back">← Back to Home</button>
                             <h1 style="font-size:32px; margin-bottom:15px;">${p.name}</h1>
                             <p style="font-size:24px; font-weight:700; color:var(--gold); margin-bottom:20px;">Rs. ${p.price}.00</p>
                             <p style="color:#666; margin-bottom:30px; line-height:1.6;">${p.desc}</p>
@@ -338,9 +335,9 @@
                         <div class="p-name" onclick="app.openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
                         <div class="p-price">Rs. ${p.price}.00</div>
                         <div class="qty-box">
-                            <button onclick="app.updateQty(${p.id}, -1)" aria-label="Decrease">-</button>
+                            <button onclick="app.updateQty(${p.id}, -1)" aria-label="Decrease quantity">−</button>
                             <input type="number" value="${q}" readonly aria-label="Quantity">
-                            <button onclick="app.updateQty(${p.id}, 1)" aria-label="Increase">+</button>
+                            <button onclick="app.updateQty(${p.id}, 1)" aria-label="Increase quantity">+</button>
                         </div>
                     </div>`;
                 }).join('');
@@ -383,7 +380,7 @@
                     return `
                     <div class="cart-item-row">
                         <div class="cart-prod-col">
-                            <img src="${item.img}" class="cart-img">
+                            <img src="${item.img}" class="cart-img" alt="${item.name}" width="90" height="90">
                             <div class="cart-info">
                                 <p>${item.name}</p>
                                 <span>Rs. ${item.price}.00</span>
@@ -391,11 +388,11 @@
                         </div>
                         <div class="cart-qty-col">
                             <div class="cart-qty-btn">
-                                <button onclick="app.updateQty(${item.id}, -1)">−</button>
+                                <button onclick="app.updateQty(${item.id}, -1)" aria-label="Subtract">−</button>
                                 <span>${item.q}</span>
-                                <button onclick="app.updateQty(${item.id}, 1)">+</button>
+                                <button onclick="app.updateQty(${item.id}, 1)" aria-label="Add">+</button>
                             </div>
-                            <span class="trash-btn" onclick="app.updateQty(${item.id}, -${item.q})">🗑</span>
+                            <span class="trash-btn" onclick="app.updateQty(${item.id}, -${item.q})" aria-label="Remove item">🗑</span>
                         </div>
                         <div class="cart-total-col">
                             Rs. ${lineTotal}.00
