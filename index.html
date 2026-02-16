@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="14 STARS TRADERS - Best gadgets, beauty, and home products in Muzaffarnagar.">
     <title>14 STARS TRADERS | Official Store</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -28,72 +32,120 @@
             transform: translateY(-50%); 
             color: #888; 
             cursor: pointer; 
-            pointer-events: auto; 
+            background: none;
+            border: none;
             z-index: 10;
         }
 
         .header-actions { display: flex; align-items: center; gap: 20px; }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a { color: #fff; text-decoration: none; font-size: 13px; cursor: pointer; opacity: 0.8; }
+        .nav-links a:hover { opacity: 1; }
 
-        .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; }
-        .badge { position: absolute; top: -8px; right: -8px; background: var(--gold); color: #fff; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; min-width: 44px; min-height: 44px; }
+        .badge { position: absolute; top: 0; right: 0; background: var(--gold); color: #fff; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
 
         #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); z-index: 999; }
 
-        .hero-banner { width: 100%; height: 500px; background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://copilot.microsoft.com/th/id/BCO.c36814e0-4b79-4fd5-9e55-1000825f2caa.png') center/cover; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+        /* SEARCH PAGE STYLES */
+        .search-results-page { text-align: center; padding: 80px 20px; color: #555; }
+        .search-results-page h1 { font-weight: 400; font-size: 32px; margin-bottom: 40px; color: #333; }
+        
+        .search-bar-container { 
+            max-width: 800px; 
+            margin: 0 auto 30px; 
+            position: relative; 
+            border: 1px solid #e0e0e0; 
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            background: #fff;
+        }
+        .search-bar-container label {
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            font-size: 10px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .search-bar-container input { 
+            width: 100%; 
+            border: none; 
+            outline: none; 
+            padding: 22px 10px 5px 0; 
+            font-size: 18px;
+            background: transparent;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .search-bar-controls { display: flex; gap: 15px; align-items: center; border-left: 1px solid #eee; padding-left: 15px; }
+        .clear-search { cursor: pointer; font-size: 18px; color: #bbb; background: none; border: none; transition: 0.2s; }
+        .clear-search:hover { color: #333; }
+        .search-submit { cursor: pointer; font-size: 20px; background: none; border: none; color: #333; }
+        
+        .no-results-text { font-size: 16px; color: #666; margin-top: 30px; font-weight: 400; }
+
+        /* HERO & GRID STYLES */
+        .hero-banner { width: 100%; height: 500px; background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://copilot.microsoft.com/th/id/BCO.c36814e0-4b79-4fd5-9e55-1000825f2caa.png') center/cover no-repeat; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
         .filter-section { display: flex; gap: 10px; overflow-x: auto; padding: 25px 0; justify-content: center; scrollbar-width: none; }
-        .filter-btn { padding: 8px 20px; border: 1px solid #eee; border-radius: 20px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; }
+        .filter-btn { padding: 8px 20px; border: 1px solid #eee; border-radius: 20px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; min-height: 40px; }
         .filter-btn.active { background: var(--dark); color: white; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; padding: 20px 0; }
-        .product-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 12px; padding: 12px; }
+        .product-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 12px; padding: 12px; transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         .img-container { background: var(--light-bg); height: 200px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
-        .img-container img { max-width: 80%; }
-        .p-name { font-size: 14px; font-weight: 600; margin: 10px 0; height: 40px; }
+        .img-container img { max-width: 80%; max-height: 90%; object-fit: contain; }
+        .p-name { font-size: 14px; font-weight: 600; margin: 10px 0; height: 40px; overflow: hidden; }
         .p-price { font-size: 16px; font-weight: 700; color: #000; margin-bottom: 10px; }
         
-        /* UPDATED: FULL WIDTH QTY BOX */
         .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; width: 100%; }
-        .qty-box button { flex: 1; height: 35px; border: none; background: #fff; cursor: pointer; font-size: 18px; }
-        .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: bold; -moz-appearance: textfield; }
-        .qty-box input::-webkit-outer-spin-button, .qty-box input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .qty-box button { flex: 1; height: 35px; border: none; background: #fff; cursor: pointer; font-size: 18px; min-width: 40px; }
+        .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: bold; }
 
+        /* CART PAGE TABLE STYLES */
+        .cart-table { width: 100%; border-collapse: collapse; margin-top: 30px; }
+        .cart-table th { text-align: left; font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 15px; border-bottom: 1px solid #eee; font-weight: 400; }
+        .cart-table td { padding: 20px 0; border-bottom: 1px solid #eee; vertical-align: middle; }
+        
+        .cart-product-cell { display: flex; gap: 15px; align-items: center; }
+        .cart-product-cell img { width: 70px; height: 70px; object-fit: contain; background: #f9f9f9; border-radius: 5px; }
+        .cart-product-info b { font-size: 15px; display: block; margin-bottom: 3px; }
+        .cart-product-info small { color: #777; font-size: 13px; }
+
+        .qty-ctrl { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 4px; width: fit-content; margin: 0 auto; }
+        .qty-ctrl button { background: none; border: none; padding: 5px 12px; cursor: pointer; font-size: 18px; }
+        .qty-ctrl span { width: 30px; text-align: center; font-weight: 600; font-size: 14px; }
+        
+        .remove-btn { background: none; border: none; color: #bbb; cursor: pointer; margin-left: 15px; font-size: 18px; transition: 0.2s; }
+        .remove-btn:hover { color: #ff4444; }
+
+        /* DETAILS & CONTACT */
         .product-detail-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px 0; align-items: start; }
         .detail-img-box { background: var(--light-bg); border-radius: 15px; padding: 20px; display: flex; justify-content: center; }
-        .detail-img-box img { max-width: 100%; border-radius: 10px; }
-        .detail-info { padding: 20px; }
+        .detail-img-box img { max-width: 100%; border-radius: 10px; height: auto; }
         .detail-info h1 { font-size: 32px; margin-bottom: 10px; }
-        .detail-info .price-tag { font-size: 24px; font-weight: bold; color: #333; margin-bottom: 20px; }
-        .detail-info .desc { color: #666; font-size: 15px; margin-bottom: 30px; line-height: 1.8; }
-        .buy-now-btn { background: #bcaaa4; color: white; border: none; padding: 15px 40px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 200px; }
+        .price-tag { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+        .buy-now-btn { background: var(--beige); color: white; border: none; padding: 15px 40px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 200px; }
 
-        /* CART PAGE STYLES */
-        .cart-header-row { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 20px 0; border-bottom: 1px solid #eee; color: #888; font-size: 12px; letter-spacing: 1px; }
-        .cart-item { display: grid; grid-template-columns: 2fr 1fr 1fr; align-items: center; padding: 25px 0; border-bottom: 1px solid #eee; }
-        .cart-product-cell { display: flex; align-items: center; gap: 20px; }
-        .cart-product-cell img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; background: var(--light-bg); }
-        .cart-item-info b { font-size: 16px; display: block; margin-bottom: 5px; }
-        .cart-item-info span { color: #666; font-size: 14px; }
-        .delete-btn { background: none; border: none; cursor: pointer; margin-left: 15px; color: #333; font-size: 18px; }
-        .total-cell { text-align: right; font-weight: 600; font-size: 16px; }
-        
-        /* Specific Fix for Cart Qty to not be too huge */
-        .quantity-cell { display: flex; align-items: center; }
-        .quantity-cell .qty-box { width: 120px; }
+        #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
+        .modal-content { background-color: #fff; margin: 5% auto; padding: 40px; border-radius: 15px; width: 90%; max-width: 550px; position: relative; text-align: center; box-shadow: 0 5px 30px rgba(0,0,0,0.3); }
+        .close-popup { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: #999; }
+        .send-btn { background: var(--beige); color: white; border: none; padding: 15px 50px; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 20px; width: 100%; font-weight: 600; }
 
         .page-view { display: none; }
         .active { display: block; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .header-search { max-width: 180px; }
             .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .product-detail-container { grid-template-columns: 1fr; }
-            .cart-header-row { display: none; }
-            .cart-item { grid-template-columns: 1fr; gap: 15px; }
-            .total-cell { text-align: left; }
+            .cart-table th:nth-child(2), .cart-table td:nth-child(2) { text-align: right; }
+            .cart-product-info b { font-size: 13px; }
+            .cart-product-cell img { width: 50px; height: 50px; }
         }
     </style>
 </head>
@@ -101,18 +153,35 @@
 
     <div id="searchOverlay" onclick="app.hideSearch()"></div>
 
+    <div id="contactPopup">
+        <div class="modal-content">
+            <span class="close-popup" onclick="app.closeContact()">&times;</span>
+            <div class="contact-form-container">
+                <h2>Questions or comments?</h2>
+                <p>Get in touch and we'll be happy to help.</p>
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <input type="text" id="cName" placeholder="Name" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    <input type="email" id="cEmail" placeholder="Email *" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+                <input type="text" id="cPhone" placeholder="Phone number" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom:15px;">
+                <textarea id="cMsg" placeholder="Comment" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; height: 100px; resize: none;"></textarea>
+                <button class="send-btn" onclick="app.sendContact()">Send</button>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="nav-container">
             <button class="logo" onclick="app.nav('home')">14 STARS TRADERS</button>
             <div class="header-search">
                 <input type="text" id="navSearch" placeholder="Search products..." onfocus="app.showSearch()" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)">
-                <span class="search-icon" onclick="app.performSearch(document.getElementById('navSearch').value)">🔍</span>
+                <button class="search-icon" onclick="app.performSearch(document.getElementById('navSearch').value)">🔍</button>
             </div>
             <div class="header-actions">
                 <nav class="nav-links">
                     <a onclick="app.nav('home')">Home</a>
                     <a onclick="app.nav('catalog')">Catalog</a>
-                    <a onclick="app.nav('contact')">Contact</a>
+                    <a onclick="app.openContact()">Contact</a>
                 </nav>
                 <button class="cart-btn" onclick="app.nav('cart')">
                     👜 <span class="badge" id="badge">0</span>
@@ -123,9 +192,7 @@
 
     <main>
         <section id="page-home" class="page-view active">
-            <div class="hero-banner">
-                <h1></h1>
-            </div>
+            <div class="hero-banner"></div>
             <div class="container">
                 <div class="filter-section">
                     <button class="filter-btn active" onclick="app.filter('All', this)">All Items</button>
@@ -137,52 +204,41 @@
             </div>
         </section>
 
-        <section id="page-product-detail" class="page-view">
-            <div class="container">
-                <div id="productDetailContent" class="product-detail-container"></div>
+        <section id="page-search" class="page-view">
+            <div class="search-results-page">
+                <div class="container">
+                    <h1>Search results</h1>
+                    <div class="search-bar-container">
+                        <label>Search</label>
+                        <input type="text" id="mainSearchInput" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)">
+                        <div class="search-bar-controls">
+                            <button class="clear-search" onclick="app.clearSearch()">✕</button>
+                            <button class="search-submit" onclick="app.performSearch(document.getElementById('mainSearchInput').value)">🔍</button>
+                        </div>
+                    </div>
+                    <div id="searchMessage"></div>
+                    <div id="searchGrid" class="grid"></div>
+                </div>
             </div>
         </section>
 
-        <section id="page-search" class="page-view">
-            <div class="container">
-                <h2 style="text-align:center; margin-top:40px;">Search Results</h2>
-                <div id="searchGrid" class="grid"></div>
-            </div>
+        <section id="page-product-detail" class="page-view">
+            <div class="container"><div id="productDetailContent" class="product-detail-container"></div></div>
         </section>
 
         <section id="page-catalog" class="page-view">
-            <div class="container">
-                <h2 style="margin: 40px 0; text-align:center;">Product Catalog</h2>
-                <div id="catalogGrid" class="grid"></div>
-            </div>
-        </section>
-
-        <section id="page-contact" class="page-view">
-            <div class="container" style="max-width:800px; padding:60px 20px;">
-                <h2>Get in touch</h2>
-                <p>Contact us at: muzaffarnagar.store@example.com</p>
-            </div>
+            <div class="container"><h2 style="margin:40px 0; text-align:center;">PRODUCT CATALOG</h2><div id="catalogGrid" class="grid"></div></div>
         </section>
 
         <section id="page-cart" class="page-view">
             <div class="container" style="max-width: 900px; padding: 50px 20px;">
-                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px;">
-                    <h1 style="font-size: 40px; font-weight: 500;">Your cart</h1>
-                    <a onclick="app.nav('home')" style="text-decoration: underline; cursor: pointer; font-size: 14px; color: #666;">Continue shopping</a>
-                </div>
-                
-                <div class="cart-header-row">
-                    <span>PRODUCT</span>
-                    <span>QUANTITY</span>
-                    <span style="text-align: right;">TOTAL</span>
-                </div>
-
+                <h1 style="font-size: 36px; font-weight: 500; margin-bottom:30px">Your cart</h1>
                 <div id="cartItemsList"></div>
-
                 <div id="cartSummary" style="text-align:right; margin-top:40px; border-top: 1px solid #eee; padding-top: 20px;">
-                    <h3 style="font-size: 20px; margin-bottom: 10px;">Total: Rs. <span id="totalPrice">0</span>.00</h3>
-                    <p style="font-size: 12px; color: #666; margin-bottom: 20px;">Taxes and shipping calculated at checkout</p>
-                    <button onclick="app.checkout()" style="background:var(--wa-green); color:white; width:100%; max-width: 400px; padding:18px; border:none; border-radius:5px; cursor:pointer; font-weight: bold; letter-spacing: 1px;">ORDER ON WHATSAPP</button>
+                    <p style="color:#666; margin-bottom:10px;">Estimated total</p>
+                    <h3 style="font-size:24px;">Rs. <span id="totalPrice">0</span>.00</h3>
+                    <p style="font-size:12px; color:#999; margin: 10px 0 20px;">Taxes and shipping calculated at checkout</p>
+                    <button onclick="app.checkout()" style="background:var(--wa-green); color:white; width:100%; max-width:400px; padding:18px; border:none; border-radius:5px; cursor:pointer; font-weight:bold; letter-spacing:1px;">ORDER ON WHATSAPP</button>
                 </div>
             </div>
         </section>
@@ -211,16 +267,33 @@
             showSearch() { document.getElementById('searchOverlay').style.display = 'block'; },
             hideSearch() { document.getElementById('searchOverlay').style.display = 'none'; },
 
+            openContact() { document.getElementById('contactPopup').style.display = 'block'; document.body.style.overflow = 'hidden'; },
+            closeContact() { document.getElementById('contactPopup').style.display = 'none'; document.body.style.overflow = 'auto'; },
+            sendContact() {
+                const name = document.getElementById('cName').value;
+                const msg = document.getElementById('cMsg').value;
+                if(!name || !msg) return alert("Please fill Name and Message");
+                window.open(`https://wa.me/919837904369?text=Hi, I am ${name}. ${msg}`);
+                this.closeContact();
+            },
+
+            clearSearch() {
+                document.getElementById('mainSearchInput').value = '';
+                document.getElementById('searchGrid').innerHTML = '';
+                document.getElementById('searchMessage').innerHTML = '';
+            },
+
             performSearch(query) {
                 if (!query) return;
                 this.hideSearch();
-                const filtered = this.products.filter(p => 
-                    p.name.toLowerCase().includes(query.toLowerCase()) || 
-                    p.category.toLowerCase().includes(query.toLowerCase())
-                );
+                const q = query.trim().toUpperCase();
+                const filtered = this.products.filter(p => p.name.toUpperCase().includes(q) || p.category.toUpperCase().includes(q));
+                document.getElementById('mainSearchInput').value = q;
+                const msgBox = document.getElementById('searchMessage');
+                if (filtered.length === 0) msgBox.innerHTML = `<p class="no-results-text">No results found for “${q}”.</p>`;
+                else msgBox.innerHTML = "";
                 this.renderGrid(filtered, 'searchGrid');
                 this.nav('search');
-                document.getElementById('navSearch').blur();
             },
 
             nav(id) {
@@ -232,22 +305,15 @@
 
             openProduct(id) {
                 const p = this.products.find(x => x.id === id);
-                const detailBox = document.getElementById('productDetailContent');
-                detailBox.innerHTML = `
-                    <div class="detail-img-box"><img src="${p.img}"></div>
+                document.getElementById('productDetailContent').innerHTML = `
+                    <div class="detail-img-box"><img src="${p.img}" alt="${p.name}"></div>
                     <div class="detail-info">
-                        <button class="buy-now-btn" style="width:auto; padding:5px 15px; margin-bottom:15px" onclick="app.nav('home')">← Back</button>
+                        <button class="buy-now-btn" style="width:auto; padding:5px 15px; margin-bottom:15px; background:#666" onclick="app.nav('home')">← Back</button>
                         <h1>${p.name}</h1>
                         <div class="price-tag">Rs. ${p.price}.00</div>
-                        <p class="desc">${p.desc}</p>
-                        <button class="buy-now-btn" onclick="app.updateQty(${p.id}, 1); app.nav('cart');">Buy it now</button>
-                        <div style="margin-top: 20px; color: #444; font-size: 14px;">
-                            <p>✅ Premium Quality Product</p>
-                            <p>✅ Best for everyday use</p>
-                            <p>✅ Fast delivery in Muzaffarnagar</p>
-                        </div>
-                    </div>
-                `;
+                        <p style="margin-bottom:30px">${p.desc}</p>
+                        <button class="buy-now-btn" onclick="app.updateQty(${p.id}, 1); app.nav('cart');">ADD TO CART</button>
+                    </div>`;
                 this.nav('product-detail');
             },
 
@@ -266,16 +332,12 @@
 
             renderGrid(items, targetId) {
                 const target = document.getElementById(targetId);
-                if (items.length === 0) {
-                    target.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding:40px;'>No results found </p>";
-                    return;
-                }
                 target.innerHTML = items.map(p => {
                     const inCart = this.cart.find(c => c.id === p.id);
                     const qty = inCart ? inCart.q : 0;
                     return `
                         <div class="product-card">
-                            <div class="img-container" onclick="app.openProduct(${p.id})"><img src="${p.img}"></div>
+                            <div class="img-container" onclick="app.openProduct(${p.id})"><img src="${p.img}" alt="${p.name}"></div>
                             <div class="p-name" onclick="app.openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
                             <div class="p-price">Rs. ${p.price}.00</div>
                             <div class="qty-box">
@@ -288,12 +350,12 @@
             },
 
             updateQty(id, delta) {
-                const p = this.products.find(x => x.id === id);
                 const idx = this.cart.findIndex(c => c.id === id);
                 if (idx > -1) {
                     this.cart[idx].q += delta;
                     if (this.cart[idx].q <= 0) this.cart.splice(idx, 1);
                 } else if (delta > 0) {
+                    const p = this.products.find(x => x.id === id);
                     this.cart.push({...p, q: 1});
                 }
                 localStorage.setItem('14stars_data', JSON.stringify(this.cart));
@@ -302,62 +364,70 @@
                 if(document.getElementById('page-cart').classList.contains('active')) this.renderCart();
             },
 
-            removeFromCart(id) {
-                this.cart = this.cart.filter(c => c.id !== id);
-                localStorage.setItem('14stars_data', JSON.stringify(this.cart));
-                this.updateBadge();
-                this.render();
-                this.renderCart();
-            },
-
-            updateBadge() {
-                document.getElementById('badge').innerText = this.cart.reduce((s, i) => s + i.q, 0);
-            },
+            updateBadge() { document.getElementById('badge').innerText = this.cart.reduce((s, i) => s + i.q, 0); },
 
             renderCart() {
                 const list = document.getElementById('cartItemsList');
+                const summary = document.getElementById('cartSummary');
                 if (this.cart.length === 0) {
-                    list.innerHTML = "<p style='text-align:center; padding:50px 0;'>Your cart is currently empty.</p>";
-                    document.getElementById('totalPrice').innerText = 0;
-                    document.getElementById('cartSummary').style.display = 'none';
+                    list.innerHTML = "<p style='text-align:center; padding:50px 0; color:#666;'>Your cart is currently empty.</p>";
+                    summary.style.display = 'none';
                     return;
                 }
-                document.getElementById('cartSummary').style.display = 'block';
+                summary.style.display = 'block';
                 let total = 0;
-                list.innerHTML = this.cart.map(item => {
+                let tableHtml = `
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>PRODUCT</th>
+                                <th style="text-align:center">QUANTITY</th>
+                                <th style="text-align:right">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                
+                this.cart.forEach(item => {
                     total += (item.price * item.q);
-                    return `
-                    <div class="cart-item">
-                        <div class="cart-product-cell">
-                            <img src="${item.img}" alt="${item.name}">
-                            <div class="cart-item-info">
-                                <b>${item.name}</b>
-                                <span>Rs. ${item.price}.00</span>
-                            </div>
-                        </div>
-                        <div class="quantity-cell">
-                            <div class="qty-box">
-                                <button onclick="app.updateQty(${item.id}, -1)">-</button>
-                                <input type="number" value="${item.q}" readonly>
-                                <button onclick="app.updateQty(${item.id}, 1)">+</button>
-                            </div>
-                            <button class="delete-btn" onclick="app.removeFromCart(${item.id})">🗑️</button>
-                        </div>
-                        <div class="total-cell">Rs. ${item.price * item.q}.00</div>
-                    </div>`;
-                }).join('');
+                    tableHtml += `
+                        <tr>
+                            <td>
+                                <div class="cart-product-cell">
+                                    <img src="${item.img}">
+                                    <div class="cart-product-info">
+                                        <b>${item.name}</b>
+                                        <small>Rs. ${item.price}.00</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="display:flex; align-items:center; justify-content:center;">
+                                    <div class="qty-ctrl">
+                                        <button onclick="app.updateQty(${item.id}, -1)">-</button>
+                                        <span>${item.q}</span>
+                                        <button onclick="app.updateQty(${item.id}, 1)">+</button>
+                                    </div>
+                                    <button class="remove-btn" onclick="app.updateQty(${item.id}, -${item.q})">🗑</button>
+                                </div>
+                            </td>
+                            <td style="text-align:right; font-weight:500;">Rs. ${item.price * item.q}.00</td>
+                        </tr>`;
+                });
+                
+                tableHtml += `</tbody></table>`;
+                list.innerHTML = tableHtml;
                 document.getElementById('totalPrice').innerText = total;
             },
 
             checkout() {
-                if (this.cart.length === 0) return alert("Your cart is empty!");
                 let msg = "*NEW ORDER - 14 STARS*\n\n";
-                this.cart.forEach(i => msg += `▪️ ${i.name} (x${i.q}) - Rs.${i.price * i.q}\n`);
+                this.cart.forEach(i => msg += `▪️ ${i.name} (x${i.q})\n`);
                 msg += `\n*Total: Rs. ${document.getElementById('totalPrice').innerText}*`;
                 window.open(`https://wa.me/919837904369?text=${encodeURIComponent(msg)}`);
             }
         };
         app.init();
+        window.onclick = function(event) { if (event.target == document.getElementById('contactPopup')) app.closeContact(); }
     </script>
 </body>
 </html>
