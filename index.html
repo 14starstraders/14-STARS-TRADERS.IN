@@ -19,14 +19,21 @@
         /* HEADER & NAV */
         header { background: var(--dark); color: #fff; padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-        
         .logo { font-size: 20px; font-weight: 700; color: #fff; border: none; background: none; cursor: pointer; white-space: nowrap; text-decoration: none; }
         
+        /* SMART SEARCH BOX */
         .header-search { flex-grow: 1; max-width: 500px; position: relative; }
         .header-search input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); outline: none; font-size: 14px; background: rgba(255,255,255,0.1); color: white; transition: 0.3s; }
         .header-search input:focus { background: white; color: #000; border-color: var(--gold); }
-        
         .search-icon-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); color: #888; cursor: pointer; background: none; border: none; padding: 8px; font-size: 18px; }
+        
+        /* SMART SEARCH RESULTS DROPDOWN */
+        .smart-search-results { position: absolute; top: 110%; left: 0; width: 100%; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; max-height: 400px; overflow-y: auto; z-index: 2001; }
+        .ssr-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; color: #333; transition: 0.2s; }
+        .ssr-item:hover { background: #f9f9f9; }
+        .ssr-item img { width: 45px; height: 45px; border-radius: 5px; margin-right: 12px; object-fit: contain; background: #f4f4f4; }
+        .ssr-item b { font-size: 13px; display: block; }
+        .ssr-item span { font-size: 12px; color: var(--gold); font-weight: 700; }
 
         .header-actions { display: flex; align-items: center; gap: 20px; }
         .nav-links { display: flex; gap: 15px; }
@@ -36,80 +43,69 @@
         .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 5px; }
         .badge { position: absolute; top: -5px; right: -5px; background: var(--gold); color: #fff; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid var(--dark); }
 
-        #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; }
+        /* SHARE BUTTON STYLING */
+        .share-btn-round { background: #ffffff; border: 1px solid #ddd; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .share-btn-round:hover { background: #f0f0f0; transform: scale(1.1); }
+        .share-icon-img { width: 22px; height: 22px; opacity: 0.7; }
 
-        /* MODAL STYLING MATCHING THE IMAGE */
-        #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); overflow-y: auto; }
-        .contact-container { max-width: 800px; margin: 100px auto; padding: 20px; }
-        .contact-container h2 { font-size: 26px; font-weight: 500; margin-bottom: 40px; color: #333; }
+        /* ZOOM CSS */
+        .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; display: flex; align-items: center; justify-content: center; }
+        .spec-zoom-container img { max-width: 100%; transition: transform 0.2s ease-out; }
+
+        /* MODALS */
+        #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; }
+        
+        #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: #fff; overflow-y: auto; }
+        .contact-container { max-width: 800px; margin: 80px auto; padding: 0 20px 60px 20px; }
+        .contact-container h2 { font-size: 26px; font-weight: 500; margin-bottom: 40px; color: #333; text-align: center; }
         .contact-form-grid { display: flex; flex-wrap: wrap; gap: 15px; }
-        .contact-input { padding: 15px 20px; border: 1px solid #999; border-radius: 5px; font-size: 15px; color: #333; outline: none; background: #fcfcfc; }
-        .contact-input::placeholder { color: #888; }
+        .contact-input { padding: 15px 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 15px; color: #333; outline: none; background: #fcfcfc; }
         .input-half { flex: 1; min-width: 250px; }
         .input-full { width: 100%; }
         .contact-textarea { width: 100%; height: 150px; resize: none; }
-        .contact-send-btn { background: #c1b3a9; color: #333; border: none; padding: 15px 50px; border-radius: 5px; font-size: 14px; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: capitalize; }
-        .contact-send-btn:hover { background: #b0a196; }
-        .close-contact { position: fixed; top: 30px; right: 40px; font-size: 30px; cursor: pointer; color: #333; }
-
-        /* SEARCH RESULTS STYLING */
-        .search-results-container { padding: 60px 20px; text-align: center; max-width: 800px; margin: 0 auto; }
-        .search-results-container h1 { font-size: 28px; font-weight: 500; margin-bottom: 30px; color: #333; }
-        .search-bar-styled { position: relative; max-width: 600px; margin: 0 auto 40px; }
-        .search-bar-styled input { width: 100%; padding: 15px 50px 15px 25px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; color: #555; outline: none; text-transform: uppercase; }
-        .search-bar-styled .clear-x { position: absolute; right: 45px; top: 50%; transform: translateY(-50%); color: #999; cursor: pointer; font-size: 20px; border: none; background: none; }
-        .search-bar-styled .search-btn-inside { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border: none; background: none; cursor: pointer; font-size: 18px; color: #333; border-left: 1px solid #eee; padding-left: 10px; }
-        .no-results-text { color: #666; font-size: 16px; margin-top: 20px; }
+        .contact-send-btn { background: var(--dark); color: #fff; border: none; padding: 15px 50px; border-radius: 5px; font-size: 14px; cursor: pointer; margin: 20px auto 0 auto; transition: 0.3s; text-transform: uppercase; display: block; letter-spacing: 1px; }
+        .contact-send-btn:hover { background: var(--gold); }
+        .close-contact { position: fixed; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: #333; z-index: 2100; }
 
         /* HERO & FILTER */
         .hero-banner { width: 100%; height: 600px; background: #222 url('https://copilot.microsoft.com/th/id/BCO.654702d9-0790-48bf-abcc-a77a1e6b5707.png') center/cover no-repeat; display: flex; align-items: center; justify-content: center; position: relative; }
-        .hero-banner::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); }
-
         .filter-section { display: flex; gap: 10px; overflow-x: auto; padding: 25px 0; justify-content: center; scrollbar-width: none; }
         .filter-btn { padding: 10px 22px; border: 1px solid #ddd; border-radius: 25px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; }
         .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; padding: 20px 0; }
-        
         .product-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; transition: 0.3s; display: flex; flex-direction: column; }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
         .img-container { background: var(--light-bg); height: 220px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; margin-bottom: 12px; }
-        .img-container img { max-width: 85%; max-height: 85%; object-fit: contain; transition: 0.4s; }
-        .product-card:hover .img-container img { transform: scale(1.05); }
-        
+        .img-container img { max-width: 85%; max-height: 85%; object-fit: contain; }
         .p-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
         .p-price { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 15px; }
-        
         .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-top: auto; }
-        .qty-box button { flex: 1; height: 40px; border: none; background: #f9f9f9; cursor: pointer; font-size: 20px; transition: 0.2s; }
-        .qty-box button:hover { background: #eee; }
+        .qty-box button { flex: 1; height: 40px; border: none; background: #f9f9f9; cursor: pointer; font-size: 20px; }
         .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: 700; background: #fff; }
 
-        /* CART PAGE */
-        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .cart-header h1 { font-size: 32px; font-weight: 500; }
-        .cont-shop { color: #666; text-decoration: underline; font-size: 14px; cursor: pointer; }
-        
-        .cart-labels { display: flex; font-size: 11px; text-transform: uppercase; color: #999; letter-spacing: 1px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .label-prod { flex: 3; }
-        .label-qty { flex: 1; text-align: center; }
-        .label-total { flex: 1; text-align: right; }
+        /* CART VIEW */
+        .cart-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .cart-item-row { display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee; gap: 20px; }
+        .cart-img { width: 100px; height: 100px; object-fit: contain; background: #f9f9f9; border-radius: 10px; }
+        .cart-item-info { flex: 2; }
+        .cart-item-info b { font-size: 16px; display: block; margin-bottom: 5px; }
+        .cart-qty-controls { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 5px; height: 35px; }
+        .cart-qty-controls button { width: 35px; height: 100%; border: none; background: none; cursor: pointer; font-size: 18px; }
+        .cart-qty-controls span { width: 40px; text-align: center; font-weight: 600; }
 
-        .cart-item-row { display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #f8f8f8; }
-        .cart-prod-col { flex: 3; display: flex; align-items: center; gap: 20px; }
-        .cart-img { width: 90px; height: 90px; object-fit: contain; background: #f9f9f9; border-radius: 4px; }
-        .cart-info p { font-weight: 600; font-size: 15px; margin-bottom: 5px; }
-        .cart-info span { color: #888; font-size: 13px; }
+        /* SOCIAL PROOF */
+        #social-proof { position: fixed; bottom: 20px; left: 20px; background: white; padding: 10px 15px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; z-index: 5000; transform: translateY(150%); transition: 0.5s ease-in-out; max-width: 300px; }
+        #social-proof.show { transform: translateY(0); }
+        .sp-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+        .sp-text { font-size: 12px; color: #444; }
+        .sp-text b { color: #000; }
+
+        /* PAYMENT & DETAILS MODAL */
+        #paymentModal, #detailsModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:5000; align-items:center; justify-content:center; padding:20px; overflow-y: auto; }
+        .pay-card { background:white; padding:30px; border-radius:20px; max-width:400px; width:100%; text-align:center; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
         
-        .cart-qty-col { flex: 1; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        .cart-qty-btn { border: 1px solid #ddd; display: flex; align-items: center; border-radius: 4px; }
-        .cart-qty-btn button { background: none; border: none; padding: 5px 12px; cursor: pointer; font-size: 16px; }
-        .cart-qty-btn span { width: 30px; text-align: center; font-weight: 600; }
-        
-        .cart-total-col { flex: 1; text-align: right; font-weight: 600; position: relative; }
-        .trash-btn { cursor: pointer; color: #ccc; margin-left: 10px; transition: 0.3s; }
-        .trash-btn:hover { color: #ff4444; }
+        .delivery-note { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; font-size: 13px; font-weight: 600; margin-bottom: 15px; border: 1px solid #ffeeba; }
 
         .page-view { display: none; animation: fadeIn 0.3s ease-in; }
         .active { display: block; }
@@ -119,28 +115,75 @@
             .nav-links { display: none; }
             .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .hero-banner { height: 300px; }
-            .logo { font-size: 16px; }
-            .cart-labels { display: none; }
-            .cart-item-row { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .cart-qty-col, .cart-total-col { width: 100%; justify-content: space-between; text-align: left; }
-            .close-contact { right: 20px; }
+            .cart-img { width: 70px; height: 70px; }
         }
     </style>
 </head>
 <body>
+
+    <div id="paymentModal">
+        <div class="pay-card">
+            <span onclick="document.getElementById('paymentModal').style.display='none'" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:28px; color:#999;">&times;</span>
+            <h3 style="margin-bottom:5px;">Complete Payment</h3>
+            <p style="font-size:13px; color:#666; margin-bottom:20px;">Scan QR to pay <b>Rs. <span id="payAmount">0</span></b></p>
+            
+            <div style="background:#f9f9f9; padding:15px; border-radius:15px; margin-bottom:20px; display:inline-block;">
+                <img id="qrPlaceholder" src="" alt="UPI QR" style="width:200px; height:200px; display:block;">
+            </div>
+
+            <p style="font-size:12px; color:#888; margin-bottom:20px;">Using GPay, PhonePe, Paytm or any UPI App</p>
+            
+            <div style="background: #e1f5fe; color: #01579b; padding: 10px; border-radius: 8px; font-size: 11px; margin-bottom: 15px; font-weight: 600;">
+                📸 Payment ke baad Screenshot lena na bhulein!
+            </div>
+
+            <button onclick="app.showDetailsForm()" style="background:#000; color:white; width:100%; padding:16px; border:none; border-radius:10px; font-weight:700; cursor:pointer; font-size:14px;">I HAVE PAID (Fill Details)</button>
+        </div>
+    </div>
+
+    <div id="detailsModal">
+        <div class="pay-card" style="text-align: left;">
+            <h3 style="margin-bottom:20px; text-align: center;">Delivery Details</h3>
+            
+            <div class="delivery-note">⚠️ Note: We only deliver in Muzaffarnagar.</div>
+
+            <label style="font-size: 12px; font-weight: 600;">FULL NAME</label>
+            <input type="text" id="custName" class="contact-input input-full" style="margin-bottom: 15px; padding: 10px;" placeholder="Enter your name">
+            
+            <label style="font-size: 12px; font-weight: 600;">WHATSAPP NUMBER</label>
+            <input type="tel" id="custPhone" class="contact-input input-full" style="margin-bottom: 15px; padding: 10px;" placeholder="Mobile number">
+            
+            <label style="font-size: 12px; font-weight: 600;">FULL ADDRESS (Muzaffarnagar)</label>
+            <textarea id="custAddr" class="contact-input input-full" style="height: 80px; margin-bottom: 20px; padding: 10px;" placeholder="House No, Street, Landmark..."></textarea>
+
+            <button onclick="app.finalSubmit()" style="background:#25d366; color:white; width:100%; padding:16px; border:none; border-radius:10px; font-weight:700; cursor:pointer; font-size:14px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                CONFIRM & PLACE ORDER 🚀
+            </button>
+            <p style="text-align: center; margin-top: 10px; font-size: 11px; color: #d32f2f; font-weight: 600;">Agli screen pe Screenshot attach karna hai!</p>
+            <p onclick="document.getElementById('detailsModal').style.display='none'" style="text-align: center; margin-top: 15px; font-size: 12px; color: #888; cursor: pointer;">Go Back</p>
+        </div>
+    </div>
+
+    <div id="social-proof">
+        <img src="" id="sp-img" class="sp-img">
+        <div class="sp-text">
+            <span id="sp-user"></span> just bought <br>
+            <b id="sp-item"></b>
+        </div>
+    </div>
 
     <div id="searchOverlay" onclick="app.hideSearch()"></div>
 
     <div id="contactPopup">
         <span class="close-contact" onclick="app.closeContact()">&times;</span>
         <div class="contact-container">
-            <h2>Questions or comments? Get in touch and we'll be happy to help.</h2>
+            <h2>Questions or comments? <br> Get in touch and we'll be happy to help.</h2>
             <div class="contact-form-grid">
                 <input type="text" id="cName" class="contact-input input-half" placeholder="Name">
                 <input type="email" id="cEmail" class="contact-input input-half" placeholder="Email *">
                 <input type="text" id="cPhone" class="contact-input input-full" placeholder="Phone number">
                 <textarea id="cMsg" class="contact-input input-full contact-textarea" placeholder="Comment"></textarea>
-                <button class="contact-send-btn" onclick="app.sendContact()">Send</button>
+                <button class="contact-send-btn" onclick="app.sendContact()">Send Message</button>
             </div>
         </div>
     </div>
@@ -148,19 +191,18 @@
     <header>
         <div class="nav-container">
             <a class="logo" onclick="app.nav('home')" href="javascript:void(0)">14 STARS TRADERS</a>
-            
             <div class="header-search">
-                <input type="text" id="navSearch" placeholder="Search products..." aria-label="Search" onfocus="app.showSearch()" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)">
-                <button class="search-icon-btn" onclick="app.performSearch(document.getElementById('navSearch').value)" aria-label="Submit Search">🔍</button>
+                <input type="text" id="navSearch" placeholder="Search products..." onfocus="app.showSearch()" oninput="app.smartSearch(this.value)" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)">
+                <button class="search-icon-btn" onclick="app.performSearch(document.getElementById('navSearch').value)">🔍</button>
+                <div id="smartResults" class="smart-search-results"></div>
             </div>
-
             <div class="header-actions">
                 <nav class="nav-links">
                     <a onclick="app.nav('home')">Home</a>
                     <a onclick="app.nav('catalog')">Catalog</a>
                     <a onclick="app.openContact()">Contact</a>
                 </nav>
-                <button class="cart-btn" onclick="app.nav('cart')" aria-label="View Cart">
+                <button class="cart-btn" onclick="app.nav('cart')">
                     👜 <span class="badge" id="badge">0</span>
                 </button>
             </div>
@@ -182,23 +224,19 @@
         </section>
 
         <section id="page-search" class="page-view">
-            <div class="search-results-container">
-                <h1>Search results</h1>
-                <div class="search-bar-styled">
-                    <span style="position: absolute; left: 25px; top: 10px; font-size: 10px; color: #999;">Search</span>
-                    <input type="text" id="resultsSearchInput" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)">
-                    <button class="clear-x" onclick="document.getElementById('resultsSearchInput').value='';">✕</button>
-                    <button class="search-btn-inside" onclick="app.performSearch(document.getElementById('resultsSearchInput').value)">🔍</button>
-                </div>
+            <div class="container" style="padding:60px 0; text-align:center;">
+                <h1 style="font-size: 28px; margin-bottom:30px;">Search results for "<span id="searchedTerm"></span>"</h1>
                 <div id="searchGrid" class="grid"></div>
-                <div id="noResultsUI" style="display:none;">
-                    <p class="no-results-text">No results found for "<span id="searchedTerm"></span>". Check the spelling or use a different word or phrase.</p>
-                </div>
+                <div id="noResultsUI" style="display:none; padding:100px 0;">No results found.</div>
             </div>
         </section>
 
         <section id="page-product-detail" class="page-view">
             <div class="container" id="productDetailContent"></div>
+            <div class="container" style="border-top:1px solid #eee; margin-top:50px; padding-top:40px;">
+                <h3 style="margin-bottom:25px; letter-spacing:1px;">YOU MAY ALSO LIKE</h3>
+                <div id="similarGrid" class="grid"></div>
+            </div>
         </section>
 
         <section id="page-catalog" class="page-view">
@@ -211,22 +249,13 @@
         <section id="page-cart" class="page-view">
             <div class="container" style="max-width: 900px; padding: 50px 20px;">
                 <div class="cart-header">
-                    <h1>Your cart</h1>
-                    <span class="cont-shop" onclick="app.nav('home')">Continue shopping</span>
+                    <h1 style="font-size: 24px; font-weight: 600;">Your cart</h1>
+                    <span style="text-decoration:underline; cursor:pointer; color: #666; font-size: 14px;" onclick="app.nav('home')">Continue shopping</span>
                 </div>
-                
-                <div class="cart-labels">
-                    <div class="label-prod">Product</div>
-                    <div class="label-qty">Quantity</div>
-                    <div class="label-total">Total</div>
-                </div>
-
                 <div id="cartItemsList"></div>
-
                 <div id="cartSummary" style="margin-top:40px; text-align:right; border-top: 1px solid #eee; padding-top: 30px;">
-                    <p style="font-size:20px; margin-bottom:20px;">Subtotal: <span style="margin-left: 30px; font-weight: 600;">Rs. <span id="totalPrice">0</span>.00</span></p>
-                    <p style="font-size: 13px; color: #888; margin-bottom: 25px;">Taxes and shipping calculated at checkout</p>
-                    <button onclick="app.checkout()" style="background:#000; color:white; width:100%; max-width:380px; padding:16px; border:none; cursor:pointer; font-weight:600; font-size:14px; letter-spacing:1px; text-transform: uppercase;">CHECK OUT</button>
+                    <p style="font-size:20px; margin-bottom:20px;">Subtotal: <b>Rs. <span id="totalPrice">0</span>.00</b></p>
+                    <button onclick="app.checkout()" style="background:#000; color:white; width:100%; max-width:380px; padding:16px; border:none; cursor:pointer; font-weight:600; letter-spacing: 1px;">CHECK OUT</button>
                 </div>
             </div>
         </section>
@@ -250,48 +279,41 @@
                 if (saved) this.cart = JSON.parse(saved);
                 this.updateBadge();
                 this.render();
+                this.startSocialProof();
             },
 
-            showSearch() { document.getElementById('searchOverlay').style.display = 'block'; },
-            hideSearch() { document.getElementById('searchOverlay').style.display = 'none'; },
-
-            openContact() { document.getElementById('contactPopup').style.display = 'block'; document.body.style.overflow = 'hidden'; },
-            closeContact() { document.getElementById('contactPopup').style.display = 'none'; document.body.style.overflow = 'auto'; },
-            
-            sendContact() {
-                const name = document.getElementById('cName').value;
-                const email = document.getElementById('cEmail').value;
-                const phone = document.getElementById('cPhone').value;
-                const msg = document.getElementById('cMsg').value;
-                if(!name || !email || !msg) return alert("Please fill the required fields (Name, Email, Comment)");
-                
-                let text = `*New Contact Request*\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nComment: ${msg}`;
-                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(text)}`);
-                this.closeContact();
+            smartSearch(val) {
+                const resultsDiv = document.getElementById('smartResults');
+                if(!val) { resultsDiv.style.display = 'none'; return; }
+                const matches = this.products.filter(p => p.name.toLowerCase().includes(val.toLowerCase())).slice(0, 5);
+                if(matches.length > 0) {
+                    resultsDiv.innerHTML = matches.map(p => `
+                        <div class="ssr-item" onclick="app.openProduct(${p.id}); app.hideSearch();">
+                            <img src="${p.img}">
+                            <div><b>${p.name}</b><span>Rs. ${p.price}</span></div>
+                        </div>`).join('');
+                    resultsDiv.style.display = 'block';
+                } else { resultsDiv.style.display = 'none'; }
             },
 
-            performSearch(query) {
-                if (!query) return;
-                this.hideSearch();
-                const q = query.toUpperCase().trim();
-                const filtered = this.products.filter(p => p.name.toUpperCase().includes(q));
-                
-                const grid = document.getElementById('searchGrid');
-                const noResults = document.getElementById('noResultsUI');
-                const inputField = document.getElementById('resultsSearchInput');
-                document.getElementById('searchedTerm').innerText = query;
-                inputField.value = query;
+            shareNow(name, id) {
+                const shareData = { title: '14 STARS TRADERS', text: `Check out this amazing ${name} at 14 STARS TRADERS!`, url: window.location.href };
+                if (navigator.share) { navigator.share(shareData).catch(console.error); } 
+                else { window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text + " " + shareData.url)}`, '_blank'); }
+            },
 
-                if (filtered.length > 0) {
-                    noResults.style.display = 'none';
-                    grid.style.display = 'grid';
-                    this.renderGrid(filtered, 'searchGrid');
-                } else {
-                    grid.style.display = 'none';
-                    noResults.style.display = 'block';
-                }
-                
-                this.nav('search');
+            startSocialProof() {
+                const users = ["Rahul", "Anjali", "Suhail", "Priya", "Mohit", "Ayesha"];
+                setInterval(() => {
+                    const randomUser = users[Math.floor(Math.random() * users.length)];
+                    const randomProd = this.products[Math.floor(Math.random() * this.products.length)];
+                    document.getElementById('sp-user').innerText = randomUser;
+                    document.getElementById('sp-item').innerText = randomProd.name;
+                    document.getElementById('sp-img').src = randomProd.img;
+                    const el = document.getElementById('social-proof');
+                    el.classList.add('show');
+                    setTimeout(() => el.classList.remove('show'), 4000);
+                }, 8000);
             },
 
             nav(id) {
@@ -301,22 +323,82 @@
                 window.scrollTo({top: 0, behavior: 'smooth'});
             },
 
+            handleZoom(e) {
+                const container = e.currentTarget;
+                const img = container.querySelector('img');
+                const x = e.offsetX; const y = e.offsetY;
+                img.style.transformOrigin = `${x}px ${y}px`;
+                img.style.transform = "scale(2.5)";
+            },
+            resetZoom(e) {
+                const img = e.currentTarget.querySelector('img');
+                img.style.transform = "scale(1)";
+                img.style.transformOrigin = "center center";
+            },
+
             openProduct(id) {
                 const p = this.products.find(x => x.id === id);
                 document.getElementById('productDetailContent').innerHTML = `
                     <div style="display:flex; flex-wrap:wrap; gap:40px; padding:40px 0;">
-                        <div style="flex:1; min-width:300px; background:#f9f9f9; padding:20px; border-radius:15px; text-align:center;">
-                            <img src="${p.img}" alt="${p.name}" style="max-width:100%; height:auto; border-radius:10px;">
+                        <div style="flex:1; min-width:300px;">
+                            <div class="spec-zoom-container" onmousemove="app.handleZoom(event)" onmouseleave="app.resetZoom(event)">
+                                <img src="${p.img}" alt="${p.name}">
+                            </div>
                         </div>
                         <div style="flex:1; min-width:300px;">
-                            <button onclick="app.nav('home')" style="margin-bottom:20px; border:none; background:none; cursor:pointer; color:#888;">← Back to Home</button>
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                                <button onclick="app.nav('home')" style="margin-bottom:20px; border:none; background:none; cursor:pointer; color:#888;">← Back to Home</button>
+                                <button class="share-btn-round" onclick="app.shareNow('${p.name}', ${p.id})">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" class="share-icon-img" alt="share">
+                                </button>
+                            </div>
                             <h1 style="font-size:32px; margin-bottom:15px;">${p.name}</h1>
                             <p style="font-size:24px; font-weight:700; color:var(--gold); margin-bottom:20px;">Rs. ${p.price}.00</p>
                             <p style="color:#666; margin-bottom:30px; line-height:1.6;">${p.desc}</p>
                             <button class="filter-btn active" style="width:200px; padding:15px;" onclick="app.updateQty(${p.id}, 1); app.nav('cart');">ADD TO CART</button>
                         </div>
                     </div>`;
+                const similar = this.products.filter(item => item.category === p.category && item.id !== p.id);
+                this.renderGrid(similar, 'similarGrid');
                 this.nav('product-detail');
+                document.getElementById('navSearch').value = ""; 
+            },
+
+            showSearch() { document.getElementById('searchOverlay').style.display = 'block'; },
+            hideSearch() { 
+                document.getElementById('searchOverlay').style.display = 'none'; 
+                document.getElementById('smartResults').style.display = 'none';
+            },
+            openContact() { document.getElementById('contactPopup').style.display = 'block'; },
+            closeContact() { document.getElementById('contactPopup').style.display = 'none'; },
+            
+            sendContact() {
+                const name = document.getElementById('cName').value;
+                const email = document.getElementById('cEmail').value;
+                const msg = document.getElementById('cMsg').value;
+                if(!name || !email || !msg) return alert("Fill required fields");
+                let text = `Name: ${name}\nEmail: ${email}\nMessage: ${msg}`;
+                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(text)}`);
+                this.closeContact();
+            },
+
+            performSearch(query) {
+                if (!query) return;
+                this.hideSearch();
+                const q = query.toUpperCase();
+                const filtered = this.products.filter(p => p.name.toUpperCase().includes(q));
+                document.getElementById('searchedTerm').innerText = query;
+                const grid = document.getElementById('searchGrid');
+                const noResults = document.getElementById('noResultsUI');
+                if (filtered.length > 0) {
+                    noResults.style.display = 'none';
+                    grid.style.display = 'grid';
+                    this.renderGrid(filtered, 'searchGrid');
+                } else {
+                    grid.style.display = 'none';
+                    noResults.style.display = 'block';
+                }
+                this.nav('search');
             },
 
             filter(cat, btn) {
@@ -333,14 +415,14 @@
                     return `
                     <div class="product-card">
                         <div class="img-container" onclick="app.openProduct(${p.id})">
-                            <img src="${p.img}" alt="${p.name}" loading="lazy" width="200" height="200">
+                            <img src="${p.img}" alt="${p.name}" loading="lazy">
                         </div>
                         <div class="p-name" onclick="app.openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
                         <div class="p-price">Rs. ${p.price}.00</div>
                         <div class="qty-box">
-                            <button onclick="app.updateQty(${p.id}, -1)" aria-label="Decrease">-</button>
-                            <input type="number" value="${q}" readonly aria-label="Quantity">
-                            <button onclick="app.updateQty(${p.id}, 1)" aria-label="Increase">+</button>
+                            <button onclick="app.updateQty(${p.id}, -1)">-</button>
+                            <input type="number" value="${q}" readonly>
+                            <button onclick="app.updateQty(${p.id}, 1)">+</button>
                         </div>
                     </div>`;
                 }).join('');
@@ -371,34 +453,28 @@
             renderCart() {
                 const list = document.getElementById('cartItemsList');
                 if (!this.cart.length) {
-                    list.innerHTML = "<p style='text-align:center; padding:100px 0;'>Your cart is currently empty.</p>";
+                    list.innerHTML = "<p style='text-align:center; padding:100px 0; color: #888;'>Your cart is empty.</p>";
                     document.getElementById('cartSummary').style.display = 'none';
                     return;
                 }
                 document.getElementById('cartSummary').style.display = 'block';
                 let total = 0;
                 list.innerHTML = this.cart.map(item => {
-                    const lineTotal = item.price * item.q;
-                    total += lineTotal;
+                    total += (item.price * item.q);
                     return `
                     <div class="cart-item-row">
-                        <div class="cart-prod-col">
-                            <img src="${item.img}" class="cart-img">
-                            <div class="cart-info">
-                                <p>${item.name}</p>
-                                <span>Rs. ${item.price}.00</span>
-                            </div>
+                        <img src="${item.img}" class="cart-img" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <b>${item.name}</b>
+                            <p style="color: #666; font-size: 14px;">Rs. ${item.price}.00</p>
                         </div>
-                        <div class="cart-qty-col">
-                            <div class="cart-qty-btn">
-                                <button onclick="app.updateQty(${item.id}, -1)">−</button>
-                                <span>${item.q}</span>
-                                <button onclick="app.updateQty(${item.id}, 1)">+</button>
-                            </div>
-                            <span class="trash-btn" onclick="app.updateQty(${item.id}, -${item.q})">🗑</span>
+                        <div class="cart-qty-controls">
+                            <button onclick="app.updateQty(${item.id}, -1)">-</button>
+                            <span>${item.q}</span>
+                            <button onclick="app.updateQty(${item.id}, 1)">+</button>
                         </div>
-                        <div class="cart-total-col">
-                            Rs. ${lineTotal}.00
+                        <div style="font-weight: 600; min-width: 80px; text-align: right;">
+                            Rs. ${item.price * item.q}.00
                         </div>
                     </div>`;
                 }).join('');
@@ -406,10 +482,48 @@
             },
 
             checkout() {
-                let msg = "*ORDER FROM 14 STARS*\n\n";
-                this.cart.forEach(i => msg += `• ${i.name} (Qty: ${i.q})\n`);
-                msg += `\n*Total: Rs. ${document.getElementById('totalPrice').innerText}*`;
-                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(msg)}`);
+                const total = document.getElementById('totalPrice').innerText;
+                if(total == "0") return alert("Cart is empty!");
+                document.getElementById('payAmount').innerText = total;
+                const upiID = "9837904369@ptsbi";
+                const upiLink = `upi://pay?pa=${upiID}&pn=14STARS%20TRADERS&am=${total}&cu=INR`;
+                document.getElementById('qrPlaceholder').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
+                document.getElementById('paymentModal').style.display = 'flex';
+            },
+
+            showDetailsForm() {
+                document.getElementById('paymentModal').style.display = 'none';
+                document.getElementById('detailsModal').style.display = 'flex';
+            },
+
+            finalSubmit() {
+                const name = document.getElementById('custName').value;
+                const phone = document.getElementById('custPhone').value;
+                const addr = document.getElementById('custAddr').value;
+                const total = document.getElementById('totalPrice').innerText;
+
+                if(!name || !phone || !addr) return alert("Please fill all delivery details!");
+
+                let itemsMsg = this.cart.map(i => `- ${i.name} (Qty: ${i.q})`).join('\n');
+                
+                let whatsappMsg = `📸 *PLEASE ATTACH PAYMENT SCREENSHOT BELOW* \n\n`;
+                whatsappMsg += `*NEW ORDER FROM WEBSITE*\n`;
+                whatsappMsg += `--------------------------\n`;
+                whatsappMsg += `*Name:* ${name}\n`;
+                whatsappMsg += `*Phone:* ${phone}\n`;
+                whatsappMsg += `*Address:* ${addr}\n`;
+                whatsappMsg += `--------------------------\n`;
+                whatsappMsg += `*Items:*\n${itemsMsg}\n`;
+                whatsappMsg += `--------------------------\n`;
+                whatsappMsg += `*Total Amount:* Rs. ${total}.00\n`;
+                whatsappMsg += `*Payment Status:* Sent (Pending Verification)`;
+
+                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(whatsappMsg)}`);
+                
+                // Reset cart after order
+                this.cart = [];
+                localStorage.removeItem('14stars_data');
+                location.reload();
             }
         };
 
@@ -417,4 +531,3 @@
     </script>
 </body>
 </html>
-
