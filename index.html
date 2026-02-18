@@ -14,426 +14,140 @@
     <style>
         :root { --gold: #d4af37; --dark: #1a1a1a; --light-bg: #f8f9fa; --wa-green: #25d366; --beige: #bcaaa4; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
-        /* Added font-display equivalent logic in CSS */
         body { background-color: #ffffff; color: #333; line-height: 1.5; overflow-x: hidden; font-display: swap; }
 
-        /* HEADER & NAV */
         header { background: var(--dark); color: #fff; padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
         .logo { font-size: 20px; font-weight: 700; color: #fff; border: none; background: none; cursor: pointer; white-space: nowrap; text-decoration: none; }
         
-        /* SMART SEARCH BOX */
         .header-search { flex-grow: 1; max-width: 500px; position: relative; }
         .header-search input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); outline: none; font-size: 14px; background: rgba(255,255,255,0.1); color: white; transition: 0.3s; }
         .header-search input:focus { background: white; color: #000; border-color: var(--gold); }
-        .search-icon-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); color: #888; cursor: pointer; background: none; border: none; padding: 8px; font-size: 18px; }
         
-        /* SMART SEARCH RESULTS DROPDOWN */
-        .smart-search-results { position: absolute; top: 110%; left: 0; width: 100%; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; max-height: 400px; overflow-y: auto; z-index: 2001; }
-        .ssr-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; color: #333; transition: 0.2s; }
-        .ssr-item:hover { background: #f9f9f9; }
-        .ssr-item img { width: 45px; height: 45px; border-radius: 5px; margin-right: 12px; object-fit: contain; background: #f4f4f4; }
-        .ssr-item b { font-size: 13px; display: block; }
-        .ssr-item span { font-size: 12px; color: var(--gold); font-weight: 700; }
+        /* 3 IMAGE GALLERY KA STYLE */
+        .product-gallery { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+        .main-img-box { width: 100%; height: 450px; background: #f9f9f9; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid #eee; }
+        .main-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .thumb-row { display: flex; gap: 10px; justify-content: center; }
+        .thumb { width: 70px; height: 70px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; overflow: hidden; background: white; padding: 2px; }
+        .thumb.active { border-color: var(--gold); }
+        .thumb img { width: 100%; height: 100%; object-fit: contain; }
 
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; cursor: pointer; opacity: 0.8; transition: 0.2s; }
-        .nav-links a:hover { opacity: 1; color: var(--gold); }
-
-        .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 5px; }
-        .badge { position: absolute; top: -5px; right: -5px; background: var(--gold); color: #fff; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid var(--dark); }
-
-        /* SHARE BUTTON STYLING */
-        .share-btn-round { background: #ffffff; border: 1px solid #ddd; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .share-btn-round:hover { background: #f0f0f0; transform: scale(1.1); }
-        .share-icon-img { width: 22px; height: 22px; opacity: 0.7; }
-
-        /* ZOOM CSS */
-        .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; display: flex; align-items: center; justify-content: center; }
-        .spec-zoom-container img { max-width: 100%; transition: transform 0.2s ease-out; }
-
-        /* MODALS */
-        #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; }
-        
-        #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: #fff; overflow-y: auto; }
-        .contact-container { max-width: 800px; margin: 80px auto; padding: 0 20px 60px 20px; }
-        .contact-container h2 { font-size: 26px; font-weight: 500; margin-bottom: 40px; color: #333; text-align: center; }
-        .contact-form-grid { display: flex; flex-wrap: wrap; gap: 15px; }
-        .contact-input { padding: 15px 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 15px; color: #333; outline: none; background: #fcfcfc; }
-        .input-half { flex: 1; min-width: 250px; }
-        .input-full { width: 100%; }
-        .contact-textarea { width: 100%; height: 150px; resize: none; }
-        .contact-send-btn { background: var(--dark); color: #fff; border: none; padding: 15px 50px; border-radius: 5px; font-size: 14px; cursor: pointer; margin: 20px auto 0 auto; transition: 0.3s; text-transform: uppercase; display: block; letter-spacing: 1px; }
-        .contact-send-btn:hover { background: var(--gold); }
-        .close-contact { position: fixed; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: #333; z-index: 2100; }
-
-        /* HERO & FILTER */
-        .hero-banner { width: 100%; height: 600px; background: #222 url('BANNER.png') center/cover no-repeat; display: flex; align-items: center; justify-content: center; position: relative; }
-        .filter-section { display: flex; gap: 10px; overflow-x: auto; padding: 25px 0; justify-content: center; scrollbar-width: none; }
-        .filter-btn { padding: 10px 22px; border: 1px solid #ddd; border-radius: 25px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; }
-        .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; padding: 20px 0; }
-        .product-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; transition: 0.3s; display: flex; flex-direction: column; }
-        .img-container { background: var(--light-bg); height: 220px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; margin-bottom: 12px; }
+        .product-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; transition: 0.3s; }
+        .img-container { background: var(--light-bg); height: 220px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; }
         .img-container img { max-width: 85%; max-height: 85%; object-fit: contain; }
-        .p-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .p-price { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 15px; }
-        .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-top: auto; }
-        .qty-box button { flex: 1; height: 40px; border: none; background: #f9f9f9; cursor: pointer; font-size: 20px; }
-        .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: 700; background: #fff; }
 
-        /* CART VIEW */
-        .cart-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .cart-item-row { display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee; gap: 20px; }
-        .cart-img { width: 100px; height: 100px; object-fit: contain; background: #f9f9f9; border-radius: 10px; }
-        .cart-item-info { flex: 2; }
-        .cart-item-info b { font-size: 16px; display: block; margin-bottom: 5px; }
-        .cart-qty-controls { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 5px; height: 35px; }
-        .cart-qty-controls button { width: 35px; height: 100%; border: none; background: none; cursor: pointer; font-size: 18px; }
-        .cart-qty-controls span { width: 40px; text-align: center; font-weight: 600; }
-
-        /* SOCIAL PROOF */
-        #social-proof { position: fixed; bottom: 20px; left: 20px; background: white; padding: 10px 15px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; z-index: 5000; transform: translateY(150%); transition: 0.5s ease-in-out; max-width: 300px; }
-        #social-proof.show { transform: translateY(0); }
-        .sp-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
-        .sp-text { font-size: 12px; color: #444; }
-        .sp-text b { color: #000; }
-
-        /* PAYMENT & DETAILS MODAL */
-        #paymentModal, #detailsModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:5000; align-items:center; justify-content:center; padding:20px; overflow-y: auto; }
-        .pay-card { background:white; padding:30px; border-radius:20px; max-width:400px; width:100%; text-align:center; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        
-        .delivery-note { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; font-size: 13px; font-weight: 600; margin-bottom: 15px; border: 1px solid #ffeeba; }
-
-        .page-view { display: none; animation: fadeIn 0.3s ease-in; }
-        .active { display: block; }
+        .page-view { display: none; }
+        .active { display: block; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .hero-banner { height: 300px; }
-            .cart-img { width: 70px; height: 70px; }
-        }
+        #paymentModal, #detailsModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:5000; align-items:center; justify-content:center; padding:20px; }
+        .pay-card { background:white; padding:30px; border-radius:20px; max-width:400px; width:100%; text-align:center; }
     </style>
 </head>
 <body>
 
-    <div id="paymentModal" aria-modal="true" role="dialog">
-        <div class="pay-card">
-            <button onclick="document.getElementById('paymentModal').style.display='none'" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:28px; color:#999; border:none; background:none;" aria-label="Close">&times;</button>
-            <h3 style="margin-bottom:5px;">Complete Payment</h3>
-            <p style="font-size:13px; color:#666; margin-bottom:20px;">Scan QR to pay <b>Rs. <span id="payAmount">0</span></b></p>
-            
-            <div style="background:#f9f9f9; padding:15px; border-radius:15px; margin-bottom:20px; display:inline-block;">
-                <img id="qrPlaceholder" src="" alt="UPI QR Code for Payment" width="200" height="200" style="display:block;">
-            </div>
-
-            <p style="font-size:12px; color:#888; margin-bottom:20px;">Using GPay, PhonePe, Paytm or any UPI App</p>
-            
-            <div style="background: #e1f5fe; color: #01579b; padding: 10px; border-radius: 8px; font-size: 11px; margin-bottom: 15px; font-weight: 600;">
-                📸 Payment ke baad Screenshot lena na bhulein!
-            </div>
-
-            <button onclick="app.showDetailsForm()" style="background:#000; color:white; width:100%; padding:16px; border:none; border-radius:10px; font-weight:700; cursor:pointer; font-size:14px;">I HAVE PAID (Fill Details)</button>
-        </div>
-    </div>
-
-    <div id="detailsModal" aria-modal="true" role="dialog">
-        <div class="pay-card" style="text-align: left;">
-            <h3 style="margin-bottom:20px; text-align: center;">Delivery Details</h3>
-            
-            <div class="delivery-note">⚠️ Note: We only deliver in Muzaffarnagar.</div>
-
-            <label for="custName" style="font-size: 12px; font-weight: 600;">FULL NAME</label>
-            <input type="text" id="custName" class="contact-input input-full" style="margin-bottom: 15px; padding: 10px;" placeholder="Enter your name">
-            
-            <label for="custPhone" style="font-size: 12px; font-weight: 600;">WHATSAPP NUMBER</label>
-            <input type="tel" id="custPhone" class="contact-input input-full" style="margin-bottom: 15px; padding: 10px;" placeholder="Mobile number">
-            
-            <label for="custAddr" style="font-size: 12px; font-weight: 600;">FULL ADDRESS (Muzaffarnagar)</label>
-            <textarea id="custAddr" class="contact-input input-full" style="height: 80px; margin-bottom: 20px; padding: 10px;" placeholder="House No, Street, Landmark..."></textarea>
-
-            <button onclick="app.finalSubmit()" style="background:#25d366; color:white; width:100%; padding:16px; border:none; border-radius:10px; font-weight:700; cursor:pointer; font-size:14px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                CONFIRM & PLACE ORDER 🚀
-            </button>
-            <p style="text-align: center; margin-top: 10px; font-size: 11px; color: #d32f2f; font-weight: 600;">Agli screen pe Screenshot attach karna hai!</p>
-            <p onclick="document.getElementById('detailsModal').style.display='none'" style="text-align: center; margin-top: 15px; font-size: 12px; color: #888; cursor: pointer;">Go Back</p>
-        </div>
-    </div>
-
-    <div id="social-proof">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" id="sp-img" class="sp-img" alt="Purchased item" width="45" height="45">
-        <div class="sp-text">
-            <span id="sp-user"></span> just bought <br>
-            <b id="sp-item"></b>
-        </div>
-    </div>
-
-    <div id="searchOverlay" onclick="app.hideSearch()"></div>
-
-    <div id="contactPopup" aria-modal="true" role="dialog">
-        <span class="close-contact" onclick="app.closeContact()" aria-label="Close Contact Form">&times;</span>
-        <div class="contact-container">
-            <h2>Questions or comments? <br> Get in touch and we'll be happy to help.</h2>
-            <div class="contact-form-grid">
-                <input type="text" id="cName" class="contact-input input-half" placeholder="Name" aria-label="Name">
-                <input type="email" id="cEmail" class="contact-input input-half" placeholder="Email *" aria-label="Email">
-                <input type="text" id="cPhone" class="contact-input input-full" placeholder="Phone number" aria-label="Phone number">
-                <textarea id="cMsg" class="contact-input input-full contact-textarea" placeholder="Comment" aria-label="Comment"></textarea>
-                <button class="contact-send-btn" onclick="app.sendContact()">Send Message</button>
-            </div>
-        </div>
-    </div>
-
     <header>
         <div class="nav-container">
-            <a class="logo" onclick="app.nav('home')" href="javascript:void(0)">14 STARS TRADERS</a>
+            <a class="logo" onclick="app.nav('home')">14 STARS TRADERS</a>
             <div class="header-search">
-                <input type="text" id="navSearch" placeholder="Search products..." onfocus="app.showSearch()" oninput="app.smartSearch(this.value)" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)" aria-label="Search products">
-                <button class="search-icon-btn" onclick="app.performSearch(document.getElementById('navSearch').value)" aria-label="Submit search">🔍</button>
-                <div id="smartResults" class="smart-search-results"></div>
+                <input type="text" id="navSearch" placeholder="Search products..." oninput="app.smartSearch(this.value)">
             </div>
-            <div class="header-actions">
-                <nav class="nav-links">
-                    <a onclick="app.nav('home')">Home</a>
-                    <a onclick="app.nav('catalog')">Catalog</a>
-                    <a onclick="app.openContact()">Contact</a>
-                </nav>
-                <button class="cart-btn" onclick="app.nav('cart')" aria-label="Open cart">
-                    👜 <span class="badge" id="badge">0</span>
-                </button>
-            </div>
+            <button onclick="app.nav('cart')" style="background:none; border:none; color:white; font-size:22px; cursor:pointer; position:relative;">
+                👜 <span id="badge" style="position:absolute; top:-5px; right:-5px; background:var(--gold); font-size:10px; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;">0</span>
+            </button>
         </div>
     </header>
 
-    <main>
+    <main style="max-width: 1200px; margin: 0 auto; padding: 20px;">
         <section id="page-home" class="page-view active">
-            <div class="hero-banner"></div>
-            <div class="container">
-                <div class="filter-section">
-                    <button class="filter-btn active" onclick="app.filter('All', this)">All Items</button>
-                    <button class="filter-btn" onclick="app.filter('Gadgets', this)">Gadgets</button>
-                    <button class="filter-btn" onclick="app.filter('Beauty', this)">Beauty</button>
-                    <button class="filter-btn" onclick="app.filter('Home', this)">Home</button>
-                </div>
-                <div id="homeGrid" class="grid"></div>
-            </div>
-        </section>
-
-        <section id="page-search" class="page-view">
-            <div class="container" style="padding:60px 0; text-align:center;">
-                <h1 style="font-size: 28px; margin-bottom:30px;">Search results for "<span id="searchedTerm"></span>"</h1>
-                <div id="searchGrid" class="grid"></div>
-                <div id="noResultsUI" style="display:none; padding:100px 0;">No results found.</div>
-            </div>
+            <div id="homeGrid" class="grid"></div>
         </section>
 
         <section id="page-product-detail" class="page-view">
-            <div class="container" id="productDetailContent"></div>
-            <div class="container" style="border-top:1px solid #eee; margin-top:50px; padding-top:40px;">
-                <h3 style="margin-bottom:25px; letter-spacing:1px;">YOU MAY ALSO LIKE</h3>
-                <div id="similarGrid" class="grid"></div>
-            </div>
-        </section>
-
-        <section id="page-catalog" class="page-view">
-            <div class="container">
-                <h2 style="margin:40px 0; text-align:center; letter-spacing:2px;">FULL CATALOG</h2>
-                <div id="catalogGrid" class="grid"></div>
-            </div>
+            <div id="productDetailContent"></div>
         </section>
 
         <section id="page-cart" class="page-view">
-            <div class="container" style="max-width: 900px; padding: 50px 20px;">
-                <div class="cart-header">
-                    <h1 style="font-size: 24px; font-weight: 600;">Your cart</h1>
-                    <span style="text-decoration:underline; cursor:pointer; color: #666; font-size: 14px;" onclick="app.nav('home')">Continue shopping</span>
-                </div>
-                <div id="cartItemsList"></div>
-                <div id="cartSummary" style="margin-top:40px; text-align:right; border-top: 1px solid #eee; padding-top: 30px;">
-                    <p style="font-size:20px; margin-bottom:20px;">Subtotal: <b>Rs. <span id="totalPrice">0</span>.00</b></p>
-                    <button onclick="app.checkout()" style="background:#000; color:white; width:100%; max-width:380px; padding:16px; border:none; cursor:pointer; font-weight:600; letter-spacing: 1px;">CHECK OUT</button>
-                </div>
+            <h2 style="margin-bottom:20px;">Your Cart</h2>
+            <div id="cartItemsList"></div>
+            <div id="cartSummary" style="text-align:right; margin-top:20px; display:none;">
+                <h3>Total: Rs. <span id="totalPrice">0</span></h3>
+                <button onclick="app.checkout()" style="background:#000; color:#fff; padding:15px 40px; border:none; border-radius:8px; cursor:pointer; margin-top:10px;">PROCEED TO CHECKOUT</button>
             </div>
         </section>
     </main>
 
+    <div id="paymentModal"><div class="pay-card" id="payContent"></div></div>
+    <div id="detailsModal"><div class="pay-card" id="detailsContent"></div></div>
+
     <script>
         const app = {
+            // HAR PRODUCT ME 3 IMAGES KA DATA DAAL DIYA HAI
             products: [
-                { id: 1, category: "Gadgets", name: "4 In 1 EMERGENCY LIGHT", price: 200, img: "TORCH.webp", desc: "Ultra-bright portable emergency light with 4 modes." },
-                { id: 2, category: "Gadgets", name: "BUDDHA TRIMMER", price: 250, img: "TRIMMER.webp", desc: "Professional metal body hair trimmer with Buddha carvings." },
-                { id: 3, category: "Beauty", name: "4 In 1 FACIAL TRIMMER ", price: 250, img: "FACIAL.webp", desc: "Complete skin glow treatment for home use." },
-                { id: 4, category: "Home", name: "PORTABLE VACCUM SEALER", price: 250, img: "VACCUM.webp", desc: "Keep food fresh for weeks with vacuum technology." },
-                { id: 5, category: "Home", name: "ELECTRIC PLASMA LIGHTER", price: 250, img: "LIGHTER.webp", desc: "Rechargeable, windproof electric arc lighter." },
-                { id: 6, category: "Gadgets", name: "PORTABLE ELECTRONIC JUICER", price: 250, img: "JUICER.webp", desc: "USB rechargeable blender for fresh juice on the go." },
-                {id: 7, category: "Home", name: "VACCUM FLASK SET", price: 250, img: "FLASK SET.webp", desc: "Rapid Vacuum Insulated Flask Set 3-cups Set For Hot & Cold Drink Set." }
+                { id: 1, name: "4 In 1 EMERGENCY LIGHT", price: 200, img: "item1_1.png", extra: ["item1_2.png", "item1_3.png"], desc: "High-quality emergency light with 4 modes." },
+                { id: 2, name: "BUDDHA TRIMMER", price: 250, img: "item2_1.png", extra: ["item2_2.png", "item2_3.png"], desc: "Professional trimmer with Buddha design." },
+                { id: 3, name: "4 In 1 FACIAL KIT", price: 250, img: "item3_1.png", extra: ["item3_2.png", "item3_3.png"], desc: "Complete 4-in-1 facial kit for glowing skin." },
+                { id: 4, name: "PORTABLE VACCUM SEALER", price: 250, img: "item4_1.png", extra: ["item4_2.png", "item4_3.png"], desc: "Portable vacuum sealer for food storage." },
+                { id: 5, name: "ELECTRIC PLASMA LIGHTER", price: 250, img: "item5_1.png", extra: ["item5_2.png", "item5_3.png"], desc: "Rechargeable windproof plasma lighter." },
+                { id: 6, name: "PORTABLE ELECTRONIC JUICER", price: 250, img: "item6_1.png", extra: ["item6_2.png", "item6_3.png"], desc: "Electronic juicer blender for fresh juice." }
             ],
             cart: [],
-            currentFilter: 'All',
 
             init() {
                 const saved = localStorage.getItem('14stars_data');
                 if (saved) this.cart = JSON.parse(saved);
                 this.updateBadge();
                 this.render();
-                this.startSocialProof();
             },
 
-            smartSearch(val) {
-                const resultsDiv = document.getElementById('smartResults');
-                if(!val) { resultsDiv.style.display = 'none'; return; }
-                const matches = this.products.filter(p => p.name.toLowerCase().includes(val.toLowerCase())).slice(0, 5);
-                if(matches.length > 0) {
-                    resultsDiv.innerHTML = matches.map(p => `
-                        <div class="ssr-item" onclick="app.openProduct(${p.id}); app.hideSearch();">
-                            <img src="${p.img}" alt="${p.name}" width="45" height="45">
-                            <div><b>${p.name}</b><span>Rs. ${p.price}</span></div>
-                        </div>`).join('');
-                    resultsDiv.style.display = 'block';
-                } else { resultsDiv.style.display = 'none'; }
-            },
-
-            shareNow(name, id) {
-                const shareData = { title: '14 STARS TRADERS', text: `Check out this amazing ${name} at 14 STARS TRADERS!`, url: window.location.href };
-                if (navigator.share) { navigator.share(shareData).catch(console.error); } 
-                else { window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text + " " + shareData.url)}`, '_blank'); }
-            },
-
-            startSocialProof() {
-                const users = ["Rahul", "Anjali", "Suhail", "Priya", "Mohit", "Ayesha"];
-                setInterval(() => {
-                    const randomUser = users[Math.floor(Math.random() * users.length)];
-                    const randomProd = this.products[Math.floor(Math.random() * this.products.length)];
-                    document.getElementById('sp-user').innerText = randomUser;
-                    document.getElementById('sp-item').innerText = randomProd.name;
-                    document.getElementById('sp-img').src = randomProd.img;
-                    const el = document.getElementById('social-proof');
-                    el.classList.add('show');
-                    setTimeout(() => el.classList.remove('show'), 4000);
-                }, 8000);
-            },
-
-            nav(id) {
-                document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-' + id).classList.add('active');
-                if(id === 'cart') this.renderCart();
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            },
-
-            handleZoom(e) {
-                const container = e.currentTarget;
-                const img = container.querySelector('img');
-                const x = e.offsetX; const y = e.offsetY;
-                img.style.transformOrigin = `${x}px ${y}px`;
-                img.style.transform = "scale(2.5)";
-            },
-            resetZoom(e) {
-                const img = e.currentTarget.querySelector('img');
-                img.style.transform = "scale(1)";
-                img.style.transformOrigin = "center center";
+            render() {
+                document.getElementById('homeGrid').innerHTML = this.products.map(p => `
+                    <div class="product-card">
+                        <div class="img-container" onclick="app.openProduct(${p.id})">
+                            <img src="${p.img}" loading="lazy" alt="${p.name}">
+                        </div>
+                        <h4 style="margin:10px 0;">${p.name}</h4>
+                        <p style="font-weight:700;">Rs. ${p.price}</p>
+                        <button onclick="app.updateQty(${p.id}, 1)" style="width:100%; padding:10px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer; margin-top:10px;">Add to Cart</button>
+                    </div>`).join('');
             },
 
             openProduct(id) {
                 const p = this.products.find(x => x.id === id);
+                const allImgs = [p.img, ...p.extra];
+                
                 document.getElementById('productDetailContent').innerHTML = `
-                    <div style="display:flex; flex-wrap:wrap; gap:40px; padding:40px 0;">
+                    <div style="display:flex; flex-wrap:wrap; gap:40px; padding:20px 0;">
                         <div style="flex:1; min-width:300px;">
-                            <div class="spec-zoom-container" onmousemove="app.handleZoom(event)" onmouseleave="app.resetZoom(event)">
-                                <img src="${p.img}" alt="${p.name}" width="500" height="500">
+                            <div class="product-gallery">
+                                <div class="main-img-box"><img src="${p.img}" id="mainView"></div>
+                                <div class="thumb-row">
+                                    ${allImgs.map((img, idx) => `
+                                        <div class="thumb ${idx===0?'active':''}" onclick="app.changeImg(this, '${img}')">
+                                            <img src="${img}">
+                                        </div>
+                                    `).join('')}
+                                </div>
                             </div>
                         </div>
                         <div style="flex:1; min-width:300px;">
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                                <button onclick="app.nav('home')" style="margin-bottom:20px; border:none; background:none; cursor:pointer; color:#888;">← Back to Home</button>
-                                <button class="share-btn-round" onclick="app.shareNow('${p.name}', ${p.id})" aria-label="Share product">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" class="share-icon-img" alt="share icon" width="22" height="22">
-                                </button>
-                            </div>
-                            <h1 style="font-size:32px; margin-bottom:15px;">${p.name}</h1>
-                            <p style="font-size:24px; font-weight:700; color:var(--gold); margin-bottom:20px;">Rs. ${p.price}.00</p>
-                            <p style="color:#666; margin-bottom:30px; line-height:1.6;">${p.desc}</p>
-                            <button class="filter-btn active" style="width:200px; padding:15px;" onclick="app.updateQty(${p.id}, 1); app.nav('cart');">ADD TO CART</button>
+                            <h1 style="font-size:28px; margin-bottom:15px;">${p.name}</h1>
+                            <h2 style="color:var(--gold); margin-bottom:20px;">Rs. ${p.price}.00</h2>
+                            <p style="color:#666; margin-bottom:30px; font-size:16px;">${p.desc}</p>
+                            <button onclick="app.updateQty(${p.id}, 1); app.nav('cart');" style="width:100%; padding:18px; background:#000; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:700; font-size:16px;">BUY NOW</button>
+                            <button onclick="app.nav('home')" style="width:100%; margin-top:15px; background:none; border:1px solid #ddd; padding:12px; border-radius:8px; cursor:pointer;">Back to Shop</button>
                         </div>
-                    </div>`;
-                const similar = this.products.filter(item => item.category === p.category && item.id !== p.id);
-                this.renderGrid(similar, 'similarGrid');
+                    </div>
+                `;
                 this.nav('product-detail');
-                document.getElementById('navSearch').value = ""; 
             },
 
-            showSearch() { document.getElementById('searchOverlay').style.display = 'block'; },
-            hideSearch() { 
-                document.getElementById('searchOverlay').style.display = 'none'; 
-                document.getElementById('smartResults').style.display = 'none';
-            },
-            openContact() { document.getElementById('contactPopup').style.display = 'block'; },
-            closeContact() { document.getElementById('contactPopup').style.display = 'none'; },
-            
-            sendContact() {
-                const name = document.getElementById('cName').value;
-                const email = document.getElementById('cEmail').value;
-                const msg = document.getElementById('cMsg').value;
-                if(!name || !email || !msg) return alert("Fill required fields");
-                let text = `Name: ${name}\nEmail: ${email}\nMessage: ${msg}`;
-                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(text)}`);
-                this.closeContact();
-            },
-
-            performSearch(query) {
-                if (!query) return;
-                this.hideSearch();
-                const q = query.toUpperCase();
-                const filtered = this.products.filter(p => p.name.toUpperCase().includes(q));
-                document.getElementById('searchedTerm').innerText = query;
-                const grid = document.getElementById('searchGrid');
-                const noResults = document.getElementById('noResultsUI');
-                if (filtered.length > 0) {
-                    noResults.style.display = 'none';
-                    grid.style.display = 'grid';
-                    this.renderGrid(filtered, 'searchGrid');
-                } else {
-                    grid.style.display = 'none';
-                    noResults.style.display = 'block';
-                }
-                this.nav('search');
-            },
-
-            filter(cat, btn) {
-                this.currentFilter = cat;
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                this.render();
-            },
-
-            renderGrid(items, targetId) {
-                const target = document.getElementById(targetId);
-                target.innerHTML = items.map(p => {
-                    const q = (this.cart.find(c => c.id === p.id) || {q:0}).q;
-                    return `
-                    <div class="product-card">
-                        <div class="img-container" onclick="app.openProduct(${p.id})">
-                            <img src="${p.img}" alt="${p.name}" loading="lazy" width="200" height="200">
-                        </div>
-                        <div class="p-name" onclick="app.openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
-                        <div class="p-price">Rs. ${p.price}.00</div>
-                        <div class="qty-box">
-                            <button onclick="app.updateQty(${p.id}, -1)" aria-label="Decrease quantity">-</button>
-                            <input type="number" value="${q}" readonly aria-label="Quantity">
-                            <button onclick="app.updateQty(${p.id}, 1)" aria-label="Increase quantity">+</button>
-                        </div>
-                    </div>`;
-                }).join('');
-            },
-
-            render() {
-                const items = this.currentFilter === 'All' ? this.products : this.products.filter(p => p.category === this.currentFilter);
-                this.renderGrid(items, 'homeGrid');
-                this.renderGrid(this.products, 'catalogGrid');
+            changeImg(el, src) {
+                document.getElementById('mainView').src = src;
+                document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+                el.classList.add('active');
             },
 
             updateQty(id, delta) {
@@ -446,38 +160,35 @@
                 }
                 localStorage.setItem('14stars_data', JSON.stringify(this.cart));
                 this.updateBadge();
-                this.render();
                 if(document.getElementById('page-cart').classList.contains('active')) this.renderCart();
             },
 
-            updateBadge() { document.getElementById('badge').innerText = this.cart.reduce((s, i) => s + i.q, 0); },
+            updateBadge() {
+                document.getElementById('badge').innerText = this.cart.reduce((s, i) => s + i.q, 0);
+            },
+
+            nav(id) {
+                document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+                document.getElementById('page-' + id).classList.add('active');
+                if(id === 'cart') this.renderCart();
+                window.scrollTo(0,0);
+            },
 
             renderCart() {
                 const list = document.getElementById('cartItemsList');
-                if (!this.cart.length) {
-                    list.innerHTML = "<p style='text-align:center; padding:100px 0; color: #888;'>Your cart is empty.</p>";
-                    document.getElementById('cartSummary').style.display = 'none';
+                const summary = document.getElementById('cartSummary');
+                if (this.cart.length === 0) {
+                    list.innerHTML = "Your cart is empty.";
+                    summary.style.display = 'none';
                     return;
                 }
-                document.getElementById('cartSummary').style.display = 'block';
+                summary.style.display = 'block';
                 let total = 0;
-                list.innerHTML = this.cart.map(item => {
-                    total += (item.price * item.q);
-                    return `
-                    <div class="cart-item-row">
-                        <img src="${item.img}" class="cart-img" alt="${item.name}" width="100" height="100">
-                        <div class="cart-item-info">
-                            <b>${item.name}</b>
-                            <p style="color: #666; font-size: 14px;">Rs. ${item.price}.00</p>
-                        </div>
-                        <div class="cart-qty-controls">
-                            <button onclick="app.updateQty(${item.id}, -1)">-</button>
-                            <span>${item.q}</span>
-                            <button onclick="app.updateQty(${item.id}, 1)">+</button>
-                        </div>
-                        <div style="font-weight: 600; min-width: 80px; text-align: right;">
-                            Rs. ${item.price * item.q}.00
-                        </div>
+                list.innerHTML = this.cart.map(i => {
+                    total += (i.price * i.q);
+                    return `<div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #eee;">
+                        <span>${i.name} (x${i.q})</span>
+                        <b>Rs. ${i.price * i.q}</b>
                     </div>`;
                 }).join('');
                 document.getElementById('totalPrice').innerText = total;
@@ -485,16 +196,25 @@
 
             checkout() {
                 const total = document.getElementById('totalPrice').innerText;
-                if(total == "0") return alert("Cart is empty!");
-                document.getElementById('payAmount').innerText = total;
-                const upiID = "9837904369@ptsbi";
-                const upiLink = `upi://pay?pa=${upiID}&pn=14STARS%20TRADERS&am=${total}&cu=INR`;
-                document.getElementById('qrPlaceholder').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
+                document.getElementById('payContent').innerHTML = `
+                    <h3>Scan to Pay</h3>
+                    <p style="margin:10px 0;">Amount to pay: <b>Rs. ${total}.00</b></p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=9837904369@ptsbi&am=${total}" style="width:200px; margin:20px 0;">
+                    <p style="font-size:12px; color:#666; margin-bottom:20px;">Scan QR with Any UPI App</p>
+                    <button onclick="app.showDetailsForm()" style="width:100%; padding:15px; background:var(--wa-green); color:white; border:none; border-radius:10px; cursor:pointer; font-weight:600;">I HAVE PAID (Proceed)</button>
+                `;
                 document.getElementById('paymentModal').style.display = 'flex';
             },
 
             showDetailsForm() {
                 document.getElementById('paymentModal').style.display = 'none';
+                document.getElementById('detailsContent').innerHTML = `
+                    <h3>Delivery Details</h3>
+                    <input type="text" id="custName" placeholder="Your Full Name" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px;">
+                    <input type="tel" id="custPhone" placeholder="WhatsApp Number" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px;">
+                    <textarea id="custAddr" placeholder="Full Delivery Address" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px; height:100px;"></textarea>
+                    <button onclick="app.finalSubmit()" style="width:100%; padding:15px; background:#000; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:600; margin-top:10px;">PLACE ORDER VIA WHATSAPP</button>
+                `;
                 document.getElementById('detailsModal').style.display = 'flex';
             },
 
@@ -522,10 +242,15 @@
 
                 window.open(`https://wa.me/919837904369?text=${encodeURIComponent(whatsappMsg)}`);
                 
-                // Reset cart after order
                 this.cart = [];
                 localStorage.removeItem('14stars_data');
                 location.reload();
+            },
+
+            smartSearch(val) {
+                if(!val) return;
+                const match = this.products.find(p => p.name.toLowerCase().includes(val.toLowerCase()));
+                if(match) this.openProduct(match.id);
             }
         };
 
@@ -533,7 +258,3 @@
     </script>
 </body>
 </html>
-
-
-
-
