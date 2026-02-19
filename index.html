@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1a1a1a">
     
-    <title>14 STARS TRADERS | Premium Gadgets & Beauty</title>
-    <meta name="description" content="14 STARS TRADERS - Best quality gadgets and beauty products in Muzaffarnagar.">
-<meta property="og:title" content="14 STARS TRADERS">
-    <meta name="keywords" content="14 Stars Traders, Gadgets, Beauty, Home Decor, Muzaffarnagar Shopping, WhatsApp Order">
+    <title>14-STARS-TRADERS.IN | Premium Gadgets & Beauty</title>
+    <meta name="description" content="14-STARS-TRADERS.IN - Best quality gadgets and beauty products in Muzaffarnagar.">
+    <meta property="og:title" content="14-STARS-TRADERS.IN">
+    <meta name="keywords" content="14-STARS-TRADERS.IN, Gadgets, Beauty, Home Decor, Muzaffarnagar Shopping, WhatsApp Order">
     
-    <meta property="og:title" content="14 STARS TRADERS | Quality & Elegance">
+    <meta property="og:title" content="14-STARS-TRADERS.IN | Quality & Elegance">
     <meta property="og:description" content="Premium gadgets & beauty products delivered to your doorstep. Order now via WhatsApp.">
     <meta property="og:type" content="website">
     <link rel="canonical" href="https://yourdomain.com/">
@@ -57,7 +57,6 @@
         .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; display: flex; align-items: center; justify-content: center; }
         .spec-zoom-container img { max-width: 100%; transition: transform 0.2s ease-out; }
 
-        /* Thumb Strip CSS for 3 Images */
         .thumb-strip { display: flex; gap: 10px; margin-top: 15px; }
         .thumb-img { width: 70px; height: 70px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; object-fit: contain; background: #fff; transition: 0.2s; }
         .thumb-img:hover, .thumb-img.active-thumb { border-color: var(--gold); }
@@ -162,7 +161,7 @@
 
     <header>
         <div class="nav-container">
-            <a class="logo" onclick="app.nav('home')" href="javascript:void(0)" aria-label="14 Stars Traders Home">14 STARS TRADERS</a>
+            <a class="logo" onclick="app.nav('home')" href="javascript:void(0)" aria-label="14-STARS-TRADERS.IN Home">14-STARS-TRADERS.IN</a>
             <div class="header-search">
                 <input type="text" id="navSearch" placeholder="Search products..." onfocus="app.showSearch()" oninput="app.smartSearch(this.value)" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)" aria-label="Search Products">
                 <button class="search-icon-btn" onclick="app.performSearch(document.getElementById('navSearch').value)" aria-label="Click to Search">🔍</button>
@@ -183,7 +182,7 @@
 
     <main>
         <section id="page-home" class="page-view active">
-            <div class="hero-banner" role="img" aria-label="14 Stars Traders Promotional Banner"></div>
+            <div class="hero-banner" role="img" aria-label="14-STARS-TRADERS.IN Promotional Banner"></div>
             <div class="container">
                 <div class="filter-section">
                     <button class="filter-btn active" onclick="app.filter('All', this)">All Items</button>
@@ -270,7 +269,8 @@
             },
 
             shareNow(name, id) {
-                const shareData = { title: '14 STARS TRADERS', text: `Check out this amazing ${name} at 14 STARS TRADERS!`, url: window.location.href };
+                // Updated Brand Name in Share Text
+                const shareData = { title: '14-STARS-TRADERS.IN', text: `Check out this amazing ${name} at 14-STARS-TRADERS.IN!`, url: window.location.href };
                 if (navigator.share) { navigator.share(shareData).catch(console.error); } 
                 else { window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text + " " + shareData.url)}`, '_blank'); }
             },
@@ -470,13 +470,15 @@
                 if(total == "0") return alert("Cart is empty!");
                 document.getElementById('payAmount').innerText = total;
                 const upiID = "9837904369@ptsbi";
-                const upiLink = `upi://pay?pa=${upiID}&pn=14STARS%20TRADERS&am=${total}&cu=INR`;
+                // Brand name updated in UPI PN field
+                const upiLink = `upi://pay?pa=${upiID}&pn=14-STARS-TRADERS.IN&am=${total}&cu=INR`;
                 document.getElementById('qrPlaceholder').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
                 document.getElementById('paymentModal').style.display = 'flex';
             },
 
             confirmOrder() {
-                let msg = "*ORDER CONFIRMED (PAYMENT DONE)*\n\n";
+                // Brand name updated in WhatsApp Message
+                let msg = "*ORDER CONFIRMED (14-STARS-TRADERS.IN)*\n\n";
                 this.cart.forEach(i => msg += `• ${i.name} (Qty: ${i.q}) - Rs.${i.price * i.q}\n`);
                 msg += `\n*Total Paid: Rs. ${document.getElementById('totalPrice').innerText}*`;
                 msg += `\n\n_I have paid the amount via UPI. Please confirm my order._`;
@@ -486,11 +488,9 @@
                 this.updateBadge();
                 document.getElementById('paymentModal').style.display = 'none';
                 this.nav('home');
-                alert("Thank you! Please share the payment screenshot on WhatsApp for faster processing.");
             }
         };
         app.init();
     </script>
 </body>
 </html>
-
