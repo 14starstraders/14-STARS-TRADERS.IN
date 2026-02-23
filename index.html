@@ -25,6 +25,7 @@
 <link rel="preload" as="image" href="BANNER.png">
 
 <style>
+        /* AAPKA ORIGINAL STYLE - NO CHANGES */
         :root { --gold: #d4af37; --dark: #1a1a1a; --light-bg: #f8f9fa; --wa-green: #25d366; --beige: #bcaaa4; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
         
@@ -123,11 +124,11 @@
             .hero-banner { height: 300px; }
             .cart-img { width: 70px; height: 70px; }
         }
-    </style>
+</style>
 </head>
 <body>
 
-    <div id="paymentModal" role="dialog" aria-modal="true">
+    <div id="paymentModal" role="dialog" aria-modal="true" aria-label="UPI Payment Window">
         <div class="pay-card">
             <button onclick="document.getElementById('paymentModal').style.display='none'" style="position:absolute; top:15px; right:20px; border:none; background:none; cursor:pointer; font-size:28px; color:#999;" aria-label="Close Payment Modal">&times;</button>
             <h3 style="margin-bottom:5px;">Complete Payment</h3>
@@ -140,8 +141,8 @@
         </div>
     </div>
 
-    <div id="social-proof">
-        <img src="" id="sp-img" class="sp-img" alt="Recent Buyer Purchased Item" width="45" height="45">
+    <div id="social-proof" role="status">
+        <img src="" id="sp-img" class="sp-img" alt="Recent Buyer" width="45" height="45">
         <div class="sp-text">
             <span id="sp-user"></span> just bought <br>
             <b id="sp-item"></b>
@@ -238,6 +239,7 @@
     </main>
 
     <script defer>
+        /* AAPKA ORIGINAL JS - NO LOGIC CHANGES */
         const app = {
             products: [
                 { id: 1, category: "Gadgets", name: "4 In 1 EMERGENCY LIGHT", price: 200, img: "TORCH.webp", images: ["TORCH.webp", "TORCH 2.jpg", "TORCH 3.jpg"], desc: "Ultra-bright portable emergency light with 4 modes." },
@@ -342,7 +344,7 @@
                             <h1 style="font-size:32px; margin-bottom:15px;">${p.name}</h1>
                             <p style="font-size:24px; font-weight:700; color:var(--gold); margin-bottom:20px;">Rs. ${p.price}.00</p>
                             <p style="color:#666; margin-bottom:30px; line-height:1.6;">${p.desc}</p>
-                            <button class="filter-btn active" style="width:200px; padding:15px;" onclick="app.updateQty(${p.id}, 1); app.nav('cart');">ADD TO CART</button>
+                            <button class="filter-btn active" style="width:200px; padding:15px;" onclick="app.updateQty(${p.id}, 1); app.nav('cart');" aria-label="Add ${p.name} to cart">ADD TO CART</button>
                         </div>
                     </div>`;
                 
@@ -408,9 +410,9 @@
                         <div class="p-name" onclick="app.openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
                         <div class="p-price">Rs. ${p.price}.00</div>
                         <div class="qty-box">
-                            <button onclick="app.updateQty(${p.id}, -1)" aria-label="Reduce quantity">-</button>
-                            <input type="number" value="${q}" readonly aria-label="Current quantity">
-                            <button onclick="app.updateQty(${p.id}, 1)" aria-label="Increase quantity">+</button>
+                            <button onclick="app.updateQty(${p.id}, -1)" aria-label="Reduce quantity of ${p.name}">-</button>
+                            <input type="number" value="${q}" readonly aria-label="Current quantity of ${p.name}">
+                            <button onclick="app.updateQty(${p.id}, 1)" aria-label="Increase quantity of ${p.name}">+</button>
                         </div>
                     </div>`;
                 }).join('');
@@ -457,9 +459,9 @@
                             <p style="color: #666; font-size: 14px;">Rs. ${item.price}.00</p>
                         </div>
                         <div class="cart-qty-controls">
-                            <button onclick="app.updateQty(${item.id}, -1)" aria-label="Remove item">-</button>
+                            <button onclick="app.updateQty(${item.id}, -1)" aria-label="Remove one ${item.name}">-</button>
                             <span>${item.q}</span>
-                            <button onclick="app.updateQty(${item.id}, 1)" aria-label="Add item">+</button>
+                            <button onclick="app.updateQty(${item.id}, 1)" aria-label="Add one ${item.name}">+</button>
                         </div>
                         <div style="font-weight: 600; min-width: 80px; text-align: right;">
                             Rs. ${item.price * item.q}.00
@@ -496,4 +498,4 @@
         app.init();
     </script>
 </body>
-</html>
+</html>.
