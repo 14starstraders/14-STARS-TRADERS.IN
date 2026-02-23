@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1a1a1a">
-<meta name="description" content="14 STARS TRADERS - Best quality gadgets and beauty products in Muzaffarnagar.">
+<meta name="description" content="14 STARS TRADERS - Premium gadgets and beauty products in Muzaffarnagar. Best quality at affordable prices. Order now via WhatsApp.">
 <meta name="robots" content="index,follow">
 <meta name="keywords" content="14 Stars Traders, Gadgets, Beauty, Home Decor, Muzaffarnagar Shopping, WhatsApp Order">
 
@@ -14,16 +13,14 @@
 <meta property="og:title" content="14 STARS TRADERS | Quality & Elegance">
 <meta property="og:description" content="Premium gadgets & beauty products delivered to your doorstep. Order now via WhatsApp.">
 <meta property="og:type" content="website">
-
+<meta property="og:url" content="https://yourdomain.com/">
 <link rel="canonical" href="https://yourdomain.com/">
 
-<!-- PERFORMANCE BOOST -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.qrserver.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
-rel="stylesheet" media="print" onload="this.media='all'">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
 <link rel="preload" as="image" href="BANNER.png">
 
@@ -55,7 +52,7 @@ rel="stylesheet" media="print" onload="this.media='all'">
         .nav-links a { color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; cursor: pointer; opacity: 0.8; transition: 0.2s; }
         .nav-links a:hover { opacity: 1; color: var(--gold); }
 
-        .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 5px; }
+        .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 5px; min-width: 44px; min-height: 44px; }
         .badge { position: absolute; top: -5px; right: -5px; background: var(--gold); color: #fff; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid var(--dark); }
 
         .share-btn-round { background: #ffffff; border: 1px solid #ddd; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
@@ -65,7 +62,6 @@ rel="stylesheet" media="print" onload="this.media='all'">
         .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; display: flex; align-items: center; justify-content: center; }
         .spec-zoom-container img { max-width: 100%; transition: transform 0.2s ease-out; }
 
-        /* Thumb Strip CSS for 3 Images */
         .thumb-strip { display: flex; gap: 10px; margin-top: 15px; }
         .thumb-img { width: 70px; height: 70px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; object-fit: contain; background: #fff; transition: 0.2s; }
         .thumb-img:hover, .thumb-img.active-thumb { border-color: var(--gold); }
@@ -85,7 +81,7 @@ rel="stylesheet" media="print" onload="this.media='all'">
 
         .hero-banner { width: 100%; height: 600px; background: #222 url('BANNER.png') center/cover no-repeat; display: flex; align-items: center; justify-content: center; position: relative; }
         .filter-section { display: flex; gap: 10px; overflow-x: auto; padding: 25px 0; justify-content: center; scrollbar-width: none; }
-        .filter-btn { padding: 10px 22px; border: 1px solid #ddd; border-radius: 25px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; }
+        .filter-btn { padding: 10px 22px; border: 1px solid #ddd; border-radius: 25px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; min-height: 44px; }
         .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -96,7 +92,7 @@ rel="stylesheet" media="print" onload="this.media='all'">
         .p-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
         .p-price { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 15px; }
         .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-top: auto; }
-        .qty-box button { flex: 1; height: 40px; border: none; background: #f9f9f9; cursor: pointer; font-size: 20px; }
+        .qty-box button { flex: 1; height: 44px; border: none; background: #f9f9f9; cursor: pointer; font-size: 20px; }
         .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: 700; background: #fff; }
 
         .cart-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
@@ -131,7 +127,7 @@ rel="stylesheet" media="print" onload="this.media='all'">
 </head>
 <body>
 
-    <div id="paymentModal">
+    <div id="paymentModal" role="dialog" aria-modal="true">
         <div class="pay-card">
             <button onclick="document.getElementById('paymentModal').style.display='none'" style="position:absolute; top:15px; right:20px; border:none; background:none; cursor:pointer; font-size:28px; color:#999;" aria-label="Close Payment Modal">&times;</button>
             <h3 style="margin-bottom:5px;">Complete Payment</h3>
@@ -145,7 +141,7 @@ rel="stylesheet" media="print" onload="this.media='all'">
     </div>
 
     <div id="social-proof">
-        <img src="" id="sp-img" class="sp-img" alt="Purchased Item" width="45" height="45">
+        <img src="" id="sp-img" class="sp-img" alt="Recent Buyer Purchased Item" width="45" height="45">
         <div class="sp-text">
             <span id="sp-user"></span> just bought <br>
             <b id="sp-item"></b>
@@ -329,7 +325,7 @@ rel="stylesheet" media="print" onload="this.media='all'">
                             </div>
                             <div class="thumb-strip">
                                 ${pImages.map((src, i) => `
-                                    <img src="${src}" class="thumb-img ${i===0?'active-thumb':''}" 
+                                    <img src="${src}" class="thumb-img ${i===0?'active-thumb':''}" alt="Thumbnail ${i}" width="70" height="70" 
                                          onclick="document.getElementById('mainView').src='${src}'; 
                                          document.querySelectorAll('.thumb-img').forEach(t=>t.classList.remove('active-thumb')); 
                                          this.classList.add('active-thumb')">
@@ -340,7 +336,7 @@ rel="stylesheet" media="print" onload="this.media='all'">
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <button onclick="app.nav('home')" style="margin-bottom:20px; border:none; background:none; cursor:pointer; color:#888;">← Back to Home</button>
                                 <button class="share-btn-round" onclick="app.shareNow('${p.name}', ${p.id})" aria-label="Share this product">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" class="share-icon-img" alt="Share">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" class="share-icon-img" alt="Share Icon" width="22" height="22">
                                 </button>
                             </div>
                             <h1 style="font-size:32px; margin-bottom:15px;">${p.name}</h1>
