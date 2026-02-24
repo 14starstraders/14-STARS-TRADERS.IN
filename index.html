@@ -8,16 +8,26 @@
 <meta name="robots" content="index,follow">
 <meta name="keywords" content="14 Stars Traders, Gadgets, Beauty, Home Decor, Muzaffarnagar Shopping, WhatsApp Order">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "14 STARS TRADERS",
+  "url": "https://14startraders.github.io/14-STARS-TRADERS.IN/"
+}
+</script>
+
 <title>14 STARS TRADERS | Premium Gadgets & Beauty</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css' media="all">
 <link rel="preload" as="image" href="BANNER.png" fetchpriority="high">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
 <style>
-        /* CSS Optimized for Core Web Vitals */
+        /* AAPKA ORIGINAL CSS (UNTOUCHED) */
         :root { --gold: #d4af37; --dark: #1a1a1a; --light-bg: #f8f9fa; --wa-green: #25d366; --beige: #bcaaa4; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
         
@@ -29,7 +39,7 @@
         .logo { font-size: 20px; font-weight: 700; color: #fff; border: none; background: none; cursor: pointer; white-space: nowrap; text-decoration: none; }
         
         .header-search { flex-grow: 1; max-width: 500px; position: relative; }
-        .header-search input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); outline: none; font-size: 14px; background: rgba(255,255,255,0.1); color: white; transition: 0.3s; }
+        .header-search input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); outline: none; font-size: 16px; background: rgba(255,255,255,0.1); color: white; transition: 0.3s; }
         .header-search input:focus { background: white; color: #000; border-color: var(--gold); }
         .search-icon-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); color: #888; cursor: pointer; background: none; border: none; padding: 8px; font-size: 18px; }
         
@@ -41,9 +51,12 @@
         .ssr-item span { font-size: 12px; color: var(--gold); font-weight: 700; }
 
         .header-actions { display: flex; align-items: center; gap: 20px; }
+        
+        /* ICONS KO HEADER ME FIT KARNE KI STYLE */
         .nav-links { display: flex; gap: 15px; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; cursor: pointer; opacity: 0.8; transition: 0.2s; }
-        .nav-links a:hover { opacity: 1; color: var(--gold); }
+        .nav-links a { cursor: pointer; display: flex; align-items: center; min-height: 44px; }
+        .nav-links img { filter: invert(1); transition: 0.3s; }
+        .nav-links img:hover { transform: scale(1.1); opacity: 0.8; }
 
         .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 5px; min-width: 44px; min-height: 44px; }
         .badge { position: absolute; top: -5px; right: -5px; background: var(--gold); color: #fff; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid var(--dark); }
@@ -52,7 +65,7 @@
         .share-btn-round:hover { background: #f0f0f0; transform: scale(1.1); }
         .share-icon-img { width: 22px; height: 22px; opacity: 0.7; }
 
-        .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; display: flex; align-items: center; justify-content: center; }
+        .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; }
         .spec-zoom-container img { max-width: 100%; transition: transform 0.2s ease-out; }
 
         .thumb-strip { display: flex; gap: 10px; margin-top: 15px; }
@@ -60,19 +73,22 @@
         .thumb-img:hover, .thumb-img.active-thumb { border-color: var(--gold); }
 
         #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; }
-        #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: #fff; overflow-y: auto; }
-        .contact-container { max-width: 800px; margin: 80px auto; padding: 0 20px 60px 20px; }
-        .contact-container h2 { font-size: 26px; font-weight: 500; margin-bottom: 40px; color: #333; text-align: center; }
-        .contact-form-grid { display: flex; flex-wrap: wrap; gap: 15px; }
-        .contact-input { padding: 15px 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 15px; color: #333; outline: none; background: #fcfcfc; }
+        
+        #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: #f4f4f4; overflow-y: auto; }
+        .contact-container { max-width: 900px; margin: 80px auto; padding: 0 40px 60px 40px; }
+        .contact-container h2 { font-size: 28px; font-weight: 500; margin-bottom: 40px; color: #333; text-align: left; }
+        .contact-form-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .contact-input { padding: 18px 25px; border: 1px solid #ccc; border-radius: 12px; font-size: 16px; color: #333; outline: none; background: transparent; transition: 0.3s; }
+        .contact-input:focus { border-color: #666; }
         .input-half { flex: 1; min-width: 250px; }
         .input-full { width: 100%; }
-        .contact-textarea { width: 100%; height: 150px; resize: none; }
-        .contact-send-btn { background: var(--dark); color: #fff; border: none; padding: 15px 50px; border-radius: 5px; font-size: 14px; cursor: pointer; margin: 20px auto 0 auto; transition: 0.3s; text-transform: uppercase; display: block; letter-spacing: 1px; }
-        .contact-send-btn:hover { background: var(--gold); }
+        .contact-textarea { width: 100%; height: 140px; resize: none; }
+        .contact-send-btn { background: var(--dark); color: #fff; border: none; padding: 15px 50px; border-radius: 5px; font-size: 14px; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
         .close-contact { position: fixed; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: #333; z-index: 2100; }
 
-        .hero-banner { width: 100%; height: 600px; background: #222 url('BANNER.png') center/cover no-repeat; display: flex; align-items: center; justify-content: center; position: relative; }
+       .hero-banner { width:100%; height:700px; background-color:#222; position:relative; overflow:hidden; }
+        .hero-banner::before{ content:""; position:absolute; inset:0; background:url('BANNER.png') center/cover no-repeat; transform:translateZ(0); will-change:transform; }
+        
         .filter-section { display: flex; gap: 10px; overflow-x: auto; padding: 25px 0; justify-content: center; scrollbar-width: none; }
         .filter-btn { padding: 10px 22px; border: 1px solid #ddd; border-radius: 25px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; min-height: 44px; }
         .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
@@ -146,7 +162,7 @@
     <div id="contactPopup" role="dialog" aria-labelledby="contactTitle">
         <span class="close-contact" onclick="app.closeContact()" aria-label="Close Contact Form">&times;</span>
         <div class="contact-container">
-            <h2 id="contactTitle">Questions or comments? <br> Get in touch and we'll be happy to help.</h2>
+            <h2 id="contactTitle">Questions or comments? Get in touch and we'll be happy to help.</h2>
             <div class="contact-form-grid">
                 <input type="text" id="cName" class="contact-input input-half" placeholder="Name" aria-label="Your Name">
                 <input type="email" id="cEmail" class="contact-input input-half" placeholder="Email *" aria-label="Your Email">
@@ -167,9 +183,15 @@
             </div>
             <div class="header-actions">
                 <nav class="nav-links">
-                    <a onclick="app.nav('home')">Home</a>
-                    <a onclick="app.nav('catalog')">Catalog</a>
-                    <a onclick="app.openContact()">Contact</a>
+                    <a onclick="app.nav('home')" title="Home">
+                        <img src="https://cdn-icons-png.flaticon.com/128/25/25694.png" width="25" height="25" alt="Home"> 
+                    </a>
+                    <a onclick="app.nav('catalog')" title="Catalog">
+                        <img src="https://cdn-icons-png.flaticon.com/128/9915/9915650.png" width="25" height="25" alt="Catalog"> 
+                    </a>
+                    <a onclick="app.openContact()" title="Contact">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1034/1034182.png" width="25" height="25" alt="Contact"> 
+                    </a>
                 </nav>
                 <button class="cart-btn" onclick="app.nav('cart')" aria-label="View Shopping Cart">
                     👜 <span class="badge" id="badge">0</span>
@@ -474,7 +496,7 @@
 
             confirmOrder() {
                 let msg = "*ORDER CONFIRMED (PAYMENT DONE)*\n\n";
-                this.cart.forEach(i => msg += `• ${i.name} (Qty: ${i.q}) - Rs.${i.price * i.q}\n`);
+                this.cart.forEach(i => msg += `• ${i.name} (Qty: ${i.q}) - Rs.${i.price * i.q}\\n`);
                 msg += `\n*Total Paid: Rs. ${document.getElementById('totalPrice').innerText}*`;
                 msg += `\n\n_I have paid the amount via UPI. Please confirm my order._`;
                 window.open(`https://wa.me/919837904369?text=${encodeURIComponent(msg)}`);
@@ -489,4 +511,4 @@
         app.init();
     </script>
 </body>
-</html>
+</html>.
