@@ -21,6 +21,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 <link rel="preload" as="image" href="BANNER.png" fetchpriority="high">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -190,11 +191,11 @@
                 <div id="smartResults" class="smart-search-results"></div>
             </div>
             <div class="header-actions">
-                <nav class="nav-links">
-                    <a onclick="app.nav('home')">Home</a>
-                    <a onclick="app.nav('catalog')">Catalog</a>
-                    <a onclick="app.openContact()">Contact</a>
-                </nav>
+               <nav class="nav-links">
+    <a onclick="app.nav('home')"><i class="fi fi-rr-home"></i> Home</a>
+    <a onclick="app.nav('catalog')"><i class="fi fi-rr-apps"></i> Catalog</a>
+    <a onclick="app.openContact()"><i class="fi fi-rr-phone-call"></i> Contact</a>
+</nav>
                 <button class="cart-btn" onclick="app.nav('cart')" aria-label="View Shopping Cart">
                     👜 <span class="badge" id="badge">0</span>
                 </button>
@@ -514,5 +515,6 @@
     </script>
 </body>
 </html>.
+
 
 
