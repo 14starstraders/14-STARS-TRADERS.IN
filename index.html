@@ -296,9 +296,11 @@
                 window.scrollTo({top: 0, behavior: 'smooth'});
             },
 
-            openProduct(id) {
+     openProduct(id) {
                 const p = this.products.find(x => x.id === id);
                 const pImages = p.images || [p.img]; 
+                
+                // Details Page Render
                 document.getElementById('productDetailContent').innerHTML = `
                     <div style="display:flex; flex-wrap:wrap; gap:40px; padding:40px 0;">
                         <div style="flex:1; min-width:300px;">
@@ -316,8 +318,20 @@
                             <button class="filter-btn active" style="width:200px; padding:15px;" onclick="app.updateQty(${p.id}, 1); app.nav('cart');">ADD TO CART</button>
                         </div>
                     </div>`;
+
+                // --- YOU MAY ALSO LIKE LOGIC (NEW) ---
+                // Current product ko chhod kar baaki 4 random products dikhayega
+                const suggestions = this.products
+                    .filter(item => item.id !== id)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 2);
+                
+                this.renderGrid(suggestions, 'similarGrid');
+                // -------------------------------------
+
                 this.nav('product-detail');
             },
+            
 
             showSearch() { document.getElementById('searchOverlay').style.display = 'block'; },
             hideSearch() { document.getElementById('searchOverlay').style.display = 'none'; document.getElementById('smartResults').style.display = 'none'; },
