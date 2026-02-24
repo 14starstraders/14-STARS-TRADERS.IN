@@ -269,11 +269,24 @@
                 } else { resultsDiv.style.display = 'none'; }
             },
 
-            shareNow(name) {
-                const shareText = `Check out this amazing ${name} at 14 STARS TRADERS! ${window.location.href}`;
-                if (navigator.share) { navigator.share({title: '14 STARS', text: shareText, url: window.location.href}); } 
-                else { window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener'); }
-            },
+           shareNow(name, id) {
+    // Product ki specific details ke sath message
+    const shareText = `Check out this amazing *${name}* at 14 STARS TRADERS!\n\nPrice: Rs. ${this.products.find(p => p.id === id).price}\n\nShop here: `;
+    const shareUrl = window.location.href; // Agar aapne routing set nahi ki hai toh ye home link hi dega
+
+    if (navigator.share) { 
+        navigator.share({ 
+            title: '14 STARS TRADERS', 
+            text: shareText, 
+            url: shareUrl 
+        }).catch(console.error); 
+    } 
+    else { 
+        // WhatsApp par product name ke sath link jayega
+        const waMessage = encodeURIComponent(shareText + " " + shareUrl);
+        window.open(`https://wa.me/?text=${waMessage}`, '_blank'); 
+    }
+}
 
             startSocialProof() {
                 const users = ["Rahul", "Anjali", "Suhail", "Priya", "Mohit", "Ayesha"];
@@ -421,5 +434,6 @@
     </script>
 </body>
 </html>
+
 
 
