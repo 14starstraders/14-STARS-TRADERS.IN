@@ -21,153 +21,142 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css' media="all">
+<link rel="preconnect" href="https://api.qrserver.com">
+
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" media="all">
+
 <link rel="preload" as="image" href="BANNER.png" fetchpriority="high">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-
 <style>
-        /* AAPKA ORIGINAL CSS (UNTOUCHED) */
-        :root { --gold: #d4af37; --dark: #1a1a1a; --light-bg: #f8f9fa; --wa-green: #25d366; --beige: #bcaaa4; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
-        
-        body { background-color: #ffffff; color: #333; line-height: 1.5; overflow-x: hidden; font-display: swap; -webkit-font-smoothing: antialiased; }
-        img { display: block; max-width: 100%; height: auto; font-display: swap; }
+    /* AAPKA ORIGINAL CSS + PERFORMANCE FIXES */
+    :root { --gold: #d4af37; --dark: #1a1a1a; --light-bg: #f8f9fa; --wa-green: #25d366; --beige: #bcaaa4; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+    
+    body { background-color: #ffffff; color: #333; line-height: 1.5; overflow-x: hidden; font-display: swap; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; height: auto; }
 
-        header { background: var(--dark); color: #fff; padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-        .logo { font-size: 20px; font-weight: 700; color: #fff; border: none; background: none; cursor: pointer; white-space: nowrap; text-decoration: none; }
-        
-        .header-search { flex-grow: 1; max-width: 500px; position: relative; }
-        .header-search input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); outline: none; font-size: 16px; background: rgba(255,255,255,0.1); color: white; transition: 0.3s; }
-        .header-search input:focus { background: white; color: #000; border-color: var(--gold); }
-        .search-icon-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); color: #888; cursor: pointer; background: none; border: none; padding: 8px; font-size: 18px; }
-        
-        .smart-search-results { position: absolute; top: 110%; left: 0; width: 100%; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; max-height: 400px; overflow-y: auto; z-index: 2001; }
-        .ssr-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; color: #333; transition: 0.2s; }
-        .ssr-item:hover { background: #f9f9f9; }
-        .ssr-item img { width: 45px; height: 45px; border-radius: 5px; margin-right: 12px; object-fit: contain; background: #f4f4f4; }
-        .ssr-item b { font-size: 13px; display: block; }
-        .ssr-item span { font-size: 12px; color: var(--gold); font-weight: 700; }
+    header { background: var(--dark); color: #fff; padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .logo { font-size: 20px; font-weight: 700; color: #fff; border: none; background: none; cursor: pointer; white-space: nowrap; text-decoration: none; }
+    
+    .header-search { flex-grow: 1; max-width: 500px; position: relative; }
+    .header-search input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); outline: none; font-size: 16px; background: rgba(255,255,255,0.1); color: white; transition: 0.3s; }
+    .header-search input:focus { background: white; color: #000; border-color: var(--gold); }
+    .search-icon-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); color: #888; cursor: pointer; background: none; border: none; padding: 8px; font-size: 18px; }
+    
+    .smart-search-results { position: absolute; top: 110%; left: 0; width: 100%; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; max-height: 400px; overflow-y: auto; z-index: 2001; }
+    .ssr-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; color: #333; transition: 0.2s; }
+    .ssr-item:hover { background: #f9f9f9; }
+    .ssr-item img { width: 45px; height: 45px; border-radius: 5px; margin-right: 12px; object-fit: contain; background: #f4f4f4; }
+    .ssr-item b { font-size: 13px; display: block; }
+    .ssr-item span { font-size: 12px; color: var(--gold); font-weight: 700; }
 
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        
-        /* ICONS KO HEADER ME FIT KARNE KI STYLE */
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { cursor: pointer; display: flex; align-items: center; min-height: 44px; }
-        .nav-links img { filter: invert(1); transition: 0.3s; }
-        .nav-links img:hover { transform: scale(1.1); opacity: 0.8; }
+    .header-actions { display: flex; align-items: center; gap: 20px; }
+    .nav-links { display: flex; gap: 15px; }
+    .nav-links a { cursor: pointer; display: flex; align-items: center; min-height: 44px; }
+    .nav-links img { filter: invert(1); transition: 0.3s; }
 
-        .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 5px; min-width: 44px; min-height: 44px; }
-        .badge { position: absolute; top: -5px; right: -5px; background: var(--gold); color: #fff; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid var(--dark); }
+    .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 5px; min-width: 44px; min-height: 44px; }
+    .badge { position: absolute; top: -5px; right: -5px; background: var(--gold); color: #fff; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid var(--dark); }
 
-        .share-btn-round { background: #ffffff; border: 1px solid #ddd; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .share-btn-round:hover { background: #f0f0f0; transform: scale(1.1); }
-        .share-icon-img { width: 22px; height: 22px; opacity: 0.7; }
+    .share-btn-round { background: #ffffff; border: 1px solid #ddd; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; }
+    .spec-zoom-container img { max-width: 100%; transition: transform 0.2s ease-out; }
 
-        .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; }
-        .spec-zoom-container img { max-width: 100%; transition: transform 0.2s ease-out; }
+    .thumb-strip { display: flex; gap: 10px; margin-top: 15px; }
+    .thumb-img { width: 70px; height: 70px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; object-fit: contain; background: #fff; transition: 0.2s; }
+    .thumb-img:hover, .thumb-img.active-thumb { border-color: var(--gold); }
 
-        .thumb-strip { display: flex; gap: 10px; margin-top: 15px; }
-        .thumb-img { width: 70px; height: 70px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; object-fit: contain; background: #fff; transition: 0.2s; }
-        .thumb-img:hover, .thumb-img.active-thumb { border-color: var(--gold); }
+    #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; }
+    
+    #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: #f4f4f4; overflow-y: auto; }
+    .contact-container { max-width: 900px; margin: 80px auto; padding: 0 40px 60px 40px; }
+    .contact-container h2 { font-size: 28px; font-weight: 500; margin-bottom: 40px; color: #333; text-align: left; }
+    .contact-form-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+    .contact-input { padding: 18px 25px; border: 1px solid #ccc; border-radius: 12px; font-size: 16px; color: #333; outline: none; background: transparent; transition: 0.3s; }
+    .input-half { flex: 1; min-width: 250px; }
+    .input-full { width: 100%; }
+    .contact-textarea { width: 100%; height: 140px; resize: none; }
+    .contact-send-btn { background: var(--dark); color: #fff; border: none; padding: 15px 50px; border-radius: 5px; font-size: 14px; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+    .close-contact { position: fixed; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: #333; z-index: 2100; }
 
-        #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; }
-        
-        #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: #f4f4f4; overflow-y: auto; }
-        .contact-container { max-width: 900px; margin: 80px auto; padding: 0 40px 60px 40px; }
-        .contact-container h2 { font-size: 28px; font-weight: 500; margin-bottom: 40px; color: #333; text-align: left; }
-        .contact-form-grid { display: flex; flex-wrap: wrap; gap: 20px; }
-        .contact-input { padding: 18px 25px; border: 1px solid #ccc; border-radius: 12px; font-size: 16px; color: #333; outline: none; background: transparent; transition: 0.3s; }
-        .contact-input:focus { border-color: #666; }
-        .input-half { flex: 1; min-width: 250px; }
-        .input-full { width: 100%; }
-        .contact-textarea { width: 100%; height: 140px; resize: none; }
-        .contact-send-btn { background: var(--dark); color: #fff; border: none; padding: 15px 50px; border-radius: 5px; font-size: 14px; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .close-contact { position: fixed; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: #333; z-index: 2100; }
+    .hero-banner { width:100%; height:700px; background-color:#222; position:relative; overflow:hidden; }
+    .hero-banner::before{ content:""; position:absolute; inset:0; background:url('BANNER.png') center/cover no-repeat; transform:translateZ(0); will-change:transform; }
+    
+    .filter-section { display: flex; gap: 10px; overflow-x: auto; padding: 25px 0; justify-content: center; scrollbar-width: none; }
+    .filter-btn { padding: 10px 22px; border: 1px solid #ddd; border-radius: 25px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; min-height: 44px; }
+    .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
 
-       .hero-banner { width:100%; height:700px; background-color:#222; position:relative; overflow:hidden; }
-        .hero-banner::before{ content:""; position:absolute; inset:0; background:url('BANNER.png') center/cover no-repeat; transform:translateZ(0); will-change:transform; }
-        
-        .filter-section { display: flex; gap: 10px; overflow-x: auto; padding: 25px 0; justify-content: center; scrollbar-width: none; }
-        .filter-btn { padding: 10px 22px; border: 1px solid #ddd; border-radius: 25px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; min-height: 44px; }
-        .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; padding: 20px 0; }
+    .product-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; transition: 0.3s; display: flex; flex-direction: column; }
+    .img-container { background: var(--light-bg); height: 220px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; margin-bottom: 12px; }
+    .img-container img { max-width: 85%; max-height: 85%; object-fit: contain; }
+    .p-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .p-price { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 15px; }
+    .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-top: auto; }
+    .qty-box button { flex: 1; height: 44px; border: none; background: #f9f9f9; cursor: pointer; font-size: 20px; }
+    .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: 700; background: #fff; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; padding: 20px 0; }
-        .product-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; transition: 0.3s; display: flex; flex-direction: column; }
-        .img-container { background: var(--light-bg); height: 220px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; margin-bottom: 12px; }
-        .img-container img { max-width: 85%; max-height: 85%; object-fit: contain; }
-        .p-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .p-price { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 15px; }
-        .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-top: auto; }
-        .qty-box button { flex: 1; height: 44px; border: none; background: #f9f9f9; cursor: pointer; font-size: 20px; }
-        .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: 700; background: #fff; }
+    .cart-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+    .cart-item-row { display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee; gap: 20px; }
+    .cart-img { width: 100px; height: 100px; object-fit: contain; background: #f9f9f9; border-radius: 10px; }
+    .cart-item-info { flex: 2; }
+    .cart-item-info b { font-size: 16px; display: block; margin-bottom: 5px; }
+    .cart-qty-controls { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 5px; height: 35px; }
+    .cart-qty-controls button { width: 35px; height: 100%; border: none; background: none; cursor: pointer; font-size: 18px; }
+    .cart-qty-controls span { width: 40px; text-align: center; font-weight: 600; }
 
-        .cart-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .cart-item-row { display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee; gap: 20px; }
-        .cart-img { width: 100px; height: 100px; object-fit: contain; background: #f9f9f9; border-radius: 10px; }
-        .cart-item-info { flex: 2; }
-        .cart-item-info b { font-size: 16px; display: block; margin-bottom: 5px; }
-        .cart-qty-controls { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 5px; height: 35px; }
-        .cart-qty-controls button { width: 35px; height: 100%; border: none; background: none; cursor: pointer; font-size: 18px; }
-        .cart-qty-controls span { width: 40px; text-align: center; font-weight: 600; }
+    #social-proof { position: fixed; bottom: 20px; left: 20px; background: white; padding: 10px 15px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; z-index: 5000; transform: translateY(150%); transition: 0.5s ease-in-out; max-width: 300px; }
+    #social-proof.show { transform: translateY(0); }
+    .sp-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+    .sp-text { font-size: 12px; color: #444; }
 
-        #social-proof { position: fixed; bottom: 20px; left: 20px; background: white; padding: 10px 15px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; z-index: 5000; transform: translateY(150%); transition: 0.5s ease-in-out; max-width: 300px; }
-        #social-proof.show { transform: translateY(0); }
-        .sp-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
-        .sp-text { font-size: 12px; color: #444; }
-        .sp-text b { color: #000; }
+    #paymentModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:5000; align-items:center; justify-content:center; padding:20px; }
+    .pay-card { background:white; padding:30px; border-radius:20px; max-width:400px; width:100%; text-align:center; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
 
-        #paymentModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:5000; align-items:center; justify-content:center; padding:20px; }
-        .pay-card { background:white; padding:30px; border-radius:20px; max-width:400px; width:100%; text-align:center; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    .page-view { display: none; animation: fadeIn 0.3s ease-in; }
+    .active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .page-view { display: none; animation: fadeIn 0.3s ease-in; }
-        .active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .hero-banner { height: 300px; }
-            .cart-img { width: 70px; height: 70px; }
-        }
-    </style>
+    @media (max-width: 768px) {
+        .nav-links { display: none; }
+        .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .hero-banner { height: 300px; }
+    }
+</style>
 </head>
 <body>
 
-    <div id="paymentModal" role="dialog" aria-modal="true" aria-label="Payment Window">
+    <div id="paymentModal" role="dialog" aria-modal="true">
         <div class="pay-card">
             <button onclick="document.getElementById('paymentModal').style.display='none'" style="position:absolute; top:15px; right:20px; border:none; background:none; cursor:pointer; font-size:28px; color:#999;" aria-label="Close Payment Modal">&times;</button>
             <h3 style="margin-bottom:5px;">Complete Payment</h3>
             <p style="font-size:13px; color:#666; margin-bottom:20px;">Scan QR to pay <b>Rs. <span id="payAmount">0</span></b></p>
             <div style="background:#f9f9f9; padding:15px; border-radius:15px; margin-bottom:20px; display:inline-block;">
-                <img id="qrPlaceholder" src="" alt="UPI QR Code" width="200" height="200" style="display:block;">
+                <img id="qrPlaceholder" src="" alt="UPI QR Code" width="200" height="200">
             </div>
-            <p style="font-size:12px; color:#888; margin-bottom:20px;">Using GPay, PhonePe, Paytm or any UPI App</p>
-            <button onclick="app.confirmOrder()" style="background:#25d366; color:white; width:100%; padding:16px; border:none; border-radius:10px; font-weight:700; cursor:pointer; font-size:14px;">I HAVE PAID (Confirm on WhatsApp)</button>
+            <button onclick="app.confirmOrder()" style="background:#25d366; color:white; width:100%; padding:16px; border:none; border-radius:10px; font-weight:700; cursor:pointer;">I HAVE PAID (Confirm on WhatsApp)</button>
         </div>
     </div>
 
     <div id="social-proof" role="status">
-        <img src="" id="sp-img" class="sp-img" alt="Recent Buyer" width="45" height="45">
-        <div class="sp-text">
-            <span id="sp-user"></span> just bought <br>
-            <b id="sp-item"></b>
-        </div>
+        <img src="TORCH.webp" id="sp-img" class="sp-img" alt="Recent Buyer" width="45" height="45">
+        <div class="sp-text"><span id="sp-user"></span> just bought <br><b id="sp-item"></b></div>
     </div>
 
     <div id="searchOverlay" onclick="app.hideSearch()"></div>
 
-    <div id="contactPopup" role="dialog" aria-labelledby="contactTitle">
-        <span class="close-contact" onclick="app.closeContact()" aria-label="Close Contact Form">&times;</span>
+    <div id="contactPopup" role="dialog">
+        <span class="close-contact" onclick="app.closeContact()">&times;</span>
         <div class="contact-container">
-            <h2 id="contactTitle">Questions or comments? Get in touch and we'll be happy to help.</h2>
+            <h2>Questions or comments? Get in touch and we'll be happy to help.</h2>
             <div class="contact-form-grid">
-                <input type="text" id="cName" class="contact-input input-half" placeholder="Name" aria-label="Your Name">
-                <input type="email" id="cEmail" class="contact-input input-half" placeholder="Email *" aria-label="Your Email">
-                <input type="text" id="cPhone" class="contact-input input-full" placeholder="Phone number" aria-label="Your Phone Number">
-                <textarea id="cMsg" class="contact-input input-full contact-textarea" placeholder="Comment" aria-label="Your Message"></textarea>
+                <input type="text" id="cName" class="contact-input input-half" placeholder="Name">
+                <input type="email" id="cEmail" class="contact-input input-half" placeholder="Email *">
+                <input type="text" id="cPhone" class="contact-input input-full" placeholder="Phone number">
+                <textarea id="cMsg" class="contact-input input-full contact-textarea" placeholder="Comment"></textarea>
                 <button class="contact-send-btn" onclick="app.sendContact()">Send Message</button>
             </div>
         </div>
@@ -175,34 +164,26 @@
 
     <header>
         <div class="nav-container">
-            <a class="logo" onclick="app.nav('home')" href="javascript:void(0)" aria-label="14 Stars Traders Home">14 STARS TRADERS</a>
+            <a class="logo" onclick="app.nav('home')" href="javascript:void(0)">14 STARS TRADERS</a>
             <div class="header-search">
-                <input type="text" id="navSearch" placeholder="Search products..." onfocus="app.showSearch()" oninput="app.smartSearch(this.value)" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)" aria-label="Search Products">
-                <button class="search-icon-btn" onclick="app.performSearch(document.getElementById('navSearch').value)" aria-label="Click to Search">🔍</button>
+                <input type="text" id="navSearch" placeholder="Search products..." onfocus="app.showSearch()" oninput="app.smartSearch(this.value)" onkeyup="if(event.key === 'Enter') app.performSearch(this.value)">
+                <button class="search-icon-btn" onclick="app.performSearch(document.getElementById('navSearch').value)">🔍</button>
                 <div id="smartResults" class="smart-search-results"></div>
             </div>
             <div class="header-actions">
                 <nav class="nav-links">
-                    <a onclick="app.nav('home')" title="Home">
-                        <img src="HOME.png" width="25" height="25" alt="Home"> 
-                    </a>
-                    <a onclick="app.nav('catalog')" title="Catalog">
-                        <img src="CATALOG.png" width="25" height="25" alt="Catalog"> 
-                    </a>
-                    <a onclick="app.openContact()" title="Contact">
-                        <img src="CONTACT.png" width="25" height="25" alt="Contact"> 
-                    </a>
+                    <a onclick="app.nav('home')"><img src="HOME.png" width="25" height="25" alt="Home"></a>
+                    <a onclick="app.nav('catalog')"><img src="CATALOG.png" width="25" height="25" alt="Catalog"></a>
+                    <a onclick="app.openContact()"><img src="CONTACT.png" width="25" height="25" alt="Contact"></a>
                 </nav>
-                <button class="cart-btn" onclick="app.nav('cart')" aria-label="View Shopping Cart">
-                    👜 <span class="badge" id="badge">0</span>
-                </button>
+                <button class="cart-btn" onclick="app.nav('cart')">👜 <span class="badge" id="badge">0</span></button>
             </div>
         </div>
     </header>
 
     <main>
         <section id="page-home" class="page-view active">
-            <div class="hero-banner" role="img" aria-label="14 Stars Traders Promotional Banner"></div>
+            <div class="hero-banner"></div>
             <div class="container">
                 <div class="filter-section">
                     <button class="filter-btn active" onclick="app.filter('All', this)">All Items</button>
@@ -240,13 +221,13 @@
         <section id="page-cart" class="page-view">
             <div class="container" style="max-width: 900px; padding: 50px 20px;">
                 <div class="cart-header">
-                    <h1 style="font-size: 24px; font-weight: 600;">Your cart</h1>
-                    <span style="text-decoration:underline; cursor:pointer; color: #666; font-size: 14px;" onclick="app.nav('home')">Continue shopping</span>
+                    <h1>Your cart</h1>
+                    <span style="text-decoration:underline; cursor:pointer; color: #666;" onclick="app.nav('home')">Continue shopping</span>
                 </div>
                 <div id="cartItemsList"></div>
                 <div id="cartSummary" style="margin-top:40px; text-align:right; border-top: 1px solid #eee; padding-top: 30px;">
                     <p style="font-size:20px; margin-bottom:20px;">Subtotal: <b>Rs. <span id="totalPrice">0</span>.00</b></p>
-                    <button onclick="app.checkout()" style="background:#000; color:white; width:100%; max-width:380px; padding:16px; border:none; cursor:pointer; font-weight:600; letter-spacing: 1px;">CHECK OUT</button>
+                    <button onclick="app.checkout()" style="background:#000; color:white; width:100%; max-width:380px; padding:16px; border:none; cursor:pointer; font-weight:600;">CHECK OUT</button>
                 </div>
             </div>
         </section>
@@ -261,7 +242,7 @@
                 { id: 4, category: "Home", name: "PORTABLE VACCUM SEALER", price: 250, img: "VACCUM.webp", images: ["VACCUM.webp", "VACCUM 2.jpg", "VACCUM 3.jpg"], desc: "Keep food fresh for weeks with vacuum technology." },
                 { id: 5, category: "Home", name: "ELECTRIC PLASMA LIGHTER", price: 250, img: "LIGHTER.webp", images: ["LIGHTER.webp", "LIGHTER 2.jpg", "LIGHTER 3.jpg"], desc: "Rechargeable, windproof electric arc lighter." },
                 { id: 6, category: "Gadgets", name: "PORTABLE ELECTRONIC JUICER", price: 250, img: "JUICER.jpg", images: ["JUICER.jpg", "JUICER 2.jpg", "JUICER 3.jpg"], desc: "USB rechargeable blender for fresh juice on the go." },
-                { id: 7, category: "Home", name: "VACCUM FLASK SET", price: 249, img: "FLASK SET.webp", images: ["FLASK SET.webp", "FLASK SET 2.jpg", "FLASK SET 3.jpg"], desc: "Rapid Vacuum Insulated Flask Set 3-cups Set For Hot & Cold Drink Set Upto 12-hours." }
+                { id: 7, category: "Home", name: "VACCUM FLASK SET", price: 249, img: "FLASK SET.webp", images: ["FLASK SET.webp", "FLASK SET 2.jpg", "FLASK SET 3.jpg"], desc: "Rapid Vacuum Insulated Flask Set 12-hours." }
             ],
             cart: [],
             currentFilter: 'All',
@@ -288,10 +269,10 @@
                 } else { resultsDiv.style.display = 'none'; }
             },
 
-            shareNow(name, id) {
-                const shareData = { title: '14 STARS TRADERS', text: `Check out this amazing ${name} at 14 STARS TRADERS!`, url: window.location.href };
-                if (navigator.share) { navigator.share(shareData).catch(console.error); } 
-                else { window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text + " " + shareData.url)}`, '_blank'); }
+            shareNow(name) {
+                const shareText = `Check out this amazing ${name} at 14 STARS TRADERS! ${window.location.href}`;
+                if (navigator.share) { navigator.share({title: '14 STARS', text: shareText, url: window.location.href}); } 
+                else { window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener'); }
             },
 
             startSocialProof() {
@@ -315,117 +296,67 @@
                 window.scrollTo({top: 0, behavior: 'smooth'});
             },
 
-            handleZoom(e) {
-                const container = e.currentTarget;
-                const img = container.querySelector('img');
-                const x = e.offsetX; const y = e.offsetY;
-                img.style.transformOrigin = `${x}px ${y}px`;
-                img.style.transform = "scale(2.5)";
-            },
-            resetZoom(e) {
-                const img = e.currentTarget.querySelector('img');
-                img.style.transform = "scale(1)";
-                img.style.transformOrigin = "center center";
-            },
-
             openProduct(id) {
                 const p = this.products.find(x => x.id === id);
-                const pImages = p.images || [p.img, p.img, p.img]; 
-
+                const pImages = p.images || [p.img]; 
                 document.getElementById('productDetailContent').innerHTML = `
                     <div style="display:flex; flex-wrap:wrap; gap:40px; padding:40px 0;">
                         <div style="flex:1; min-width:300px;">
-                            <div class="spec-zoom-container" onmousemove="app.handleZoom(event)" onmouseleave="app.resetZoom(event)">
-                                <img id="mainView" src="${pImages[0]}" alt="${p.name}" width="400" height="400" loading="eager">
-                            </div>
-                            <div class="thumb-strip">
-                                ${pImages.map((src, i) => `
-                                    <img src="${src}" class="thumb-img ${i===0?'active-thumb':''}" alt="Thumbnail ${i}" width="70" height="70" 
-                                         onclick="document.getElementById('mainView').src='${src}'; 
-                                         document.querySelectorAll('.thumb-img').forEach(t=>t.classList.remove('active-thumb')); 
-                                         this.classList.add('active-thumb')">
-                                `).join('')}
-                            </div>
+                            <div class="spec-zoom-container"><img id="mainView" src="${pImages[0]}" alt="${p.name}" width="400" height="400"></div>
+                            <div class="thumb-strip">${pImages.map((src, i) => `<img src="${src}" class="thumb-img ${i===0?'active-thumb':''}" alt="Thumb" width="70" height="70" onclick="document.getElementById('mainView').src='${src}';">`).join('')}</div>
                         </div>
                         <div style="flex:1; min-width:300px;">
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                                <button onclick="app.nav('home')" style="margin-bottom:20px; border:none; background:none; cursor:pointer; color:#888;">← Back to Home</button>
-                                <button class="share-btn-round" onclick="app.shareNow('${p.name}', ${p.id})" aria-label="Share this product">
-                                    <img src="SHARE.png" class="share-icon-img" alt="Share Icon" width="22" height="22">
-                                </button>
+                            <div style="display:flex; justify-content:space-between;">
+                                <button onclick="app.nav('home')" style="border:none; background:none; cursor:pointer; color:#888;">← Home</button>
+                                <button class="share-btn-round" onclick="app.shareNow('${p.name}')"><img src="SHARE.png" width="22" height="22" alt="Share"></button>
                             </div>
-                            <h1 style="font-size:32px; margin-bottom:15px;">${p.name}</h1>
-                            <p style="font-size:24px; font-weight:700; color:var(--gold); margin-bottom:20px;">Rs. ${p.price}.00</p>
-                            <p style="color:#666; margin-bottom:30px; line-height:1.6;">${p.desc}</p>
+                            <h1 style="font-size:32px; margin-top:15px;">${p.name}</h1>
+                            <p style="font-size:24px; font-weight:700; color:var(--gold); margin:15px 0;">Rs. ${p.price}.00</p>
+                            <p style="color:#666; margin-bottom:30px;">${p.desc}</p>
                             <button class="filter-btn active" style="width:200px; padding:15px;" onclick="app.updateQty(${p.id}, 1); app.nav('cart');">ADD TO CART</button>
                         </div>
                     </div>`;
-                
-                const similar = this.products.filter(item => item.category === p.category && item.id !== p.id);
-                this.renderGrid(similar, 'similarGrid');
                 this.nav('product-detail');
-                document.getElementById('navSearch').value = ""; 
             },
 
             showSearch() { document.getElementById('searchOverlay').style.display = 'block'; },
-            hideSearch() { 
-                document.getElementById('searchOverlay').style.display = 'none'; 
-                document.getElementById('smartResults').style.display = 'none';
-            },
+            hideSearch() { document.getElementById('searchOverlay').style.display = 'none'; document.getElementById('smartResults').style.display = 'none'; },
             openContact() { document.getElementById('contactPopup').style.display = 'block'; },
             closeContact() { document.getElementById('contactPopup').style.display = 'none'; },
             
             sendContact() {
-                const name = document.getElementById('cName').value;
-                const email = document.getElementById('cEmail').value;
-                const msg = document.getElementById('cMsg').value;
-                if(!name || !email || !msg) return alert("Fill required fields");
-                let text = `Name: ${name}\nEmail: ${email}\nMessage: ${msg}`;
-                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(text)}`);
+                const n = document.getElementById('cName').value, e = document.getElementById('cEmail').value, m = document.getElementById('cMsg').value;
+                if(!n || !e || !m) return alert("Fill required fields");
+                window.open(`https://wa.me/919837904369?text=${encodeURIComponent("Name: "+n+"\nEmail: "+e+"\nMsg: "+m)}`, '_blank', 'noopener');
                 this.closeContact();
             },
 
             performSearch(query) {
-                if (!query) return;
-                this.hideSearch();
-                const q = query.toUpperCase();
-                const filtered = this.products.filter(p => p.name.toUpperCase().includes(q));
+                if (!query) return; this.hideSearch();
+                const filtered = this.products.filter(p => p.name.toUpperCase().includes(query.toUpperCase()));
                 document.getElementById('searchedTerm').innerText = query;
-                const grid = document.getElementById('searchGrid');
-                const noResults = document.getElementById('noResultsUI');
-                if (filtered.length > 0) {
-                    noResults.style.display = 'none';
-                    grid.style.display = 'grid';
-                    this.renderGrid(filtered, 'searchGrid');
-                } else {
-                    grid.style.display = 'none';
-                    noResults.style.display = 'block';
-                }
+                this.renderGrid(filtered, 'searchGrid');
                 this.nav('search');
             },
 
             filter(cat, btn) {
                 this.currentFilter = cat;
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                this.render();
+                btn.classList.add('active'); this.render();
             },
 
             renderGrid(items, targetId) {
-                const target = document.getElementById(targetId);
-                target.innerHTML = items.map(p => {
+                document.getElementById(targetId).innerHTML = items.map(p => {
                     const q = (this.cart.find(c => c.id === p.id) || {q:0}).q;
                     return `
                     <div class="product-card">
-                        <div class="img-container" onclick="app.openProduct(${p.id})">
-                            <img src="${p.img}" alt="${p.name}" loading="lazy" width="200" height="200">
-                        </div>
-                        <div class="p-name" onclick="app.openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
+                        <div class="img-container" onclick="app.openProduct(${p.id})"><img src="${p.img}" alt="${p.name}" loading="lazy" width="200" height="200"></div>
+                        <div class="p-name">${p.name}</div>
                         <div class="p-price">Rs. ${p.price}.00</div>
                         <div class="qty-box">
-                            <button onclick="app.updateQty(${p.id}, -1)" aria-label="Reduce quantity">-</button>
-                            <input type="number" value="${q}" readonly aria-label="Current quantity">
-                            <button onclick="app.updateQty(${p.id}, 1)" aria-label="Increase quantity">+</button>
+                            <button onclick="app.updateQty(${p.id}, -1)">-</button>
+                            <input type="number" value="${q}" readonly>
+                            <button onclick="app.updateQty(${p.id}, 1)">+</button>
                         </div>
                     </div>`;
                 }).join('');
@@ -439,15 +370,10 @@
 
             updateQty(id, delta) {
                 const idx = this.cart.findIndex(c => c.id === id);
-                if (idx > -1) {
-                    this.cart[idx].q += delta;
-                    if (this.cart[idx].q <= 0) this.cart.splice(idx, 1);
-                } else if (delta > 0) {
-                    this.cart.push({...this.products.find(x => x.id === id), q: 1});
-                }
+                if (idx > -1) { this.cart[idx].q += delta; if (this.cart[idx].q <= 0) this.cart.splice(idx, 1); }
+                else if (delta > 0) { this.cart.push({...this.products.find(x => x.id === id), q: 1}); }
                 localStorage.setItem('14stars_data', JSON.stringify(this.cart));
-                this.updateBadge();
-                this.render();
+                this.updateBadge(); this.render();
                 if(document.getElementById('page-cart').classList.contains('active')) this.renderCart();
             },
 
@@ -455,30 +381,15 @@
 
             renderCart() {
                 const list = document.getElementById('cartItemsList');
-                if (!this.cart.length) {
-                    list.innerHTML = "<p style='text-align:center; padding:100px 0; color: #888;'>Your cart is empty.</p>";
-                    document.getElementById('cartSummary').style.display = 'none';
-                    return;
-                }
+                if (!this.cart.length) { list.innerHTML = "<p style='text-align:center; padding:100px 0;'>Empty.</p>"; document.getElementById('cartSummary').style.display = 'none'; return; }
                 document.getElementById('cartSummary').style.display = 'block';
                 let total = 0;
-                list.innerHTML = this.cart.map(item => {
-                    total += (item.price * item.q);
-                    return `
-                    <div class="cart-item-row">
-                        <img src="${item.img}" class="cart-img" alt="${item.name}" loading="lazy" width="100" height="100">
-                        <div class="cart-item-info">
-                            <b>${item.name}</b>
-                            <p style="color: #666; font-size: 14px;">Rs. ${item.price}.00</p>
-                        </div>
-                        <div class="cart-qty-controls">
-                            <button onclick="app.updateQty(${item.id}, -1)" aria-label="Remove item">-</button>
-                            <span>${item.q}</span>
-                            <button onclick="app.updateQty(${item.id}, 1)" aria-label="Add item">+</button>
-                        </div>
-                        <div style="font-weight: 600; min-width: 80px; text-align: right;">
-                            Rs. ${item.price * item.q}.00
-                        </div>
+                list.innerHTML = this.cart.map(item => { total += (item.price * item.q);
+                    return `<div class="cart-item-row">
+                        <img src="${item.img}" class="cart-img" alt="${item.name}" width="100" height="100">
+                        <div class="cart-item-info"><b>${item.name}</b><p>Rs. ${item.price}</p></div>
+                        <div class="cart-qty-controls"><button onclick="app.updateQty(${item.id}, -1)">-</button><span>${item.q}</span><button onclick="app.updateQty(${item.id}, 1)">+</button></div>
+                        <div style="font-weight:600;">Rs. ${item.price * item.q}</div>
                     </div>`;
                 }).join('');
                 document.getElementById('totalPrice').innerText = total;
@@ -486,15 +397,13 @@
 
             checkout() {
                 const total = document.getElementById('totalPrice').innerText;
-                if(total == "0") return alert("Cart is empty!");
                 document.getElementById('payAmount').innerText = total;
-                const upiID = "9837904369@ptsbi";
-                const upiLink = `upi://pay?pa=${upiID}&pn=14STARS%20TRADERS&am=${total}&cu=INR`;
-                document.getElementById('qrPlaceholder').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
+                const upi = `upi://pay?pa=9837904369@ptsbi&pn=14STARS%20TRADERS&am=${total}&cu=INR`;
+                document.getElementById('qrPlaceholder').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
                 document.getElementById('paymentModal').style.display = 'flex';
             },
 
-            confirmOrder() {
+              confirmOrder() {
                 let msg = "*ORDER CONFIRMED (PAYMENT DONE)*\n\n";
                 this.cart.forEach(i => msg += `• ${i.name} (Qty: ${i.q}) - Rs.${i.price * i.q}\\n`);
                 msg += `\n*Total Paid: Rs. ${document.getElementById('totalPrice').innerText}*`;
@@ -511,6 +420,4 @@
         app.init();
     </script>
 </body>
-</html>.
-
-
+</html>
