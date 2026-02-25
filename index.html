@@ -417,19 +417,25 @@
                 document.getElementById('paymentModal').style.display = 'flex';
             },
 
-            confirmOrder() {
-                let msg = "*ORDER CONFIRMED*\n\n";
-                this.cart.forEach(i => msg += `• ${i.name} (Qty: ${i.q}) - Rs.${i.price * i.q}\n`);
-                msg += `\n*Total: Rs. ${document.getElementById('totalPrice').innerText}*`;
-                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
-                this.cart = []; localStorage.removeItem('14stars_data'); this.updateBadge();
-                document.getElementById('paymentModal').style.display = 'none'; this.nav('home');
+          confirmOrder() {
+                let msg = "*ORDER CONFIRMED (PAYMENT DONE)*\n\n";
+                this.cart.forEach(i => msg += `• ${i.name} (Qty: ${i.q}) - Rs.${i.price * i.q}\\n`);
+                msg += `\n*Total Paid: Rs. ${document.getElementById('totalPrice').innerText}*`;
+                msg += `\n\n_I have paid the amount via UPI. Please confirm my order._`;
+                window.open(`https://wa.me/919837904369?text=${encodeURIComponent(msg)}`);
+                this.cart = [];
+                localStorage.removeItem('14stars_data');
+                this.updateBadge();
+                document.getElementById('paymentModal').style.display = 'none';
+                this.nav('home');
+                alert("Thank you! Please share the payment screenshot on WhatsApp for faster processing.");
             }
         };
         app.init();
     </script>
 </body>
 </html>
+
 
 
 
