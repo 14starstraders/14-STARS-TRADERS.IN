@@ -38,6 +38,39 @@
     body { background-color: #ffffff; color: #333; line-height: 1.5; overflow-x: hidden; font-display: swap; -webkit-font-smoothing: antialiased; }
     img { display: block; max-width: 100%; height: auto; }
 
+    /* --- ADDED: MODERN LOADER CSS --- */
+    #top-loader {
+        position: fixed;
+        top: 0; left: 0;
+        width: 0%; height: 3px;
+        background: linear-gradient(90deg, var(--gold), #fff);
+        z-index: 10001;
+        transition: width 0.3s ease;
+    }
+    #modern-loader {
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .modern-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(212, 175, 55, 0.1);
+        border-radius: 50%;
+        border-top-color: var(--gold);
+        animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* ------------------------------ */
+
     header { background: var(--dark); color: #fff; padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
     .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
     .logo { font-size: 20px; font-weight: 700; color: #fff; border: none; background: none; cursor: pointer; white-space: nowrap; text-decoration: none; }
@@ -62,7 +95,6 @@
     .cart-btn { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 22px; display: flex; align-items: center; justify-content: center; padding: 5px; min-width: 44px; min-height: 44px; }
     .badge { position: absolute; top: -5px; right: -5px; background: var(--gold); color: #fff; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid var(--dark); }
 
-    /* MOBILE BOTTOM NAV CSS */
     .mobile-bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #1a1a1a; padding: 10px 0; justify-content: space-around; align-items: center; z-index: 5001; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); border-top: 1px solid #333; }
     .mobile-nav-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; color: white; font-size: 10px; text-decoration: none; gap: 4px; }
     .mobile-nav-item img { filter: invert(1); width: 24px; height: 24px; }
@@ -123,9 +155,9 @@
     #paymentModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:6000; align-items:center; justify-content:center; padding:20px; }
     .pay-card { background:white; padding:30px; border-radius:20px; max-width:400px; width:100%; text-align:center; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
 
-    .page-view { display: none; animation: fadeIn 0.3s ease-in; }
+    .page-view { display: none; animation: fadeIn 0.4s ease-out; transform-origin: top; }
     .active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 768px) {
         .nav-links { display: none; }
@@ -133,11 +165,15 @@
         body { padding-bottom: 70px; }
         .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
         .hero-banner { height: 300px; }
-        #social-proof { bottom: 80px; } /* Mobile par nav ke upar dikhega */
     }
 </style>
 </head>
 <body>
+
+    <div id="top-loader"></div>
+    <div id="modern-loader">
+        <div class="modern-spinner"></div>
+    </div>
 
     <div id="paymentModal" role="dialog" aria-modal="true">
         <div class="pay-card">
@@ -187,9 +223,9 @@
                     <a onclick="app.openContact()"><img src="CONTACT.png" width="25" height="25" alt="Contact"></a>
                 </nav>
                <button class="cart-btn" onclick="app.nav('cart')">
-    <img src="cart-icon.png" width="30" height="30" alt="Cart">
-    <span class="badge" id="badge">0</span>
-</button>
+                    <span style="font-size:24px;">🛒</span>
+                    <span class="badge" id="badge">0</span>
+                </button>
             </div>
         </div>
     </header>
@@ -208,7 +244,7 @@
             <span>CONTACT</span>
         </a>
         <a class="mobile-nav-item" onclick="app.nav('cart')" style="position:relative;">
-            <img src="HOME.png" style="display:none;"> <span style="font-size:20px;">👜</span>
+            <span style="font-size:20px;">👜</span>
             <span class="badge" id="badge-bottom" style="top:-5px; right:5px;">0</span>
             <span>CART</span>
         </a>
@@ -322,11 +358,37 @@
                 }, 8000);
             },
 
+            // --- UPDATED: MODERN NAV LOGIC ---
             nav(id) {
-                document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-' + id).classList.add('active');
-                if(id === 'cart') this.renderCart();
-                window.scrollTo({top: 0, behavior: 'smooth'});
+                const topBar = document.getElementById('top-loader');
+                const overlay = document.getElementById('modern-loader');
+                
+                // Start loading
+                topBar.style.width = "40%";
+                overlay.style.display = 'flex';
+                setTimeout(() => { overlay.style.opacity = '1'; }, 10);
+
+                setTimeout(() => {
+                    topBar.style.width = "80%";
+                    
+                    // Switch Page Content
+                    document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+                    const targetPage = document.getElementById('page-' + id);
+                    if(targetPage) targetPage.classList.add('active');
+                    
+                    if(id === 'cart') this.renderCart();
+                    window.scrollTo({top: 0, behavior: 'instant'});
+
+                    // Finish loading
+                    setTimeout(() => {
+                        topBar.style.width = "100%";
+                        overlay.style.opacity = '0';
+                        setTimeout(() => {
+                            topBar.style.width = "0%";
+                            overlay.style.display = 'none';
+                        }, 300);
+                    }, 200);
+                }, 300);
             },
 
             openProduct(id) {
@@ -465,7 +527,4 @@
         app.init();
     </script>
 </body>
-</html>.
-
-
-
+</html>
