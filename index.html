@@ -100,8 +100,10 @@
     .mobile-nav-item img { filter: invert(1); width: 24px; height: 24px; }
 
     .share-btn-round { background: #ffffff; border: 1px solid #ddd; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    
+    /* MODIFIED: ZOOM CSS - BINA KUCH CHHEDE */
     .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; }
-    .spec-zoom-container img { max-width: 100%; transition: transform 0.2s ease-out; }
+    .spec-zoom-container img { max-width: 100%; transition: transform 0.1s ease-out; transform-origin: center center; }
 
     .thumb-strip { display: flex; gap: 10px; margin-top: 15px; }
     .thumb-img { width: 70px; height: 70px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; object-fit: contain; background: #fff; transition: 0.2s; }
@@ -413,6 +415,22 @@
                         </div>
                     </div>`;
 
+                // ADDED: ZOOM FEATURE LOGIC
+                const zoomContainer = document.querySelector('.spec-zoom-container');
+                const mainImg = document.getElementById('mainView');
+                if(zoomContainer && mainImg) {
+                    zoomContainer.addEventListener('mousemove', (e) => {
+                        const { left, top, width, height } = zoomContainer.getBoundingClientRect();
+                        const x = ((e.clientX - left) / width) * 100;
+                        const y = ((e.clientY - top) / height) * 100;
+                        mainImg.style.transformOrigin = `${x}% ${y}%`;
+                        mainImg.style.transform = "scale(2.5)";
+                    });
+                    zoomContainer.addEventListener('mouseleave', () => {
+                        mainImg.style.transform = "scale(1)";
+                    });
+                }
+
                 const suggestions = this.products
                     .filter(item => item.id !== id)
                     .sort(() => 0.5 - Math.random())
@@ -527,4 +545,4 @@
         app.init();
     </script>
 </body>
-</html>
+</html>.
