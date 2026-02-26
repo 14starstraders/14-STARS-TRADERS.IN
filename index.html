@@ -31,58 +31,61 @@
 <link rel="preload" as="image" href="BR.png" fetchpriority="high">
 
 <style>
-    /* AAPKA ORIGINAL CSS + PERFORMANCE FIXES */
-    :root { --gold: #d4af37; --dark: #1a1a1a; --light-bg: #f8f9fa; --wa-green: #25d366; --beige: #bcaaa4; }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+    /* --- DARK/LIGHT MODE COLOR VARIABLES --- */
+    :root { 
+        --gold: #d4af37; 
+        --dark: #1a1a1a; 
+        --wa-green: #25d366; 
+        --beige: #bcaaa4; 
+        /* Dynamic Variables */
+        --body-bg: #ffffff;
+        --body-text: #333;
+        --card-bg: #ffffff;
+        --card-border: #eee;
+        --price-text: #000;
+        --light-bg-dynamic: #f8f9fa;
+        --input-bg: rgba(255,255,255,0.1);
+        --header-shadow: rgba(0,0,0,0.3);
+    }
+
+    [data-theme="dark"] {
+        --body-bg: #121212;
+        --body-text: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --card-border: #333;
+        --price-text: #fff;
+        --light-bg-dynamic: #2a2a2a;
+        --input-bg: rgba(255,255,255,0.05);
+    }
+
+    /* AAPKA ORIGINAL CSS */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; transition: background 0.3s ease, color 0.3s ease; }
     
-    body { background-color: #ffffff; color: #333; line-height: 1.5; overflow-x: hidden; font-display: swap; -webkit-font-smoothing: antialiased; }
+    body { background-color: var(--body-bg); color: var(--body-text); line-height: 1.5; overflow-x: hidden; font-display: swap; -webkit-font-smoothing: antialiased; }
     img { display: block; max-width: 100%; height: auto; }
 
-    /* --- ADDED: MODERN LOADER CSS --- */
-    #top-loader {
-        position: fixed;
-        top: 0; left: 0;
-        width: 0%; height: 3px;
-        background: linear-gradient(90deg, var(--gold), #fff);
-        z-index: 10001;
-        transition: width 0.3s ease;
-    }
-    #modern-loader {
-        position: fixed;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    .modern-spinner {
-        width: 40px;
-        height: 40px;
-        border: 3px solid rgba(212, 175, 55, 0.1);
-        border-radius: 50%;
-        border-top-color: var(--gold);
-        animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-    }
+    /* LOADER CSS */
+    #top-loader { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--gold), #fff); z-index: 10001; transition: width 0.3s ease; }
+    #modern-loader { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 10000; opacity: 0; transition: opacity 0.3s ease; }
+    .modern-spinner { width: 40px; height: 40px; border: 3px solid rgba(212, 175, 55, 0.1); border-radius: 50%; border-top-color: var(--gold); animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    /* ------------------------------ */
 
-    header { background: var(--dark); color: #fff; padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    header { background: var(--dark); color: #fff; padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px var(--header-shadow); }
     .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
     .logo { font-size: 20px; font-weight: 700; color: #fff; border: none; background: none; cursor: pointer; white-space: nowrap; text-decoration: none; }
     
-    .header-search { flex-grow: 1; max-width: 500px; position: relative; }
-    .header-search input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); outline: none; font-size: 16px; background: rgba(255,255,255,0.1); color: white; transition: 0.3s; }
+    .header-search { flex-grow: 1; max-width: 500px; position: relative; display: flex; align-items: center; gap: 10px; }
+    .header-search input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); outline: none; font-size: 16px; background: var(--input-bg); color: white; transition: 0.3s; }
     .header-search input:focus { background: white; color: #000; border-color: var(--gold); }
     .search-icon-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); color: #888; cursor: pointer; background: none; border: none; padding: 8px; font-size: 18px; }
     
-    .smart-search-results { position: absolute; top: 110%; left: 0; width: 100%; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; max-height: 400px; overflow-y: auto; z-index: 2001; }
-    .ssr-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; color: #333; transition: 0.2s; }
-    .ssr-item:hover { background: #f9f9f9; }
+    /* THEME TOGGLE BUTTON */
+    .theme-toggle { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: 0.3s; }
+    .theme-toggle:hover { background: var(--gold); }
+
+    .smart-search-results { position: absolute; top: 110%; left: 0; width: 100%; background: var(--card-bg); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; max-height: 400px; overflow-y: auto; z-index: 2001; }
+    .ssr-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid var(--card-border); cursor: pointer; color: var(--body-text); transition: 0.2s; }
+    .ssr-item:hover { background: var(--light-bg-dynamic); }
     .ssr-item img { width: 45px; height: 45px; border-radius: 5px; margin-right: 12px; object-fit: contain; background: #f4f4f4; }
     .ssr-item b { font-size: 13px; display: block; }
     .ssr-item span { font-size: 12px; color: var(--gold); font-weight: 700; }
@@ -99,63 +102,64 @@
     .mobile-nav-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; color: white; font-size: 10px; text-decoration: none; gap: 4px; }
     .mobile-nav-item img { filter: invert(1); width: 24px; height: 24px; }
 
-    .share-btn-round { background: #ffffff; border: 1px solid #ddd; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    
-    /* MODIFIED: ZOOM CSS - BINA KUCH CHHEDE */
-    .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: #f9f9f9; border-radius: 15px; width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; }
+    .share-btn-round { background: var(--card-bg); border: 1px solid var(--card-border); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .share-btn-round img { filter: brightness(0.5); }
+    [data-theme="dark"] .share-btn-round img { filter: invert(1); }
+
+    .spec-zoom-container { position: relative; overflow: hidden; cursor: zoom-in; background: var(--light-bg-dynamic); border-radius: 15px; width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; }
     .spec-zoom-container img { max-width: 100%; transition: transform 0.1s ease-out; transform-origin: center center; }
 
     .thumb-strip { display: flex; gap: 10px; margin-top: 15px; }
-    .thumb-img { width: 70px; height: 70px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; object-fit: contain; background: #fff; transition: 0.2s; }
+    .thumb-img { width: 70px; height: 70px; border: 2px solid var(--card-border); border-radius: 8px; cursor: pointer; object-fit: contain; background: #fff; transition: 0.2s; }
     .thumb-img:hover, .thumb-img.active-thumb { border-color: var(--gold); }
 
     #searchOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; }
     
-    #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: #f4f4f4; overflow-y: auto; }
+    #contactPopup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: var(--body-bg); overflow-y: auto; }
     .contact-container { max-width: 900px; margin: 80px auto; padding: 0 40px 60px 40px; }
-    .contact-container h2 { font-size: 28px; font-weight: 500; margin-bottom: 40px; color: #333; text-align: left; }
+    .contact-container h2 { font-size: 28px; font-weight: 500; margin-bottom: 40px; color: var(--body-text); text-align: left; }
     .contact-form-grid { display: flex; flex-wrap: wrap; gap: 20px; }
-    .contact-input { padding: 18px 25px; border: 1px solid #ccc; border-radius: 12px; font-size: 16px; color: #333; outline: none; background: transparent; transition: 0.3s; }
+    .contact-input { padding: 18px 25px; border: 1px solid var(--card-border); border-radius: 12px; font-size: 16px; color: var(--body-text); outline: none; background: var(--light-bg-dynamic); transition: 0.3s; }
     .input-half { flex: 1; min-width: 250px; }
     .input-full { width: 100%; }
     .contact-textarea { width: 100%; height: 140px; resize: none; }
     .contact-send-btn { background: var(--dark); color: #fff; border: none; padding: 15px 50px; border-radius: 5px; font-size: 14px; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-    .close-contact { position: fixed; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: #333; z-index: 2100; }
+    .close-contact { position: fixed; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: var(--body-text); z-index: 2100; }
 
     .hero-banner { width:100%; height:750px; background-color:#222; position:relative; overflow:hidden; }
     .hero-banner::before{ content:""; position:absolute; inset:0; background:url('BANN.webp') center/cover no-repeat; transform:translateZ(0); will-change:transform; }
     
     .filter-section { display: flex; gap: 10px; overflow-x: auto; padding: 25px 0; justify-content: center; scrollbar-width: none; }
-    .filter-btn { padding: 10px 22px; border: 1px solid #ddd; border-radius: 25px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; min-height: 44px; }
+    .filter-btn { padding: 10px 22px; border: 1px solid var(--card-border); border-radius: 25px; background: var(--card-bg); color: var(--body-text); cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; white-space: nowrap; min-height: 44px; }
     .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
 
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; padding: 20px 0; }
-    .product-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; transition: 0.3s; display: flex; flex-direction: column; }
-    .img-container { background: var(--light-bg); height: 220px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; margin-bottom: 12px; }
+    .product-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 15px; transition: 0.3s; display: flex; flex-direction: column; }
+    .img-container { background: var(--light-bg-dynamic); height: 220px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; margin-bottom: 12px; }
     .img-container img { max-width: 85%; max-height: 85%; object-fit: contain; }
-    .p-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-    .p-price { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 15px; }
-    .qty-box { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-top: auto; }
-    .qty-box button { flex: 1; height: 44px; border: none; background: #f9f9f9; cursor: pointer; font-size: 20px; }
-    .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: 700; background: #fff; }
+    .p-name { font-size: 15px; font-weight: 600; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--body-text); }
+    .p-price { font-size: 18px; font-weight: 700; color: var(--price-text); margin-bottom: 15px; }
+    .qty-box { display: flex; border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; margin-top: auto; }
+    .qty-box button { flex: 1; height: 44px; border: none; background: var(--light-bg-dynamic); color: var(--body-text); cursor: pointer; font-size: 20px; }
+    .qty-box input { width: 50px; text-align: center; border: none; outline: none; font-weight: 700; background: var(--card-bg); color: var(--body-text); }
 
-    .cart-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-    .cart-item-row { display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee; gap: 20px; }
-    .cart-img { width: 100px; height: 100px; object-fit: contain; background: #f9f9f9; border-radius: 10px; }
+    .cart-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; border-bottom: 1px solid var(--card-border); padding-bottom: 15px; }
+    .cart-item-row { display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--card-border); gap: 20px; }
+    .cart-img { width: 100px; height: 100px; object-fit: contain; background: var(--light-bg-dynamic); border-radius: 10px; }
     .cart-item-info { flex: 2; }
-    .cart-item-info b { font-size: 16px; display: block; margin-bottom: 5px; }
-    .cart-qty-controls { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 5px; height: 35px; }
-    .cart-qty-controls button { width: 35px; height: 100%; border: none; background: none; cursor: pointer; font-size: 18px; }
-    .cart-qty-controls span { width: 40px; text-align: center; font-weight: 600; }
+    .cart-item-info b { font-size: 16px; display: block; margin-bottom: 5px; color: var(--body-text); }
+    .cart-qty-controls { display: flex; align-items: center; border: 1px solid var(--card-border); border-radius: 5px; height: 35px; }
+    .cart-qty-controls button { width: 35px; height: 100%; border: none; background: none; color: var(--body-text); cursor: pointer; font-size: 18px; }
+    .cart-qty-controls span { width: 40px; text-align: center; font-weight: 600; color: var(--body-text); }
 
-    #social-proof { position: fixed; bottom: 80px; left: 20px; background: white; padding: 10px 15px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; z-index: 5000; transform: translateY(150%); transition: 0.5s ease-in-out; max-width: 300px; }
+    #social-proof { position: fixed; bottom: 80px; left: 20px; background: var(--card-bg); color: var(--body-text); padding: 10px 15px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; z-index: 5000; transform: translateY(150%); transition: 0.5s ease-in-out; max-width: 300px; }
     #social-proof.show { transform: translateY(0); }
     .sp-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
-    .sp-text { font-size: 12px; color: #444; }
+    .sp-text { font-size: 12px; }
 
     #paymentModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:6000; align-items:center; justify-content:center; padding:20px; }
-    .pay-card { background:white; padding:30px; border-radius:20px; max-width:400px; width:100%; text-align:center; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    .pay-card { background: var(--card-bg); color: var(--body-text); padding:30px; border-radius:20px; max-width:400px; width:100%; text-align:center; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
 
     .page-view { display: none; animation: fadeIn 0.4s ease-out; transform-origin: top; }
     .active { display: block; }
@@ -170,7 +174,7 @@
     }
 </style>
 </head>
-<body>
+<body data-theme="light">
 
     <div id="top-loader"></div>
     <div id="modern-loader">
@@ -218,7 +222,10 @@
                 <button class="search-icon-btn" onclick="app.performSearch(document.getElementById('navSearch').value)">🔍</button>
                 <div id="smartResults" class="smart-search-results"></div>
             </div>
+            
             <div class="header-actions">
+                <button class="theme-toggle" onclick="app.toggleTheme()" title="Switch Theme">🌙</button>
+
                 <nav class="nav-links">
                     <a onclick="app.nav('home')"><img src="HOME.png" width="25" height="25" alt="Home"></a>
                     <a onclick="app.nav('catalog')"><img src="CATALOG.png" width="25" height="25" alt="Catalog"></a>
@@ -276,7 +283,7 @@
 
         <section id="page-product-detail" class="page-view">
             <div class="container" id="productDetailContent"></div>
-            <div class="container" style="border-top:1px solid #eee; margin-top:50px; padding-top:40px;">
+            <div class="container" style="border-top:1px solid var(--card-border); margin-top:50px; padding-top:40px;">
                 <h3 style="margin-bottom:25px; letter-spacing:1px;">YOU MAY ALSO LIKE</h3>
                 <div id="similarGrid" class="grid"></div>
             </div>
@@ -293,12 +300,12 @@
             <div class="container" style="max-width: 900px; padding: 50px 20px;">
                 <div class="cart-header">
                     <h1>Your cart</h1>
-                    <span style="text-decoration:underline; cursor:pointer; color: #666;" onclick="app.nav('home')">Continue shopping</span>
+                    <span style="text-decoration:underline; cursor:pointer; color: #888;" onclick="app.nav('home')">Continue shopping</span>
                 </div>
                 <div id="cartItemsList"></div>
-                <div id="cartSummary" style="margin-top:40px; text-align:right; border-top: 1px solid #eee; padding-top: 30px;">
+                <div id="cartSummary" style="margin-top:40px; text-align:right; border-top: 1px solid var(--card-border); padding-top: 30px;">
                     <p style="font-size:20px; margin-bottom:20px;">Subtotal: <b>Rs. <span id="totalPrice">0</span>.00</b></p>
-                    <button onclick="app.checkout()" style="background:#000; color:white; width:100%; max-width:380px; padding:16px; border:none; cursor:pointer; font-weight:600;">CHECK OUT</button>
+                    <button onclick="app.checkout()" style="background:var(--dark); color:white; width:100%; max-width:380px; padding:16px; border:none; cursor:pointer; font-weight:600;">CHECK OUT</button>
                 </div>
             </div>
         </section>
@@ -319,11 +326,24 @@
             currentFilter: 'All',
 
             init() {
+                // Initialize Theme
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                document.body.setAttribute('data-theme', savedTheme);
+                document.querySelector('.theme-toggle').innerText = savedTheme === 'light' ? '🌙' : '☀️';
+
                 const saved = localStorage.getItem('14stars_data');
                 if (saved) this.cart = JSON.parse(saved);
                 this.updateBadge();
                 this.render();
                 this.startSocialProof();
+            },
+
+            toggleTheme() {
+                const current = document.body.getAttribute('data-theme');
+                const next = current === 'light' ? 'dark' : 'light';
+                document.body.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                document.querySelector('.theme-toggle').innerText = next === 'light' ? '🌙' : '☀️';
             },
 
             smartSearch(val) {
@@ -360,28 +380,19 @@
                 }, 8000);
             },
 
-            // --- UPDATED: MODERN NAV LOGIC ---
             nav(id) {
                 const topBar = document.getElementById('top-loader');
                 const overlay = document.getElementById('modern-loader');
-                
-                // Start loading
                 topBar.style.width = "40%";
                 overlay.style.display = 'flex';
                 setTimeout(() => { overlay.style.opacity = '1'; }, 10);
-
                 setTimeout(() => {
                     topBar.style.width = "80%";
-                    
-                    // Switch Page Content
                     document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
                     const targetPage = document.getElementById('page-' + id);
                     if(targetPage) targetPage.classList.add('active');
-                    
                     if(id === 'cart') this.renderCart();
                     window.scrollTo({top: 0, behavior: 'instant'});
-
-                    // Finish loading
                     setTimeout(() => {
                         topBar.style.width = "100%";
                         overlay.style.opacity = '0';
@@ -396,7 +407,6 @@
             openProduct(id) {
                 const p = this.products.find(x => x.id === id);
                 const pImages = p.images || [p.img]; 
-                
                 document.getElementById('productDetailContent').innerHTML = `
                     <div style="display:flex; flex-wrap:wrap; gap:40px; padding:40px 0;">
                         <div style="flex:1; min-width:300px;">
@@ -405,17 +415,16 @@
                         </div>
                         <div style="flex:1; min-width:300px;">
                             <div style="display:flex; justify-content:space-between;">
-                                <button onclick="app.nav('home')" style="border:none; background:none; cursor:pointer; color:#888;">← BACK TO HOME</button>
+                                <button onclick="app.nav('home')" style="border:none; background:none; cursor:pointer; color:var(--body-text); opacity:0.6;">← BACK TO HOME</button>
                                 <button class="share-btn-round" onclick="app.shareNow('${p.name}')"><img src="SHARE.png" width="22" height="22" alt="Share"></button>
                             </div>
-                            <h1 style="font-size:32px; margin-top:15px;">${p.name}</h1>
+                            <h1 style="font-size:32px; margin-top:15px; color:var(--body-text);">${p.name}</h1>
                             <p style="font-size:24px; font-weight:700; color:var(--gold); margin:15px 0;">Rs. ${p.price}.00</p>
-                            <p style="color:#666; margin-bottom:30px;">${p.desc}</p>
+                            <p style="color:var(--body-text); opacity:0.8; margin-bottom:30px;">${p.desc}</p>
                             <button class="filter-btn active" style="width:200px; padding:15px;" onclick="app.updateQty(${p.id}, 1); app.nav('cart');">ADD TO CART</button>
                         </div>
                     </div>`;
 
-                // ADDED: ZOOM FEATURE LOGIC
                 const zoomContainer = document.querySelector('.spec-zoom-container');
                 const mainImg = document.getElementById('mainView');
                 if(zoomContainer && mainImg) {
@@ -426,16 +435,10 @@
                         mainImg.style.transformOrigin = `${x}% ${y}%`;
                         mainImg.style.transform = "scale(2.5)";
                     });
-                    zoomContainer.addEventListener('mouseleave', () => {
-                        mainImg.style.transform = "scale(1)";
-                    });
+                    zoomContainer.addEventListener('mouseleave', () => { mainImg.style.transform = "scale(1)"; });
                 }
 
-                const suggestions = this.products
-                    .filter(item => item.id !== id)
-                    .sort(() => 0.5 - Math.random())
-                    .slice(0, 2);
-                
+                const suggestions = this.products.filter(item => item.id !== id).sort(() => 0.5 - Math.random()).slice(0, 2);
                 this.renderGrid(suggestions, 'similarGrid');
                 this.nav('product-detail');
             },
@@ -514,7 +517,7 @@
                         <img src="${item.img}" class="cart-img" alt="${item.name}" width="100" height="100">
                         <div class="cart-item-info"><b>${item.name}</b><p>Rs. ${item.price}</p></div>
                         <div class="cart-qty-controls"><button onclick="app.updateQty(${item.id}, -1)">-</button><span>${item.q}</span><button onclick="app.updateQty(${item.id}, 1)">+</button></div>
-                        <div style="font-weight:600;">Rs. ${item.price * item.q}</div>
+                        <div style="font-weight:600; color:var(--body-text);">Rs. ${item.price * item.q}</div>
                     </div>`;
                 }).join('');
                 document.getElementById('totalPrice').innerText = total;
@@ -545,4 +548,4 @@
         app.init();
     </script>
 </body>
-</html>.
+</html>
